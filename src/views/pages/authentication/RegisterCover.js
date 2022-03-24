@@ -1,5 +1,9 @@
 // ** React Imports
-import { Link } from 'react-router-dom'
+import { Link, useHistory} from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
+import { register, reset } from '../../../redux/authentication'
 
 // ** Custom Hooks
 import { useSkin } from '@hooks/useSkin'
@@ -17,11 +21,63 @@ import { Row, Col, CardTitle, CardText, Form, Label, Input, Button } from 'react
 import '@styles/react/pages/page-authentication.scss'
 
 const RegisterCover = () => {
+
+  const history = useHistory()
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    password2: ''
+  })
   // ** Hooks
   const { skin } = useSkin()
 
   const illustration = skin === 'dark' ? 'register-v2-dark.svg' : 'register-v2.svg',
     source = require(`@src/assets/images/pages/${illustration}`).default
+
+    const { name, email, password, password2 } = formData
+
+    const dispatch = useDispatch()
+  
+    const { user, isError, isSuccess, message } = useSelector(
+      (state) => state.auth
+    )
+  
+    useEffect(() => {
+      if (isError) {
+        toast.error(message)
+      }
+  
+      if (isSuccess || user) {
+        history.push('/')
+      }
+  
+      dispatch(reset())
+    }, [user, isError, isSuccess, message, dispatch])
+  
+    const onChange = (e) => {
+      setFormData((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value
+      }))
+    }
+  
+    const onSubmit = (e) => {
+      e.preventDefault()
+  
+      if (password !== password2) {
+        toast.error('Passwords do not match')
+      } else {
+        const userData = {
+          name,
+          email,
+          password
+        }
+  
+        dispatch(register(userData))
+      }
+    }
 
   return (
     <div className='auth-wrapper auth-cover'>
@@ -75,7 +131,7 @@ const RegisterCover = () => {
               </g>
             </g>
           </svg>
-          <h2 className='brand-text text-primary ms-1'>Vuexy</h2>
+          <h2 className='brand-text text-primary ms-1'>PeckPoint</h2>
         </Link>
         <Col className='d-none d-lg-flex align-items-center p-5' lg='8' sm='12'>
           <div className='w-100 d-lg-flex align-items-center justify-content-center px-5'>
@@ -87,25 +143,48 @@ const RegisterCover = () => {
             <CardTitle tag='h2' className='fw-bold mb-1'>
               Adventure starts here 🚀
             </CardTitle>
-            <CardText className='mb-2'>Make your app management easy and fun!</CardText>
-            <Form className='auth-register-form mt-2' onSubmit={e => e.preventDefault()}>
+            <CardText className='mb-2'>Make your sms management easy and fun!</CardText>
+            <Form className='auth-register-form mt-2' onSubmit={onSubmit}>
               <div className='mb-1'>
-                <Label className='form-label' for='register-username'>
+                <Label 
+                className='form-label'>
                   Username
                 </Label>
-                <Input type='text' id='register-username' placeholder='johndoe' autoFocus />
+                <Input type='text' 
+                placeholder='johndoe' 
+                autoFocus 
+                name='name'
+                value={name} 
+               onChange={onChange}/>
               </div>
               <div className='mb-1'>
-                <Label className='form-label' for='register-email'>
+                <Label 
+                className='form-label'>
                   Email
                 </Label>
-                <Input type='email' id='register-email' placeholder='john@example.com' />
+                <Input type='email' 
+                id='email' 
+                placeholder='john@example.com'  
+                name='email'
+                value={email} 
+                onChange={onChange}/>
+              </div>
+              <div className='mb-1'>
+                <Label 
+                className='form-label'>
+                  Password
+                </Label>
+                <InputPasswordToggle className='input-group-merge' id='register-password'  name='password'
+                value={password} 
+                onChange={onChange}/>
               </div>
               <div className='mb-1'>
                 <Label className='form-label' for='register-password'>
-                  Password
+                  Confirm Password
                 </Label>
-                <InputPasswordToggle className='input-group-merge' id='register-password' />
+                <InputPasswordToggle className='input-group-merge' id='confirm-password'  name='password2'
+                value={password2} 
+                onChange={onChange} />
               </div>
               <div className='form-check mb-1'>
                 <Input type='checkbox' id='terms' />
@@ -116,7 +195,7 @@ const RegisterCover = () => {
                   </a>
                 </Label>
               </div>
-              <Button color='primary' block>
+              <Button type='submit' color='primary' block>
                 Sign up
               </Button>
             </Form>

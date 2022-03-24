@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 const PagesRoutes = [
   {
     path: '/login',
-    component: lazy(() => import('../../views/pages/authentication/Login')),
+    component: lazy(() => import('../../views/pages/authentication/LoginCover')),
     layout: 'BlankLayout',
     meta: {
       authRoute: true
@@ -22,7 +22,7 @@ const PagesRoutes = [
   },
   {
     path: '/register',
-    component: lazy(() => import('../../views/pages/authentication/Register')),
+    component: lazy(() => import('../../views/pages/authentication/RegisterCover')),
     layout: 'BlankLayout',
     meta: {
       authRoute: true
@@ -40,7 +40,7 @@ const PagesRoutes = [
   },
   {
     path: '/forgot-password',
-    component: lazy(() => import('../../views/pages/authentication/ForgotPassword')),
+    component: lazy(() => import('../../views/pages/authentication/ForgotPasswordCover')),
     layout: 'BlankLayout',
     meta: {
       authRoute: true

@@ -2,13 +2,14 @@
 import { useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
+import { register } from '../redux/authentication'
+
 // ** Custom Hooks
 import { useSkin } from '@hooks/useSkin'
 import useJwt from '@src/auth/jwt/useJwt'
 
 // ** Store & Actions
 import { useDispatch } from 'react-redux'
-import { handleLogin } from '@store/authentication'
 
 // ** Third Party Components
 import { useForm, Controller } from 'react-hook-form'
@@ -69,7 +70,7 @@ const Register = () => {
           } else {
             const data = { ...res.data.user, accessToken: res.data.accessToken }
             ability.update(res.data.user.ability)
-            dispatch(handleLogin(data))
+            dispatch(register(data))
             history.push('/')
             console.log(data)
           }
@@ -156,7 +157,7 @@ const Register = () => {
             <CardTitle tag='h2' className='fw-bold mb-1'>
               Adventure starts here 🚀
             </CardTitle>
-            <CardText className='mb-2'>Make your app management easy and fun!</CardText>
+            <CardText className='mb-2'>Make your app management easy and fun! API TESTING</CardText>
 
             <Form action='/' className='auth-register-form mt-2' onSubmit={handleSubmit(onSubmit)}>
               <div className='mb-1'>

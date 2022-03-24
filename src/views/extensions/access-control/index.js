@@ -21,7 +21,7 @@ const AccessControl = () => {
           </CardBody>
         </Card>
       </Col>
-      {ability.can('read', 'Analytics') ? (
+      {ability.cannot('read', 'Analytics') ? (
         <Col md='6' sm='12'>
           <Card>
             <CardBody>

@@ -1,11 +1,67 @@
 import { useSkin } from '@hooks/useSkin'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { Facebook, Twitter, Mail, GitHub } from 'react-feather'
 import InputPasswordToggle from '@components/input-password-toggle'
 import { Row, Col, CardTitle, CardText, Form, Label, Input, Button } from 'reactstrap'
+import { useState, useEffect, useContext } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
+import { login, reset } from '../../../redux/authentication'
 import '@styles/react/pages/page-authentication.scss'
+// ** Context
+import { AbilityContext } from '@src/utility/context/Can'
 
 const LoginCover = () => {
+
+  const ability = useContext(AbilityContext)
+
+  const history = useHistory()
+
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  })
+
+  const { email, password } = formData
+
+  const dispatch = useDispatch()
+
+  const { user, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  )
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message)
+    }
+
+    if (isSuccess || user) {
+      history.push('/')
+    }
+
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, dispatch])
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value
+    }))
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    const userData = {
+      email,
+      password
+    }
+
+    ability.update(res.data.userData.ability)
+    
+    dispatch(login(userData))
+  }
+
   const { skin } = useSkin()
 
   const illustration = skin === 'dark' ? 'login-v2-dark.svg' : 'login-v2.svg',
@@ -63,7 +119,7 @@ const LoginCover = () => {
               </g>
             </g>
           </svg>
-          <h2 className='brand-text text-primary ms-1'>Vuexy</h2>
+          <h2 className='brand-text text-primary ms-1'>PeckPoint</h2>
         </Link>
         <Col className='d-none d-lg-flex align-items-center p-5' lg='8' sm='12'>
           <div className='w-100 d-lg-flex align-items-center justify-content-center px-5'>
@@ -73,26 +129,30 @@ const LoginCover = () => {
         <Col className='d-flex align-items-center auth-bg px-2 p-lg-5' lg='4' sm='12'>
           <Col className='px-xl-2 mx-auto' sm='8' md='6' lg='12'>
             <CardTitle tag='h2' className='fw-bold mb-1'>
-              Welcome to Vuexy! 👋
+              Welcome to PeckPoint! 👋
             </CardTitle>
             <CardText className='mb-2'>Please sign-in to your account and start the adventure</CardText>
-            <Form className='auth-login-form mt-2' onSubmit={e => e.preventDefault()}>
+            <Form className='auth-login-form mt-2' onSubmit={onSubmit}>
               <div className='mb-1'>
                 <Label className='form-label' for='login-email'>
                   Email
                 </Label>
-                <Input type='email' id='login-email' placeholder='john@example.com' autoFocus />
+                <Input type='email' id='login-email' placeholder='john@example.com' autoFocus name='email'
+                value={email} 
+               onChange={onChange}/>
               </div>
               <div className='mb-1'>
                 <div className='d-flex justify-content-between'>
                   <Label className='form-label' for='login-password'>
                     Password
                   </Label>
-                  <Link to='/pages/forgot-password-cover'>
+                  <Link to='/forgot-password'>
                     <small>Forgot Password?</small>
                   </Link>
                 </div>
-                <InputPasswordToggle className='input-group-merge' id='login-password' />
+                <InputPasswordToggle className='input-group-merge' id='login-password' name='password'
+                value={password} 
+               onChange={onChange}/>
               </div>
               <div className='form-check mb-1'>
                 <Input type='checkbox' id='remember-me' />
@@ -100,13 +160,13 @@ const LoginCover = () => {
                   Remember Me
                 </Label>
               </div>
-              <Button color='primary' block>
+              <Button type='submit' color='primary' block>
                 Sign in
               </Button>
             </Form>
             <p className='text-center mt-2'>
               <span className='me-25'>New on our platform?</span>
-              <Link to='/pages/register-cover'>
+              <Link to='/register'>
                 <span>Create an account</span>
               </Link>
             </p>

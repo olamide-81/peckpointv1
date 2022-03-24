@@ -110,7 +110,7 @@ mock.onPost('/jwt/register').reply(request => {
         username,
         fullName: '',
         avatar: null,
-        role: 'admin',
+        role: 'client',
         ability: [
           {
             action: 'manage',

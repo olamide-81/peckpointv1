@@ -93,7 +93,8 @@
     "test": "craco test",
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.js src/**/*.jsx",
-    "lint:fix": "eslint src/**/*.js --fix"
+    "lint:fix": "eslint src/**/*.js --fix",
+    "fix": "eslint . --fix"
   },
   "eslintConfig": {
     "extends": "react-app"

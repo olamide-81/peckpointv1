@@ -11,6 +11,13 @@ const AppRoutes = [
     component: lazy(() => import('../../views/apps/email'))
   },
   {
+    path: '/apps/plan',
+    exact: true,
+    appLayout: true,
+    className: '',
+    component: lazy(() => import('../../views/plans/pricing'))
+  },
+  {
     path: '/apps/email/:folder',
     exact: true,
     appLayout: true,
