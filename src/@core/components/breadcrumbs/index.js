@@ -62,19 +62,19 @@ const BreadCrumbs = props => {
               <Grid size={14} />
             </DropdownToggle>
             <DropdownMenu tag='ul' end>
-              <DropdownItem tag={Link} to='/apps/todo'>
+              <DropdownItem tag={Link} to='/'>
                 <CheckSquare className='me-1' size={14} />
                 <span className='align-middle'>Todo</span>
               </DropdownItem>
-              <DropdownItem tag={Link} to='/apps/chat'>
+              <DropdownItem tag={Link} to='/'>
                 <MessageSquare className='me-1' size={14} />
                 <span className='align-middle'>Chat</span>
               </DropdownItem>
-              <DropdownItem tag={Link} to='/apps/email'>
+              <DropdownItem tag={Link} to='/'>
                 <Mail className='me-1' size={14} />
                 <span className='align-middle'>Email</span>
               </DropdownItem>
-              <DropdownItem tag={Link} to='/apps/calendar'>
+              <DropdownItem tag={Link} to='/'>
                 <Calendar className='me-1' size={14} />
                 <span className='align-middle'>Calendar</span>
               </DropdownItem>

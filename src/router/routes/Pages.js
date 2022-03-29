@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 
 const PagesRoutes = [
   {
-    path: '/login',
+    path: '/admin/login',
     component: lazy(() => import('../../views/pages/authentication/LoginCover')),
     layout: 'BlankLayout',
     meta: {
@@ -21,8 +21,8 @@ const PagesRoutes = [
     layout: 'BlankLayout'
   },
   {
-    path: '/register',
-    component: lazy(() => import('../../views/pages/authentication/RegisterCover')),
+    path: '/admin/register',
+    component: lazy(() => import('../../views/pages/authentication/Register')),
     layout: 'BlankLayout',
     meta: {
       authRoute: true

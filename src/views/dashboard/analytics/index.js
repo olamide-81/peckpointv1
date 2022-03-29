@@ -28,9 +28,10 @@ import OrdersReceived from '@src/views/ui-elements/cards/statistics/OrdersReceiv
 import SubscribersGained from '@src/views/ui-elements/cards/statistics/SubscribersGained'
 import CardCongratulations from '@src/views/ui-elements/cards/advance/CardCongratulations'
 
+/*
 // ** Images
 import jsonImg from '@src/assets/images/icons/json.png'
-import ceo from '@src/assets/images/portrait/small/avatar-s-9.jpg'
+import ceo from '@src/assets/images/portrait/small/avatar-s-9.jpg'*/
 
 // ** Styles
 import '@styles/react/libs/charts/apex-charts.scss'
@@ -39,7 +40,8 @@ const AnalyticsDashboard = () => {
   // ** Context
   const { colors } = useContext(ThemeColors)
 
-  // ** Vars
+  // ** Vars 
+  /*
   const avatarGroupArr = [
     {
       imgWidth: 33,
@@ -77,6 +79,8 @@ const AnalyticsDashboard = () => {
       img: require('@src/assets/images/portrait/small/avatar-s-20.jpg').default
     }
   ]
+  */
+  /* 
   const data = [
     {
       title: '12 Invoices have been paid',
@@ -121,19 +125,25 @@ const AnalyticsDashboard = () => {
       meta: '',
       metaClassName: 'me-1'
     }
-  ]
+  ]*/
 
   return (
     <div id='dashboard-analytics'>
       <Row className='match-height'>
-        <Col lg='6' sm='12'>
+       {/* <Col lg='6' sm='12'>
           <CardCongratulations />
-        </Col>
+        </Col> */}
         <Col lg='3' sm='6'>
           <SubscribersGained kFormatter={kFormatter} />
         </Col>
         <Col lg='3' sm='6'>
           <OrdersReceived kFormatter={kFormatter} warning={colors.warning.main} />
+        </Col>
+        <Col lg='3' sm='6'>
+          <SubscribersGained kFormatter={kFormatter} />
+        </Col>
+        <Col lg='3' sm='6'>
+          <SubscribersGained kFormatter={kFormatter} />
         </Col>
       </Row>
       <Row className='match-height'>
@@ -144,6 +154,7 @@ const AnalyticsDashboard = () => {
           <SupportTracker primary={colors.primary.main} danger={colors.danger.main} />
         </Col>
       </Row>
+      {/*
       <Row className='match-height'>
         <Col lg='4' xs='12'>
           <Card className='card-user-timeline'>
@@ -164,7 +175,8 @@ const AnalyticsDashboard = () => {
         <Col lg='4' md='6' xs='12'>
           <CardAppDesign />
         </Col>
-      </Row>
+      </Row> 
+      */}
       <Row className='match-height'>
         <Col xs='12'>
           <InvoiceList />

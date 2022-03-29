@@ -71,7 +71,7 @@ const OrdersReceived = ({ kFormatter, warning }) => {
       icon={<Package size={21} />}
       color='warning'
       stats={kFormatter(data.analyticsData.orders)}
-      statTitle='Orders Received'
+      statTitle='Plan'
       options={options}
       series={data.series}
       type='area'

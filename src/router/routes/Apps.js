@@ -11,12 +11,72 @@ const AppRoutes = [
     component: lazy(() => import('../../views/apps/email'))
   },
   {
-    path: '/apps/plan',
+    path: '/admin/plans',
+    exact: true,
+    className: 'email-application',
+    component: lazy(() => import('../../views/tables/reactstrap'))
+  },
+  {
+    path: '/admin/userslist',
     exact: true,
     appLayout: true,
     className: '',
     component: lazy(() => import('../../views/plans/pricing'))
   },
+  {
+    path: '/admin/currency',
+    exact: true,
+    className: '',
+    component: lazy(() => import('../../views/tables/reactstrap'))
+  },
+  {
+    path: '/all-settings',
+    exact: true,
+    className: 'email-application',
+    component: lazy(() => import('../../views/pages/account-settings'))
+},
+{
+  path: '/admin/blacklist',
+  exact: true,
+  className: 'email-application',
+  component: lazy(() => import('../../views/tables/reactstrap'))
+},
+{
+  path: '/admin/spam-words',
+  exact: true,
+  className: 'email-application',
+  component: lazy(() => import('../../views/tables/reactstrap'))
+},
+{
+  path: '/admin/country',
+  exact: true,
+  className: 'email-application',
+  component: lazy(() => import('../../views/tables/reactstrap/countries'))
+},
+{
+  path: '/admin/language',
+  exact: true,
+  className: 'email-application',
+  component: lazy(() => import('../../views/tables/reactstrap/countries'))
+},
+{
+  path: '/admin/payment-gateways',
+  exact: true,
+  className: 'email-application',
+  component: lazy(() => import('../../views/tables/reactstrap/countries'))
+},
+{
+  path: '/admin/email-templates',
+  exact: true,
+  className: 'email-application',
+  component: lazy(() => import('../../views/tables/reactstrap/countries'))
+},
+{
+  path: '/admin/update',
+  exact: true,
+  className: 'email-application',
+  component: lazy(() => import('../../views/tables/reactstrap/countries'))
+},
   {
     path: '/apps/email/:folder',
     exact: true,
@@ -26,7 +86,8 @@ const AppRoutes = [
     meta: {
       navLink: '/apps/email'
     }
-  },
+    },
+
   {
     path: '/apps/email/label/:label',
     exact: true,
@@ -45,17 +106,15 @@ const AppRoutes = [
     }
   },
   {
-    path: '/apps/chat',
-    appLayout: true,
+    path: '/admin/sending-servers',
     className: 'chat-application',
-    component: lazy(() => import('../../views/apps/chat'))
+    component: lazy(() => import('../../views/tables/reactstrap'))
   },
   {
-    path: '/apps/todo',
+    path: '/numbers',
     exact: true,
-    appLayout: true,
     className: 'todo-application',
-    component: lazy(() => import('../../views/apps/todo'))
+    component: lazy(() => import('../../views/tables/reactstrap'))
   },
   {
     path: '/apps/todo/:filter',
@@ -77,11 +136,15 @@ const AppRoutes = [
     }
   },
   {
-    path: '/apps/calendar',
-    component: lazy(() => import('../../views/apps/calendar'))
+    path: '/sender-id',
+    component: lazy(() => import('../../views/tables/reactstrap'))
   },
   {
-    path: '/apps/invoice/list',
+    path: '/template-tags',
+    component: lazy(() => import('../../views/tables/reactstrap'))
+  },
+  {
+    path: '/admin/invoice/list',
     component: lazy(() => import('../../views/apps/invoice/list'))
   },
   {
@@ -164,12 +227,16 @@ const AppRoutes = [
     }
   },
   {
-    path: '/apps/roles',
-    component: lazy(() => import('../../views/apps/roles-permissions/roles'))
+    path: '/keywords',
+    component: lazy(() => import('../../views/tables/reactstrap'))
   },
   {
-    path: '/apps/permissions',
+    path: '/admin/permissions',
     component: lazy(() => import('../../views/apps/roles-permissions/permissions'))
+  },
+  {
+    path: '/admin/roles',
+    component: lazy(() => import('../../views/apps/roles-permissions/roles'))
   }
 ]
 

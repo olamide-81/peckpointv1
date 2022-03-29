@@ -10,10 +10,10 @@ import ExtensionsRoutes from './Extensions'
 import PageLayoutsRoutes from './PageLayouts'
 
 // ** Document title
-const TemplateTitle = '%s - Vuexy React Admin Template'
+const TemplateTitle = '%s - PECKPOINT'
 
 // ** Default Route
-const DefaultRoute = '/dashboard/'
+const DefaultRoute = '/admin/dashboard/'
 
 // ** Merge Routes
 const Routes = [
