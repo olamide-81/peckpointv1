@@ -3,11 +3,11 @@ import axios from 'axios'
 const API_URL = 'http://api.peckpoint.com/api/v1/create-account'
 
 // Register user
-const register = async (data) => {
-  const response = await axios.post(API_URL, data)
+const register = async (userdata) => {
+  const response = await axios.post(API_URL, userdata)
 
   if (response.data) {
-    localStorage.setItem('user', JSON.stringify(response.data))
+    localStorage.setItem('user', JSON.stringify(response.userdata))
   }
 
   return response.data

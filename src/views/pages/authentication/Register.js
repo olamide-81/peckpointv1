@@ -8,7 +8,7 @@ import useJwt from '@src/auth/jwt/useJwt'
 
 // ** Store & Actions
 import { useDispatch } from 'react-redux'
-import { handleLogin } from '@store/authentication'
+import { register } from '@store/authentication'
 
 // ** Third Party Components
 import { useForm, Controller } from 'react-hook-form'
@@ -69,7 +69,7 @@ const Register = () => {
           } else {
             const data = { ...res.data.user, accessToken: res.data.accessToken }
             ability.update(res.data.user.ability)
-            dispatch(handleLogin(data))
+            dispatch(register(data))
             history.push('/')
             console.log(data)
           }

@@ -28,7 +28,9 @@ const RegisterCover = () => {
     name: '',
     email: '',
     password: '',
-    password2: ''
+    password_confirmation: '',
+    username: '',
+    phone: ''
   })
   // ** Hooks
   const { skin } = useSkin()
@@ -36,7 +38,7 @@ const RegisterCover = () => {
   const illustration = skin === 'dark' ? 'register-v2-dark.svg' : 'register-v2.svg',
     source = require(`@src/assets/images/pages/${illustration}`).default
 
-    const { name, email, password, password2 } = formData
+    const { name, email, password, password_confirmation, phone, username } = formData
 
     const dispatch = useDispatch()
   
@@ -50,7 +52,7 @@ const RegisterCover = () => {
       }
   
       if (isSuccess || user) {
-        history.push('/')
+        history.push('/dashboard')
       }
   
       dispatch(reset())
@@ -66,16 +68,21 @@ const RegisterCover = () => {
     const onSubmit = (e) => {
       e.preventDefault()
   
-      if (password !== password2) {
+      if (password !== password_confirmation) {
         toast.error('Passwords do not match')
       } else {
         const userData = {
           name,
           email,
-          password
+          password,
+          password_confirmation,
+          username,
+          phone
         }
-  
+         
+        console.log(" this is the user data being passed", userData)
         dispatch(register(userData))
+        
       }
     }
 
@@ -172,6 +179,30 @@ const RegisterCover = () => {
               <div className='mb-1'>
                 <Label 
                 className='form-label'>
+                  Username
+                </Label>
+                <Input type='text' 
+                id='username' 
+                placeholder='username'  
+                name='username'
+                value={username} 
+                onChange={onChange}/>
+              </div>
+              <div className='mb-1'>
+                <Label 
+                className='form-label'>
+                  Phone
+                </Label>
+                <Input type='number' 
+                id='phonenumber' 
+                placeholder='09067854673'  
+                name='phone'
+                value={phone} 
+                onChange={onChange}/>
+              </div>
+              <div className='mb-1'>
+                <Label 
+                className='form-label'>
                   Password
                 </Label>
                 <InputPasswordToggle className='input-group-merge' id='register-password'  name='password'
@@ -182,8 +213,8 @@ const RegisterCover = () => {
                 <Label className='form-label' for='register-password'>
                   Confirm Password
                 </Label>
-                <InputPasswordToggle className='input-group-merge' id='confirm-password'  name='password2'
-                value={password2} 
+                <InputPasswordToggle className='input-group-merge' id='confirm-password'  name='password_confirmation'
+                value={password_confirmation} 
                 onChange={onChange} />
               </div>
               <div className='form-check mb-1'>

@@ -6,7 +6,7 @@ import { Row, Col, CardTitle, CardText, Form, Label, Input, Button } from 'react
 import { useState, useEffect, useContext } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-import { login, reset } from '../../../redux/authentication'
+import { reset } from '../../../redux/authentication'
 import '@styles/react/pages/page-authentication.scss'
 // ** Context
 import { AbilityContext } from '@src/utility/context/Can'
@@ -59,7 +59,7 @@ const LoginCover = () => {
 
     ability.update(res.data.userData.ability)
     
-    dispatch(login(userData))
+    dispatch(reset(userData))
   }
 
   const { skin } = useSkin()
