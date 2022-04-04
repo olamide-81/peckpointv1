@@ -3,6 +3,7 @@ import { Suspense, useContext, lazy, Fragment } from 'react'
 
 // ** Utils
 import { isUserLoggedIn } from '@utils'
+
 import { useLayout } from '@hooks/useLayout'
 import { AbilityContext } from '@src/utility/context/Can'
 import { useRouterTransition } from '@hooks/useRouterTransition'
@@ -11,7 +12,7 @@ import { useRouterTransition } from '@hooks/useRouterTransition'
 import LayoutWrapper from '@layouts/components/layout-wrapper'
 
 // ** Router Components
-import { BrowserRouter as AppRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter as AppRouter, Route, Switch, Redirect, useLocation} from 'react-router-dom'
 
 // ** Routes & Default Routes
 import { DefaultRoute, Routes } from './clientroutes'
@@ -20,6 +21,7 @@ import { DefaultRoute, Routes } from './clientroutes'
 import BlankLayout from '@layouts/BlankLayout'
 import VerticalLayout from '@src/layouts/ClientLayout'
 import HorizontalLayout from '@src/layouts/HorizontalLayout'
+import Register from '../views/pages/authentication/Register'
 
 const Router = () => {
   // ** Hooks
@@ -74,10 +76,9 @@ const Router = () => {
       resource = route.meta.resource ? route.meta.resource : null
     }
 
-    if (
-      (!isUserLoggedIn() && route.meta === undefined) ||
-      (!isUserLoggedIn() && route.meta && !route.meta.authRoute && !route.meta.publicRoute)
-    ) {
+    const locationn = useLocation()
+    
+    if (localStorage.getItem('user') === undefined) {
       /**
        ** If user is not Logged in & route meta is undefined
        ** OR
@@ -86,9 +87,16 @@ const Router = () => {
        */
 
       return <Redirect to='/login' />
-    } else if (route.meta && route.meta.authRoute && isUserLoggedIn()) {
+
+    } else if (localStorage.getItem('user') !== undefined) {
       // ** If route has meta and authRole and user is Logged in then redirect user to home page (DefaultRoute)
+      if (locationn.pathname.indexOf('/register') === -1) {
+
       return <Redirect to='/dashboard' />
+      } else {
+        
+        return <RegisterBasic />
+      }
     } else if (isUserLoggedIn() && !ability.can(action || 'read', resource)) {
       // ** If user is Logged in and doesn't have ability to visit the page redirect the user to Not Authorized
       return <Redirect to='/misc/not-authorized' />
@@ -149,6 +157,7 @@ const Router = () => {
                           {route.layout === 'BlankLayout' ? (
                             <Fragment>
                               <FinalRoute route={route} {...props} />
+                     
                             </Fragment>
                           ) : (
                             <LayoutWrapper

@@ -25,10 +25,20 @@ const NavbarSearch = () => {
   const [navbarSearch, setNavbarSearch] = useState(false)
 
   // ** ComponentDidMount
+  const [component, mountComponent] = useState(false)
+
+  const sugg = async () => {
+
+    const req = await axios.get('/api/main-search/data')
+
+    setSuggestions(req.data.searchArr)
+
+  }
   useEffect(() => {
-    axios.get('/api/main-search/data').then(({ data }) => {
-      setSuggestions(data.searchArr)
-    })
+    mountComponent(true)
+    if (component) {
+      sugg()
+    }
   }, [])
 
   // ** Removes query in store

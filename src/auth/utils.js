@@ -1,4 +1,4 @@
-import useJwt from '@src/@core/auth/jwt/useJwt'
+// import useJwt from '@src/@core/auth/jwt/useJwt'
 
 /**
  * Return if user is logged in
@@ -7,10 +7,17 @@ import useJwt from '@src/@core/auth/jwt/useJwt'
  */
 // eslint-disable-next-line arrow-body-style
 export const isUserLoggedIn = () => {
-  return localStorage.getItem('userData') && localStorage.getItem(useJwt.jwtConfig.storageTokenKeyName)
+  let logged = false
+  
+  if (localStorage.getItem('user') !== undefined) {
+    logged = true
+  }
+
+  return logged
+
 }
 
-export const getUserData = () => JSON.parse(localStorage.getItem('userData'))
+export const getUserData = () => JSON.parse(localStorage.getItem('user'))
 
 /**
  * This function is used for demo purpose route navigation
