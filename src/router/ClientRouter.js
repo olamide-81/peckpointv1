@@ -22,6 +22,7 @@ import BlankLayout from '@layouts/BlankLayout'
 import VerticalLayout from '@src/layouts/ClientLayout'
 import HorizontalLayout from '@src/layouts/HorizontalLayout'
 import Register from '../views/pages/authentication/Register'
+import RegisterBasic from '../views/pages/authentication/RegisterBasic'
 
 const Router = () => {
   // ** Hooks
@@ -78,7 +79,7 @@ const Router = () => {
 
     const locationn = useLocation()
     
-    if (localStorage.getItem('user') === undefined) {
+    if (localStorage.getItem('user') === null) {
       /**
        ** If user is not Logged in & route meta is undefined
        ** OR
@@ -88,13 +89,13 @@ const Router = () => {
 
       return <Redirect to='/login' />
 
-    } else if (localStorage.getItem('user') !== undefined) {
+    } else if (localStorage.getItem('user') !== null) {
       // ** If route has meta and authRole and user is Logged in then redirect user to home page (DefaultRoute)
       if (locationn.pathname.indexOf('/register') === -1) {
 
       return <Redirect to='/dashboard' />
       } else {
-        
+
         return <RegisterBasic />
       }
     } else if (isUserLoggedIn() && !ability.can(action || 'read', resource)) {
