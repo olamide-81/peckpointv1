@@ -23,6 +23,7 @@ import VerticalLayout from '@src/layouts/ClientLayout'
 import HorizontalLayout from '@src/layouts/HorizontalLayout'
 import Register from '../views/pages/authentication/Register'
 import RegisterBasic from '../views/pages/authentication/RegisterBasic'
+import LoginCover from '../views/pages/authentication/LoginCover'
 
 const Router = () => {
   // ** Hooks
@@ -87,7 +88,7 @@ const Router = () => {
        ** Then redirect user to login
        */
 
-      return <Redirect to='/login' />
+      return <LoginCover />
 
     } else if (localStorage.getItem('user') !== null) {
       // ** If route has meta and authRole and user is Logged in then redirect user to home page (DefaultRoute)

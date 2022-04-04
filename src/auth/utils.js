@@ -9,7 +9,7 @@
 export const isUserLoggedIn = () => {
   let logged = false
   
-  if (localStorage.getItem('user') !== undefined) {
+  if (localStorage.getItem('user') !== null) {
     logged = true
   }
 
