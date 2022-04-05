@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react'
 // ** Custom Components
 import Avatar from '@components/avatar'
 
-// ** Utils
-import { isUserLoggedIn } from '@utils'
+// // ** Utils
+// import { isUserLoggedIn } from '@utils'
 
 // ** Store & Actions
 import { useDispatch } from 'react-redux'
@@ -30,8 +30,8 @@ const UserDropdown = () => {
 
   //** ComponentDidMount
   useEffect(() => {
-    if (isUserLoggedIn() !== null) {
-      setUserData(JSON.parse(localStorage.getItem('userData')))
+    if (localStorage.getItem('user') !== null) {
+      setUserData(JSON.parse(localStorage.getItem('user')))
     }
   }, [])
 

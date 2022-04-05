@@ -193,14 +193,14 @@ const Router = () => {
   }
 
   return (
-    <AppRouter basename={process.env.REACT_APP_BASENAME}>
+    <AppRouter basename=''>
       <Switch>
         {/* If user is logged in Redirect user to DefaultRoute else to login */}
         <Route
           exact
           path='/'
           render={() => {
-            return isUserLoggedIn() ? <Redirect to={DefaultRoute} /> : <Redirect to='/login' />
+            return localStorage.getItem('user') !== null ? <Redirect to={DefaultRoute} /> : <Redirect to='/login' />
           }}
         />
         {/* Not Auth Route */}
