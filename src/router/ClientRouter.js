@@ -2,7 +2,6 @@
 import { Suspense, useContext, lazy, Fragment } from 'react'
 
 // ** Utils
-import { isUserLoggedIn } from '@utils'
 
 import { useLayout } from '@hooks/useLayout'
 import { AbilityContext } from '@src/utility/context/Can'
@@ -12,7 +11,7 @@ import { useRouterTransition } from '@hooks/useRouterTransition'
 import LayoutWrapper from '@layouts/components/layout-wrapper'
 
 // ** Router Components
-import { BrowserRouter as AppRouter, Route, Switch, Redirect, useLocation} from 'react-router-dom'
+import { BrowserRouter as AppRouter, Route, Switch, Redirect } from 'react-router-dom'
 
 // ** Routes & Default Routes
 import { DefaultRoute, Routes } from './clientroutes'
@@ -21,9 +20,6 @@ import { DefaultRoute, Routes } from './clientroutes'
 import BlankLayout from '@layouts/BlankLayout'
 import VerticalLayout from '@src/layouts/ClientLayout'
 import HorizontalLayout from '@src/layouts/HorizontalLayout'
-import Register from '../views/pages/authentication/Register'
-import RegisterBasic from '../views/pages/authentication/RegisterBasic'
-import LoginCover from '../views/pages/authentication/LoginCover'
 
 const Router = () => {
   // ** Hooks
@@ -78,9 +74,10 @@ const Router = () => {
       resource = route.meta.resource ? route.meta.resource : null
     }
 
-    const locationn = useLocation()
-    
-    if (localStorage.getItem('user') === null) {
+    if (
+      (localStorage.getItem('user') === null && route.meta === undefined) ||
+      (localStorage.getItem('user') === null && route.meta && !route.meta.authRoute && !route.meta.publicRoute)
+    ) {
       /**
        ** If user is not Logged in & route meta is undefined
        ** OR
@@ -88,21 +85,14 @@ const Router = () => {
        ** Then redirect user to login
        */
 
-      return <LoginCover />
-
-    } else if (localStorage.getItem('user') !== null) {
+      return <Redirect to='/login' />
+    } else if (route.meta && route.meta.authRoute && localStorage.getItem('user')) {
       // ** If route has meta and authRole and user is Logged in then redirect user to home page (DefaultRoute)
-      if (locationn.pathname.indexOf('/register') === -1) {
-
-      return <Redirect to='/dashboard' />
-      } else {
-
-        return <RegisterBasic />
-      }
-    } else if (isUserLoggedIn() && !ability.can(action || 'read', resource)) {
+      return <Redirect to='/' />
+    } /*else if (localStorage.getItem('user') && !ability.can(action || 'read', resource)) {
       // ** If user is Logged in and doesn't have ability to visit the page redirect the user to Not Authorized
       return <Redirect to='/misc/not-authorized' />
-    } else {
+    }*/ else {
       // ** If none of the above render component
       return <route.component {...props} />
     }
@@ -159,7 +149,6 @@ const Router = () => {
                           {route.layout === 'BlankLayout' ? (
                             <Fragment>
                               <FinalRoute route={route} {...props} />
-                     
                             </Fragment>
                           ) : (
                             <LayoutWrapper
@@ -170,20 +159,20 @@ const Router = () => {
                               /*eslint-disable */
                               {...(route.appLayout
                                 ? {
-                                    appLayout: route.appLayout
-                                  }
+                                  appLayout: route.appLayout
+                                }
                                 : {})}
                               {...(route.meta
                                 ? {
-                                    routeMeta: route.meta
-                                  }
+                                  routeMeta: route.meta
+                                }
                                 : {})}
                               {...(route.className
                                 ? {
-                                    wrapperClass: route.className
-                                  }
+                                  wrapperClass: route.className
+                                }
                                 : {})}
-                              /*eslint-enable */
+                            /*eslint-enable */
                             >
                               <Suspense fallback={null}>
                                 <FinalRoute route={route} {...props} />
@@ -204,14 +193,14 @@ const Router = () => {
   }
 
   return (
-    <AppRouter basename={process.env.REACT_APP_BASENAME}>
+    <AppRouter basename=''>
       <Switch>
         {/* If user is logged in Redirect user to DefaultRoute else to login */}
         <Route
           exact
           path='/'
           render={() => {
-            return isUserLoggedIn() ? <Redirect to={DefaultRoute} /> : <Redirect to='/login' />
+            return localStorage.getItem('user') !== null ? <Redirect to={DefaultRoute} /> : <Redirect to='/login' />
           }}
         />
         {/* Not Auth Route */}
