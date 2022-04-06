@@ -1,10 +1,10 @@
 // ** React Imports
-import { Suspense, useContext, lazy, Fragment } from 'react'
+import { Suspense, lazy, Fragment } from 'react'
 
 // ** Utils
 
 import { useLayout } from '@hooks/useLayout'
-import { AbilityContext } from '@src/utility/context/Can'
+// import { AbilityContext } from '@src/utility/context/Can'
 import { useRouterTransition } from '@hooks/useRouterTransition'
 
 // ** Custom Components
@@ -27,7 +27,7 @@ const Router = () => {
   const { transition, setTransition } = useRouterTransition()
 
   // ** ACL Ability Context
-  const ability = useContext(AbilityContext)
+  // const ability = useContext(AbilityContext)
 
   // ** Default Layout
   const DefaultLayout = layout === 'horizontal' ? 'HorizontalLayout' : 'VerticalLayout'
@@ -66,12 +66,12 @@ const Router = () => {
    */
   const FinalRoute = props => {
     const route = props.route
-    let action, resource
+    // let action, resource = null
 
     // ** Assign vars based on route meta
     if (route.meta) {
-      action = route.meta.action ? route.meta.action : null
-      resource = route.meta.resource ? route.meta.resource : null
+      // action = route.meta.action ? route.meta.action : null
+      // resource = route.meta.resource ? route.meta.resource : null
     }
 
     if (
@@ -89,10 +89,7 @@ const Router = () => {
     } else if (route.meta && route.meta.authRoute && localStorage.getItem('user')) {
       // ** If route has meta and authRole and user is Logged in then redirect user to home page (DefaultRoute)
       return <Redirect to='/' />
-    } /*else if (localStorage.getItem('user') && !ability.can(action || 'read', resource)) {
-      // ** If user is Logged in and doesn't have ability to visit the page redirect the user to Not Authorized
-      return <Redirect to='/misc/not-authorized' />
-    }*/ else {
+    } else {
       // ** If none of the above render component
       return <route.component {...props} />
     }
