@@ -29,11 +29,10 @@ const AddNewModal = ({ open, handleModal }) => {
   
      const result = await fetch("http://api.peckpoint.com/api/v1/contact", {
        method: 'POST',
-       Authorization: `${token}`,
        body:JSON.stringify(item),
        headers: {
-         Authorization: `${token}`,
-         "Content-Type": 'application/json'
+         Authorization: `Bearer ${token}`,
+         'Content-Type': 'application/json'
        }
     })
     toast.success("contact created successfully")
