@@ -4,11 +4,7 @@ const ClientDashboardRoutes = [
   // Dashboards
   {
     path: '/dashboard',
-    component: lazy(() => import('../../views/dashboard/client')),
-    meta: {
-      action: 'read',
-      resource: 'ACL'
-    }
+    component: lazy(() => import('../../views/dashboard/client'))
   },
   {
     path: '/contacts',

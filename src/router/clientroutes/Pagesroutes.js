@@ -75,9 +75,12 @@ const PagesRoutes = [
     layout: 'BlankLayout'
   },
   {
-    path: '/pages/verify-email-cover',
+    path: '/verifyemail',
     component: lazy(() => import('../../views/pages/authentication/VerifyEmailCover')),
-    layout: 'BlankLayout'
+    layout: 'BlankLayout',
+    meta: {
+      authRoute: true
+    }
   },
   {
     path: '/pages/two-steps-basic',

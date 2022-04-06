@@ -3,17 +3,16 @@ import { Link, useHistory } from 'react-router-dom'
 import { Facebook, Twitter, Mail, GitHub } from 'react-feather'
 import InputPasswordToggle from '@components/input-password-toggle'
 import { Row, Col, CardTitle, CardText, Form, Label, Input, Button } from 'reactstrap'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-import { reset } from '../../../redux/authentication'
+import { reset, login } from '../../../redux/authentication'
 import '@styles/react/pages/page-authentication.scss'
 // ** Context
 import { AbilityContext } from '@src/utility/context/Can'
 
 const LoginCover = () => {
 
-  const ability = useContext(AbilityContext)
 
   const history = useHistory()
 
@@ -56,10 +55,8 @@ const LoginCover = () => {
       email,
       password
     }
-
-    ability.update(res.data.userData.ability)
     
-    dispatch(reset(userData))
+    dispatch(login(userData))
   }
 
   const { skin } = useSkin()

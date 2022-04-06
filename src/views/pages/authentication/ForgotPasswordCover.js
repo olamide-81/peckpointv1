@@ -1,8 +1,10 @@
 // ** React Imports
 import { Link } from 'react-router-dom'
 
+
 // ** Custom Hooks
 import { useSkin } from '@hooks/useSkin'
+import { useState } from 'react'
 
 // ** Icons Imports
 import { ChevronLeft } from 'react-feather'
@@ -12,8 +14,27 @@ import { Row, Col, CardTitle, CardText, Form, Label, Input, Button } from 'react
 
 // ** Styles
 import '@styles/react/pages/page-authentication.scss'
+import { toast } from 'react-toastify'
 
 const ForgotPasswordCover = () => {
+
+  const [email, setEmail] = useState("")
+
+async function forgotpassword() {
+  const item = {email}
+  console.warn(item)
+
+   const result = await fetch("http://api.peckpoint.com/api/v1/forgot-password-link", {
+     method: 'POST',
+     body:JSON.stringify(item),
+     headers: {
+       "Content-Type": 'application/json'
+     }
+  })
+  toast.success("email sent")
+  return result.item
+}
+
   // ** Hooks
   const { skin } = useSkin()
 
@@ -92,9 +113,9 @@ const ForgotPasswordCover = () => {
                 <Label className='form-label' for='login-email'>
                   Email
                 </Label>
-                <Input type='email' id='login-email' placeholder='john@example.com' autoFocus />
+                <Input type='email' value={email} onChange={(e) => setEmail(e.target.value) } id='login-email' placeholder='john@example.com' autoFocus />
               </div>
-              <Button color='primary' block>
+              <Button color='primary' onClick={forgotpassword} block>
                 Send reset link
               </Button>
             </Form>

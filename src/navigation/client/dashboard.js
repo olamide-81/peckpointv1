@@ -5,7 +5,7 @@ import { Home, Send, MessageSquare, CheckSquare, Calendar, FileText, Circle, Boo
 export default [
   
   {
-    id: 'admindashbard',
+    id: 'userdashbard',
     title: 'Dashboard',
     icon: <Home size={20} />,
     navLink: '/dashboard'
