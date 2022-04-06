@@ -27,7 +27,7 @@ const Router = () => {
   const { transition, setTransition } = useRouterTransition()
 
   // ** ACL Ability Context
-  // const ability = useContext(AbilityContext)
+  //const ability = useContext(AbilityContext)
 
   // ** Default Layout
   const DefaultLayout = layout === 'horizontal' ? 'HorizontalLayout' : 'VerticalLayout'
@@ -66,13 +66,9 @@ const Router = () => {
    */
   const FinalRoute = props => {
     const route = props.route
-    // let action, resource = null
 
     // ** Assign vars based on route meta
-    if (route.meta) {
-      // action = route.meta.action ? route.meta.action : null
-      // resource = route.meta.resource ? route.meta.resource : null
-    }
+ 
 
     if (
       (localStorage.getItem('user') === null && route.meta === undefined) ||

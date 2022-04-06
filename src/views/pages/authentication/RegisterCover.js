@@ -51,8 +51,9 @@ const RegisterCover = () => {
         toast.error(message)
       }
   
-      if (isSuccess || user) {
-        history.push('/dashboard')
+      if (isSuccess) {
+        history.push('/verifyemail')
+        toast.success('Account created successfully please verify your email before logging in ')
       }
   
       dispatch(reset())
@@ -155,7 +156,7 @@ const RegisterCover = () => {
               <div className='mb-1'>
                 <Label 
                 className='form-label'>
-                  Username
+                  Name
                 </Label>
                 <Input type='text' 
                 placeholder='johndoe' 

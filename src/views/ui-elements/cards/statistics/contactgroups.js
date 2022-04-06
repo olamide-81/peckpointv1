@@ -11,10 +11,18 @@ import StatsWithAreaChart from '@components/widgets/stats/StatsWithAreaChart'
 const contactgroups = ({ kFormatter }) => {
   // ** State
   const [data, setData] = useState(null)
+    // ** State
+    const [userData, setUserData] = useState(null)
 
   useEffect(() => {
     axios.get('/card/card-statistics/subscribers').then(res => setData(res.data))
     return () => setData(null)
+  }, [])
+
+  useEffect(() => {
+    if (localStorage.getItem('user') !== null) {
+      setUserData(JSON.parse(localStorage.getItem('user')))
+    }
   }, [])
 
   return data !== null ? (
@@ -22,7 +30,7 @@ const contactgroups = ({ kFormatter }) => {
       icon={<Users size={21} />}
       color='primary'
       stats={kFormatter(data.analyticsData.subscribers)}
-      statTitle='Contact Groups'
+      statTitle={userData.user.username}
       series={data.series}
       type='area'
     />
