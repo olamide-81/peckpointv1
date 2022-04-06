@@ -19,17 +19,20 @@ const AddNewModal = ({ open, handleModal }) => {
   const [lastName, setlastName] = useState("")
   const [phoneNumber, setphoneNumber] = useState("")
 
-  async function createcontact() {
-    const item = {firstName, lastName, phoneNumber}
-    console.warn(item)
+  const saved = JSON.parse(localStorage.getItem('user'))
+  const token = saved.token
+  console.log(token)
 
-  const saved = localStorage.getItem("user.token")
-  console.warn(saved)
+  async function createcontact() {
+    const item = {firstName, lastName, phoneNumber, token}
+    console.warn(item)
   
      const result = await fetch("http://api.peckpoint.com/api/v1/contact", {
        method: 'POST',
+       Authorization: `${token}`,
        body:JSON.stringify(item),
        headers: {
+         Authorization: `${token}`,
          "Content-Type": 'application/json'
        }
     })
