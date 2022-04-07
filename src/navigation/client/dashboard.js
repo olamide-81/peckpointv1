@@ -18,26 +18,22 @@ export default [
       {
         id: 'all-messages',
         title: 'All Messages',
-        icon: <BarChart size={12} />,
-        navLink: '/admin/invoice/list'
+        icon: <BarChart size={12} />
       },
       {
         id: 'recieved-messages',
         title: 'Recieved Messages',
-        icon: <PhoneIncoming size={12} />,
-        navLink: '/apps/invoice/preview'
+        icon: <PhoneIncoming size={12} />
       },
       {
         id: 'sent-mesages',
         title: 'Sent Messages',
-        icon: <PhoneOutgoing size={12} />,
-        navLink: '/apps/invoice/edit'
+        icon: <PhoneOutgoing size={12} />
       },
       {
         id: 'campaigns',
         title: 'Campaigns',
-        icon: <PieChart size={12} />,
-        navLink: '/apps/invoice/add'
+        icon: <PieChart size={12} />
       }
     ]
   },
@@ -56,40 +52,39 @@ export default [
     {
       id: 'sending-servers',
       title: 'Sending Servers',
-      icon: <Send size={12} />,
-      navLink: '/admin/sending-servers'
+      icon: <Send size={12} />
+   
     },
     {
       id: 'sender-id',
       title: 'Sender ID',
-      icon: <Book size={12} />,
-      navLink: '/sender-id'
+      icon: <Book size={12} />
+      
     },
     {
       id: 'numbers',
       title: 'Numbers',
-      icon: <Phone size={12} />,
-      navLink: '/numbers'
+      icon: <Phone size={12} />
+      
     },
     {
       id: 'keywords',
       title: 'Keywords',
-      icon: <Hash size={12} />,
-      navLink: '/keywords'
+      icon: <Hash size={12} />
+     
     },
     {
       id: 'template-tags',
       title: 'Template Tags',
-      icon: <Tag size={12} />,
-      navLink: '/template-tags'
+      icon: <Tag size={12} />
+      
     }
   ]
 },
 {
   id: 'blacklist',
   title: 'Blacklist',
-  icon: <Shield size={20} />,
-  navLink: '/admin/blacklist'
+  icon: <Shield size={20} />
 },
 {
   id: 'sms',
@@ -99,20 +94,17 @@ export default [
     {
       id: 'plans-table',
       title: 'Campaign Builder',
-      icon: <Server size={12} />,
-      navLink: '/admin/plans'
+      icon: <Server size={12} />
     },
     {
       id: 'Quick Send',
       title: 'Quick Send',
-      icon: <Send size={12} />,
-      navLink: '/admin/currency'
+      icon: <Send size={12} />
     },
     {
       id: 'plans-currency',
       title: 'Send Using File',
-      icon: <FileText size={12} />,
-      navLink: '/admin/currency'
+      icon: <FileText size={12} />
     }
   ]
 },
@@ -124,20 +116,17 @@ export default [
     {
       id: 'plans-table',
       title: 'Campaign Builder',
-      icon: <Server size={12} />,
-      navLink: '/admin/plans'
+      icon: <Server size={12} />
     },
     {
       id: 'Quick Send',
       title: 'Quick Send',
-      icon: <Send size={12} />,
-      navLink: '/admin/currency'
+      icon: <Send size={12} />
     },
     {
       id: 'plans-currency',
       title: 'Send Using File',
-      icon: <FileText size={12} />,
-      navLink: '/admin/currency'
+      icon: <FileText size={12} />
     }
   ]
 },
@@ -149,20 +138,17 @@ export default [
     {
       id: 'plans-table',
       title: 'Campaign Builder',
-      icon: <Server size={12} />,
-      navLink: '/admin/plans'
+      icon: <Server size={12} />
     },
     {
       id: 'Quick Send',
       title: 'Quick Send',
-      icon: <Send size={12} />,
-      navLink: '/admin/currency'
+      icon: <Send size={12} />
     },
     {
       id: 'plans-currency',
       title: 'Send Using File',
-      icon: <FileText size={12} />,
-      navLink: '/admin/currency'
+      icon: <FileText size={12} />
     }
   ]
 },
@@ -174,33 +160,28 @@ export default [
     {
       id: 'plans-table',
       title: 'Campaign Builder',
-      icon: <Server size={12} />,
-      navLink: '/admin/plans'
+      icon: <Server size={12} />
     },
     {
       id: 'Quick Send',
       title: 'Quick Send',
-      icon: <Send size={12} />,
-      navLink: '/admin/currency'
+      icon: <Send size={12} />
     },
     {
       id: 'plans-currency',
       title: 'Send Using File',
-      icon: <FileText size={12} />,
-      navLink: '/admin/currency'
+      icon: <FileText size={12} />
     }
   ]
 },
 {
   id: 'chat-box',
   title: 'Chat Box',
-  icon: <Slack size={20} />,
-  navLink: '/'
+  icon: <Slack size={20} />
 },
 {
   id: 'developers',
   title: 'Developers',
-  icon: <Code size={20} />,
-  navLink: '/'
+  icon: <Code size={20} />
 }
 ]

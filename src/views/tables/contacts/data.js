@@ -21,11 +21,19 @@ const status = {
 
 export let data
 
+const saved = JSON.parse(localStorage.getItem('user'))
+const token = saved.token
+
 // ** Get initial Data
-axios.get('/api/datatables/initial-data').then(response => {
+axios.get("http://api.peckpoint.com/api/v1/contacts", {
+  headers: {
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json'
+   }
+})
+.then(response => {
   data = response.data
 })
-
 // ** Table Zero Config Column
 export const basicColumns = [
   {
