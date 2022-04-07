@@ -7,9 +7,12 @@ import { data, columns } from './data'
 // ** Add New Modal Component
 import AddNewModal from './AddNewModal'
 
+
+import DataTable from 'react-data-table-component'
+
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
-import DataTable from 'react-data-table-component'
+
 import { ChevronDown, Share, Printer, FileText, File, Grid, Copy, Plus } from 'react-feather'
 
 // ** Reactstrap Imports
@@ -25,7 +28,8 @@ import {
   DropdownMenu,
   DropdownItem,
   DropdownToggle,
-  UncontrolledButtonDropdown
+  UncontrolledButtonDropdown,
+  Table
 } from 'reactstrap'
 
 // ** Bootstrap Checkbox Component

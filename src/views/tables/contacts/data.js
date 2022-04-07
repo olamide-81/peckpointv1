@@ -150,7 +150,8 @@ export const columns = [
           <Avatar img={require(`@src/assets/images/portrait/small/avatar-s-${row.avatar}`).default} />
         )}
         <div className='user-info text-truncate ms-1'>
-          <span className='d-block fw-bold text-truncate'>{row.full_name}</span>
+          <span className='d-block fw-bold text-truncate'>{data.data.firstname}</span>
+          
           <small>{row.post}</small>
         </div>
       </div>

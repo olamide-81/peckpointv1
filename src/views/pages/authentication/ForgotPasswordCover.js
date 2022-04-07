@@ -20,20 +20,31 @@ const ForgotPasswordCover = () => {
 
   const [email, setEmail] = useState("")
 
-async function forgotpassword() {
-  const item = {email}
-  console.warn(item)
-
-   const result = await fetch("http://api.peckpoint.com/api/v1/forgot-password-link", {
-     method: 'POST',
-     body:JSON.stringify(item),
-     headers: {
-       "Content-Type": 'application/json'
-     }
-  })
-  toast.success("email sent")
-  return result.item
-}
+  async function forgotpassword() {
+    const item = {email}
+  
+    if (email.length) {
+      if (email.match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) !== null) {
+      await fetch("http://api.peckpoint.com/api/v1/forgot-password-link", {
+       method: 'POST',
+       body:JSON.stringify(item),
+       headers: {
+         "Content-Type": 'application/json'
+       }
+    }).then(res => res.json())
+      .then(data => {
+        toast.info(data.message)
+      })
+  
+  } else {
+    toast.error('Email Address Is Incorrect')
+  }
+  } else {
+    
+    toast.error("Email Address Is Required")
+  }
+  
+  }
 
   // ** Hooks
   const { skin } = useSkin()
