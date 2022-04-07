@@ -5,7 +5,10 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 export const getData = createAsyncThunk('datatables/getData', async params => {
-  const response = await axios.get('/api/datatables/data', params)
+  const response = await axios.get('http://api.peckpoint.com/api/v1/contacts', { headers: {
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json'
+   }},params)
   return { allData: response.data.allData, data: response.data.invoices, totalPages: response.data.total, params }
 })
 
