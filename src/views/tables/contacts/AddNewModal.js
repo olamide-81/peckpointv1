@@ -1,9 +1,10 @@
 // ** React Imports
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 
 // ** Third Party Components
 import Flatpickr from 'react-flatpickr'
-import { User, Briefcase, Mail, Calendar, DollarSign, X } from 'react-feather'
+import { User, Briefcase, Mail, Calendar, DollarSign, X, Phone } from 'react-feather'
 
 // ** Reactstrap Imports
 import { Modal, Input, Label, Button, ModalHeader, ModalBody, InputGroup, InputGroupText } from 'reactstrap'
@@ -15,29 +16,28 @@ import '@styles/react/libs/flatpickr/flatpickr.scss'
 const AddNewModal = ({ open, handleModal }) => {
   // ** State
   
-  const [firstName, setfirstName] = useState("")
-  const [lastName, setlastName] = useState("")
-  const [phoneNumber, setphoneNumber] = useState("")
+  const [firstname, setfirstName] = useState("")
+  const [lastname, setlastName] = useState("")
+  const [phone_number, setphoneNumber] = useState("")
 
   const saved = JSON.parse(localStorage.getItem('user'))
   const token = saved.token
-  console.log(token)
 
   async function createcontact() {
-    const item = {firstName, lastName, phoneNumber, token}
+    const item = {firstname, lastname, phone_number}
     console.warn(item)
   
-     const result = await fetch("http://api.peckpoint.com/api/v1/contact", {
+     const result = await fetch("http://api.peckpoint.com/api/v1/contacts", {
        method: 'POST',
-       Authorization: `${token}`,
        body:JSON.stringify(item),
        headers: {
-         Authorization: `${token}`,
-         "Content-Type": 'application/json'
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
        }
     })
-    toast.success("contact created successfully")
+    toast.success("created successfully")
     return result.item
+    
   }
 
   // ** Custom close btn
@@ -63,7 +63,7 @@ const AddNewModal = ({ open, handleModal }) => {
             <InputGroupText>
               <User size={15} />
             </InputGroupText>
-            <Input id='full-name' placeholder='Bruce Wayne' name='firstname' value={firstName} onChange={(e) => setfirstName(e.target.value) }  />
+            <Input id='full-name' placeholder='Bruce Wayne' name='firstname' value={firstname} onChange={(e) => setfirstName(e.target.value) }  />
           </InputGroup>
         </div>
         <div className='mb-1'>
@@ -72,9 +72,9 @@ const AddNewModal = ({ open, handleModal }) => {
           </Label>
           <InputGroup>
             <InputGroupText>
-              <Briefcase size={15} />
+              <User size={15} />
             </InputGroupText>
-            <Input id='post' placeholder='Last name' name='lastname' value={lastName} onChange={(e) => setlastName(e.target.value) }  />
+            <Input id='post' placeholder='Last name' name='lastname' value={lastname} onChange={(e) => setlastName(e.target.value) }  />
           </InputGroup>
         </div>
         <div className='mb-1'>
@@ -83,9 +83,9 @@ const AddNewModal = ({ open, handleModal }) => {
           </Label>
           <InputGroup>
             <InputGroupText>
-              <Briefcase size={15} />
+              <Phone size={15} />
             </InputGroupText>
-            <Input id='post' placeholder='phone number' name='phonenumber' value={phoneNumber} onChange={(e) => setphoneNumber(e.target.value) }  />
+            <Input id='post' placeholder='phone number' name='phonenumber' value={phone_number} onChange={(e) => setphoneNumber(e.target.value) }  />
           </InputGroup>
         </div>
         <Button className='me-1' color='primary' onClick={createcontact}>
