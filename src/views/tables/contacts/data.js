@@ -1,15 +1,14 @@
 // ** Custom Components
-import Avatar from '@components/avatar'
+// import Avatar from '@components/avatar'
 
 // ** Third Party Components
-import axios from 'axios'
+// import axios from 'axios'
 import { MoreVertical, Edit, FileText, Archive, Trash } from 'react-feather'
-
 // ** Reactstrap Imports
 import { Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 
 // ** Vars
-const states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary']
+// const states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary']
 
 const status = {
   1: { title: 'Current', color: 'light-primary' },
@@ -19,21 +18,6 @@ const status = {
   5: { title: 'Applied', color: 'light-info' }
 }
 
-export let data
-
-const saved = JSON.parse(localStorage.getItem('user'))
-const token = saved.token
-
-// ** Get initial Data
-axios.get("http://api.peckpoint.com/api/v1/contacts", {
-  headers: {
-    Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json'
-   }
-})
-.then(response => {
-  data = response.data
-})
 // ** Table Zero Config Column
 export const basicColumns = [
   {
@@ -141,59 +125,70 @@ export const columns = [
   {
     name: 'Name',
     minWidth: '250px',
-    sortable: row => row.full_name,
+    sortable: row => row.fullname,
     cell: row => (
       <div className='d-flex align-items-center'>
-        {row.avatar === '' ? (
-          <Avatar color={`light-${states[row.status]}`} content={row.full_name} initials />
+        {/* {row.avatar === undefined ? (
+          <Avatar color={`light-${states[0]}`} content={row.fullname} initials />
         ) : (
           <Avatar img={require(`@src/assets/images/portrait/small/avatar-s-${row.avatar}`).default} />
-        )}
+        )} */}
         <div className='user-info text-truncate ms-1'>
-          <span className='d-block fw-bold text-truncate'>{data.data.firstname}</span>
-          
-          <small>{row.post}</small>
+          <span className='d-block fw-bold text-truncate'>{row.firstname} {row.lastname}</span>
+     
+   
         </div>
       </div>
     )
   },
+
+  {
+    name: 'Phone Number',
+    sortable: true,
+    minWidth: '250px',
+    selector: row => row.phone_number
+  },
+
   {
     name: 'Email',
     sortable: true,
     minWidth: '250px',
     selector: row => row.email
   },
+
   {
     name: 'Date',
     sortable: true,
     minWidth: '150px',
-    selector: row => row.start_date
+    selector: row => row.created_at
   },
 
   {
-    name: 'Salary',
-    sortable: true,
+    name: 'Gender',
+    sortable: false,
     minWidth: '150px',
-    selector: row => row.salary
+    selector: row => row.gender
   },
+
   {
-    name: 'Age',
+    name: 'DOB',
     sortable: true,
     minWidth: '100px',
-    selector: row => row.age
+    selector: row => row.dob
   },
-  {
-    name: 'Status',
-    minWidth: '150px',
-    sortable: row => row.status.title,
-    cell: row => {
-      return (
-        <Badge color={status[row.status].color} pill>
-          {status[row.status].title}
-        </Badge>
-      )
-    }
-  },
+
+  // {
+  //   name: 'Status',
+  //   minWidth: '150px',
+  //   sortable: row => row.status.title,
+  //   cell: row => {
+  //     return (
+  //       <Badge color={status[row.status].color} pill>
+  //         {status[row.status].title}
+  //       </Badge>
+  //     )
+  //   }
+  // },
   {
     name: 'Actions',
     allowOverflow: true,
@@ -356,7 +351,7 @@ export const advSearchColumns = [
     name: 'Email',
     sortable: true,
     minWidth: '250px',
-    selector: row => row.email
+      selector: row => row.email
   },
   {
     name: 'Post',
