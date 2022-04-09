@@ -28,7 +28,7 @@ const AddNewModal = ({ open, handleModal }) => {
   async function createcontact() {
     const item = {firstname, lastname, phone_number}
   
-     const result = await fetch("http://api.peckpoint.com/api/v1/contacts", {
+     const result = await fetch("https://api.peckpoint.com/api/v1/contacts", {
        method: 'POST',
        body:JSON.stringify(item),
        headers: {
@@ -40,7 +40,7 @@ const AddNewModal = ({ open, handleModal }) => {
       .then(data => {
         toast.info(data.message)
       })
-    return result.item
+    return result
     
   }
 
@@ -48,7 +48,7 @@ const AddNewModal = ({ open, handleModal }) => {
   async function sendviaemail() {
     const emailitem = {email}
   
-     const result = await fetch("http://api.peckpoint.com/api/v1/via-email-address", {
+     const result = await fetch("https://api.peckpoint.com/api/v1/via-email-address", {
        method: 'POST',
        body:JSON.stringify(emailitem),
        headers: {
@@ -60,14 +60,13 @@ const AddNewModal = ({ open, handleModal }) => {
       .then(data => {
         toast.info(data.message)
       })
-    return result.item
-    
+      return result
   }
 
   async function sendlinkphonenumber() {
     const phone_number = {phone_number2}
   
-     const result = await fetch("http://api.peckpoint.com/api/v1/via-phone-number", {
+     const result = await fetch("https://api.peckpoint.com/api/v1/via-phone-number", {
        method: 'POST',
        body:JSON.stringify(phone_number),
        headers: {
@@ -79,8 +78,7 @@ const AddNewModal = ({ open, handleModal }) => {
       .then(data => {
         toast.info(data.message)
       })
-    return result.phone_number
-    
+      return result
   }
 
   // ** Custom close btn

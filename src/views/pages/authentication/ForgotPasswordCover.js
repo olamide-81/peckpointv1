@@ -25,7 +25,7 @@ const ForgotPasswordCover = () => {
   
     if (email.length) {
       if (email.match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) !== null) {
-      await fetch("http://api.peckpoint.com/api/v1/forgot-password-link", {
+      await fetch("https://api.peckpoint.com/api/v1/forgot-password-link", {
        method: 'POST',
        body:JSON.stringify(item),
        headers: {

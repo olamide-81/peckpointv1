@@ -68,6 +68,14 @@ const PagesRoutes = [
     }
   },
   {
+    path: '/verified',
+    component: lazy(() => import('../../views/pages/authentication/VerifyEmailBasic')),
+    layout: 'BlankLayout',
+    meta: {
+      authRoute: true
+    }
+  },
+  {
     path: '/pages/reset-password-basic',
     component: lazy(() => import('../../views/pages/authentication/ResetPasswordBasic')),
     layout: 'BlankLayout'

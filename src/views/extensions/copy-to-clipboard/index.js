@@ -13,6 +13,9 @@ import ExtensionsHeader from '@components/extensions-header'
 // ** Reactstrap Imports
 import { Row, Col, Card, CardHeader, CardTitle, CardBody, Button, Input } from 'reactstrap'
 
+const user = JSON.parse(localStorage.getItem('user'))
+
+
 const ToastSuccess = () => (
   <Fragment>
     <div className='toastify-header pb-0'>
@@ -26,7 +29,7 @@ const ToastSuccess = () => (
 
 const Clipboard = () => {
   // ** State
-  const [value, setValue] = useState('https://peckpoint/contact-boarding/id?220055')
+  const [value, setValue] = useState(user.user.invite_url)
   const [copied, setCopied] = useState(false)
 
   const handleCopy = ({ target: { value } }) => {

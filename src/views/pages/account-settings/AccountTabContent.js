@@ -19,6 +19,7 @@ import { selectThemeColors } from '@utils'
 // ** Demo Components
 import DeleteAccount from './DeleteAccount'
 import ShareLink from '../../extensions/copy-to-clipboard'
+import Birthday from '../../ui-elements/cards/advance/CardCongratulations'
 
 const countryOptions = [
   { value: 'uk', label: 'UK' },
@@ -291,6 +292,7 @@ const AccountTabs = ({ data }) => {
       </Card>
       <ShareLink />
       <DeleteAccount />
+      <Birthday />
     </Fragment>
   )
 }
