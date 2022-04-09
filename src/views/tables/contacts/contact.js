@@ -3,7 +3,7 @@ import { Fragment, useState, forwardRef } from 'react'
 // ** Table Data & Columns
 import { columns } from './data'
 
-
+import { delayLog } from './delayLog'
 // ** Add New Modal Component
 import AddNewModal from './AddNewModal'
 
@@ -45,9 +45,8 @@ const Contact = () => {
   const [data, addData] = useState([])
   const saved = JSON.parse(localStorage.getItem('user'))
   const token = saved.token
-
+  delayLog()
   // ** Get initial Data
-
   axios.get("http://api.peckpoint.com/api/v1/contacts", {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -55,7 +54,7 @@ const Contact = () => {
     }
   }).then(dataa => {
            addData(dataa.data.data)
-        })
+      })
     
 
   const [modal, setModal] = useState(false)
