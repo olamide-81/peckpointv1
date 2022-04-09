@@ -39,6 +39,21 @@ const ShareContactList = () => {
     
   }
 
+  const getGet = (val) => {
+  const str = (window.location.search).substring(1)
+
+  const ee = str.split('&')
+
+  for (const e in ee) {
+    const c = ee[e].split('=')
+    if (c[0] === val) {
+      return c[1]
+    }
+  }
+}
+// const user_name = getGet('username')
+// this would return the value of username in the url 0r any other
+
 
   return (
     <Card >
