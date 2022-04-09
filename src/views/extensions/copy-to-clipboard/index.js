@@ -26,7 +26,7 @@ const ToastSuccess = () => (
 
 const Clipboard = () => {
   // ** State
-  const [value, setValue] = useState('Copy Me!')
+  const [value, setValue] = useState('https://peckpoint/contact-boarding/id?220055')
   const [copied, setCopied] = useState(false)
 
   const handleCopy = ({ target: { value } }) => {
@@ -49,15 +49,15 @@ const Clipboard = () => {
   return (
     <Fragment>
       <ExtensionsHeader
-        title='React Copy To Clipboard'
-        subTitle='Copy to clipboard React component'
-        link='https://github.com/nkbt/react-copy-to-clipboard'
+        title='Share Your Link '
+        subTitle='Copy to clipboard and forward to users who you want to add to your contact list'
+        
       />
       <Row>
         <Col sm='12'>
           <Card>
             <CardHeader>
-              <CardTitle tag='h4'>Clipboard</CardTitle>
+              <CardTitle tag='h4'>Contact List Link</CardTitle>
             </CardHeader>
             <CardBody>
               <Row>

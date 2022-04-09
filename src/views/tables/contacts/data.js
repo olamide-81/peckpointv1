@@ -379,5 +379,4 @@ export const advSearchColumns = [
     selector: row => row.salary
   }
 ]
-
 export default ExpandableTable
