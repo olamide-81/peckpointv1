@@ -8,7 +8,7 @@ import { Users } from 'react-feather'
 // ** Custom Components
 import StatsWithAreaChart from '@components/widgets/stats/StatsWithAreaChart'
 
-const SubscribersGained = ({ kFormatter }) => {
+const SubscribersGained = ({}) => {
   // ** State
   const [data, setData] = useState(null)
 
@@ -21,8 +21,8 @@ const SubscribersGained = ({ kFormatter }) => {
     <StatsWithAreaChart
       icon={<Users size={21} />}
       color='primary'
-      stats={kFormatter(data.analyticsData.subscribers)}
-      statTitle='Customers'
+      stats='0'
+      statTitle='Contacts'
       series={data.series}
       type='area'
     />

@@ -19,9 +19,9 @@ const CardCongratulations = () => {
         <img className='congratulations-img-right' src={decorationRight} alt='decor-right' />
         <Avatar icon={<Award size={28} />} className='shadow' color='primary' size='xl' />
         <div className='text-center'>
-          <h1 className='mb-1 text-white'>Congratulations John,</h1>
+          <h1 className='mb-1 text-white'>Happy Birthday John,</h1>
           <CardText className='m-auto w-75'>
-            You have done <strong>57.6%</strong> more sales today. Check your new badge in your profile.
+          We at PeckPoint, wish you a happy birthday and are extremely excited for you on reaching such a milestone in your life. <br/> We hope all the days of your life will be as great as you are to us. Happy birthday!
           </CardText>
         </div>
       </CardBody>
