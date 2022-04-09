@@ -7,6 +7,10 @@ import { useState } from 'react'
 
 const ShareContactList = () => {
   const [picker, setPicker] = useState(new Date())
+  const [gender, setGender] = useState({
+    male : false,
+    female : false
+  })
 
   return (
     <Card >
@@ -60,12 +64,12 @@ const ShareContactList = () => {
               <Input type='email' name='Email' id='EmailMulti' placeholder='Email' />
             </Col>
             <Col md='6' sm='12' className='mb-1'>
-            <Input type='checkbox' id='basic-cb-unchecked' />
+              <Input type='checkbox' checked={gender.male} onClick={() => setGender({female : false, male : !gender.male })} id='basic-cb-unchecked' />
               <Label for='basic-cb-unchecked' className='form-check-label'>
                 Male
               </Label>
-            <Input type='checkbox' id='basic-cb-unchecked' />
-              <Label for='basic-cb-unchecked' className='form-check-label'>
+              <Input type='checkbox' checked={gender.female} onClick={() => setGender({ male: false, female: !gender.female })} id='basic-cb-unchecked_fm' />
+              <Label for='basic-cb-unchecked_fm' className='form-check-label'>
                 Female
               </Label>
             </Col>
