@@ -5,12 +5,8 @@ const API_URL = 'http://api.peckpoint.com/api/v1/create-account'
 // Register user
 const register = async (userdata) => {
   const response = await axios.post(API_URL, userdata)
-
   if (response.data) {
-    console.log('created successfully')
   }
-
-  return response.data
 }
 
 // Login user

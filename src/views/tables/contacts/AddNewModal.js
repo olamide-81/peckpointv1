@@ -19,13 +19,14 @@ const AddNewModal = ({ open, handleModal }) => {
   const [firstname, setfirstName] = useState("")
   const [lastname, setlastName] = useState("")
   const [phone_number, setphoneNumber] = useState("")
+  const [phone_number2, setphoneNumber2] = useState("")
+  const [email, setEmail] = useState("")
 
   const saved = JSON.parse(localStorage.getItem('user'))
   const token = saved.token
 
   async function createcontact() {
     const item = {firstname, lastname, phone_number}
-    console.warn(item)
   
      const result = await fetch("http://api.peckpoint.com/api/v1/contacts", {
        method: 'POST',
@@ -35,8 +36,50 @@ const AddNewModal = ({ open, handleModal }) => {
         'Content-Type': 'application/json'
        }
     })
-    toast.success("created successfully")
+    .then(res => res.json())
+      .then(data => {
+        toast.info(data.message)
+      })
     return result.item
+    
+  }
+
+
+  async function sendviaemail() {
+    const emailitem = {email}
+  
+     const result = await fetch("http://api.peckpoint.com/api/v1/via-email-address", {
+       method: 'POST',
+       body:JSON.stringify(emailitem),
+       headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+       }
+    })
+    .then(res => res.json())
+      .then(data => {
+        toast.info(data.message)
+      })
+    return result.item
+    
+  }
+
+  async function sendlinkphonenumber() {
+    const phone_number = {phone_number2}
+  
+     const result = await fetch("http://api.peckpoint.com/api/v1/via-phone-number", {
+       method: 'POST',
+       body:JSON.stringify(phone_number),
+       headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+       }
+    })
+    .then(res => res.json())
+      .then(data => {
+        toast.info(data.message)
+      })
+    return result.phone_number
     
   }
 
@@ -95,6 +138,40 @@ const AddNewModal = ({ open, handleModal }) => {
           Cancel
         </Button>
       </ModalBody>
+      <ModalBody className='flex-grow-1'>
+        <div className='mb-1'>
+          <Label className='form-label' for='post'>
+            Phone Number
+          </Label>
+          <InputGroup>
+            <InputGroupText>
+              <Phone size={15} />
+            </InputGroupText>
+            <Input id='post' placeholder='phone number' name='phonenumber' value={phone_number2} onChange={(e) => setphoneNumber2(e.target.value) }  />
+          </InputGroup>
+        </div>
+        <Button className='me-1' color='primary' onClick={sendlinkphonenumber}>
+          Send Link 
+        </Button>
+      </ModalBody>
+
+      <ModalBody className='flex-grow-1'>
+        <div className='mb-1'>
+          <Label className='form-label' for='post'>
+            Email
+          </Label>
+          <InputGroup>
+            <InputGroupText>
+              <Phone size={15} />
+            </InputGroupText>
+            <Input id='post' placeholder='email' name='email' value={email} onChange={(e) => setEmail(e.target.value) }  />
+          </InputGroup>
+        </div>
+        <Button className='me-1' color='primary' onClick={sendviaemail}>
+          Send Link 
+        </Button>
+      </ModalBody>
+
     </Modal>
   )
 }

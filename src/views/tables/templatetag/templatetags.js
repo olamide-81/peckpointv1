@@ -199,7 +199,7 @@ const Contact = () => {
             </UncontrolledButtonDropdown>
             <Button className='ms-2' color='primary' onClick={handleModal}>
               <Plus size={15} />
-              <span className='align-middle ms-50'>Add Record</span>
+              <span className='align-middle ms-50'>Add Template</span>
             </Button>
           </div>
         </CardHeader>

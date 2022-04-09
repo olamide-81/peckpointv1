@@ -1,11 +1,14 @@
 // ** React Imports
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 
 // ** Third Party Components
 import Select from 'react-select'
 import Cleave from 'cleave.js/react'
 import { useForm, Controller } from 'react-hook-form'
 import 'cleave.js/dist/addons/cleave-phone.us'
+
+// ** Default Avatar Image
+import defaultAvatar from '@src/assets/images/portrait/small/avatar-s-11.jpg'
 
 // ** Reactstrap Imports
 import { Row, Col, Form, Card, Input, Label, Button, CardBody, CardTitle, CardHeader, FormFeedback } from 'reactstrap'
@@ -15,6 +18,7 @@ import { selectThemeColors } from '@utils'
 
 // ** Demo Components
 import DeleteAccount from './DeleteAccount'
+import ShareLink from '../../extensions/copy-to-clipboard'
 
 const countryOptions = [
   { value: 'uk', label: 'UK' },
@@ -66,6 +70,7 @@ const timeZoneOptions = [
   { value: '(GMT-03:30) Newfoundland', label: '(GMT-03:30) Newfoundland' }
 ]
 
+
 const AccountTabs = ({ data }) => {
   // ** Hooks
   const defaultValues = {
@@ -73,14 +78,28 @@ const AccountTabs = ({ data }) => {
     firstName: data.fullName.split(' ')[0]
   }
   const {
-    control,
     setError,
     handleSubmit,
     formState: { errors }
   } = useForm({ defaultValues })
 
+   // ** State
+   const [userData, setUserData] = useState(null)
+
+    //** ComponentDidMount
+    useEffect(() => {
+      if (localStorage.getItem('user') !== null) {
+        setUserData(JSON.parse(localStorage.getItem('user')))
+      }
+    }, [])
+  
+    const user = JSON.parse(localStorage.getItem('user'))
+
+     //** Vars
+  const userAvatar = (userData && userData.avatar) || defaultAvatar
+
   // ** States
-  const [avatar, setAvatar] = useState(data.avatar ? data.avatar : '')
+ 
 
   const onChange = e => {
     const reader = new FileReader(),
@@ -118,7 +137,7 @@ const AccountTabs = ({ data }) => {
         <CardBody className='py-2 my-25'>
           <div className='d-flex'>
             <div className='me-25'>
-              <img className='rounded me-50' src={avatar} alt='Generic placeholder image' height='100' width='100' />
+              <img className='rounded me-50' src={userAvatar} alt='Generic placeholder image' height='100' width='100' />
             </div>
             <div className='d-flex align-items-end mt-75 ms-1'>
               <div>
@@ -137,35 +156,35 @@ const AccountTabs = ({ data }) => {
             <Row>
               <Col sm='6' className='mb-1'>
                 <Label className='form-label' for='firstName'>
-                  First Name
+                FirstName
                 </Label>
-                <Controller
-                  name='firstName'
-                  control={control}
-                  render={({ field }) => (
-                    <Input id='firstName' placeholder='John' invalid={errors.firstName && true} {...field} />
-                  )}
-                />
+                <Input type='text' 
+                placeholder='johndoe' 
+                name='name'
+                value={user.user.name} 
+               onChange={onChange}/>
                 {errors && errors.firstName && <FormFeedback>Please enter a valid First Name</FormFeedback>}
               </Col>
               <Col sm='6' className='mb-1'>
                 <Label className='form-label' for='lastName'>
-                  Last Name
+                  Username
                 </Label>
-                <Controller
-                  name='lastName'
-                  control={control}
-                  render={({ field }) => (
-                    <Input id='lastName' placeholder='Doe' invalid={errors.lastName && true} {...field} />
-                  )}
-                />
+                <Input type='text' 
+                placeholder='johndoe' 
+                name='name'
+                value={user.user.username} 
+               onChange={onChange}/>
                 {errors.lastName && <FormFeedback>Please enter a valid Last Name</FormFeedback>}
               </Col>
               <Col sm='6' className='mb-1'>
                 <Label className='form-label' for='emailInput'>
                   E-mail
                 </Label>
-                <Input id='emailInput' type='email' name='email' placeholder='Email' defaultValue={data.email} />
+                <Input type='email' 
+                placeholder='example@gmail.com' 
+                name='name'
+                value={user.user.email} 
+               onChange={onChange}/>
               </Col>
               <Col sm='6' className='mb-1'>
                 <Label className='form-label' for='company'>
@@ -177,13 +196,11 @@ const AccountTabs = ({ data }) => {
                 <Label className='form-label' for='phNumber'>
                   Phone Number
                 </Label>
-                <Cleave
-                  id='phNumber'
-                  name='phNumber'
-                  className='form-control'
-                  placeholder='1 234 567 8900'
-                  options={{ phone: true, phoneRegionCode: 'US' }}
-                />
+                <Input type='text' 
+                placeholder='johndoe' 
+                name='name'
+                value={user.user.phone} 
+               onChange={onChange}/>
               </Col>
               <Col sm='6' className='mb-1'>
                 <Label className='form-label' for='address'>
@@ -217,6 +234,7 @@ const AccountTabs = ({ data }) => {
                   defaultValue={countryOptions[0]}
                 />
               </Col>
+
               <Col sm='6' className='mb-1'>
                 <Label className='form-label' for='language'>
                   Language
@@ -271,6 +289,7 @@ const AccountTabs = ({ data }) => {
           </Form>
         </CardBody>
       </Card>
+      <ShareLink />
       <DeleteAccount />
     </Fragment>
   )

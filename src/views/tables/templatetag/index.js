@@ -8,7 +8,7 @@ import Breadcrumbs from '@components/breadcrumbs'
 import { Row, Col } from 'reactstrap'
 
 // ** Demo Components
-import TableWithButtons from './Campaigns'
+import TableWithButtons from './templatetags'
 
 
 // ** Styles
@@ -17,7 +17,7 @@ import '@styles/react/libs/tables/react-dataTable-component.scss'
 const Tables = () => {
   return (
     <Fragment>
-      <Breadcrumbs breadCrumbTitle='Contact' breadCrumbParent='Home' breadCrumbActive='Datatables Basic' />
+      <Breadcrumbs breadCrumbTitle='SMS Template' breadCrumbActive='Templates' />
       <Row>
         <Col sm='12'>
           <TableWithButtons />

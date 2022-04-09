@@ -83,12 +83,12 @@ const VerifyEmailCover = () => {
               We've sent a link to your email address: <span className='fw-bolder'></span> Please
               follow the link inside to continue.
             </CardText>
-            <Button block tag={Link} to='/login' color='primary'>
-              Go back to Login
-            </Button>
+            <Button tag={Link} to='/' color='primary' className='btn-sm-block mb-2'>
+            Back to Login
+          </Button>
             <p className='text-center mt-2'>
               <span>Didn't receive an email? </span>
-              <a href='/' onClick={e => e.preventDefault()}>
+              <a href='/login' onClick={e => e.preventDefault()}>
                 <span>Resend</span>
               </a>
             </p>

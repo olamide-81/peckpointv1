@@ -1,8 +1,8 @@
 // ** React Imports
 import { Fragment, useState, forwardRef } from 'react'
-
 // ** Table Data & Columns
-import { data, columns } from './data'
+import { columns } from './data'
+
 
 // ** Add New Modal Component
 import AddNewModal from './AddNewModal'
@@ -31,6 +31,7 @@ import {
   UncontrolledButtonDropdown,
   Table
 } from 'reactstrap'
+import axios from 'axios'
 
 // ** Bootstrap Checkbox Component
 const BootstrapCheckbox = forwardRef((props, ref) => (
@@ -41,6 +42,22 @@ const BootstrapCheckbox = forwardRef((props, ref) => (
 
 const Contact = () => {
   // ** States
+  const [data, addData] = useState([])
+  const saved = JSON.parse(localStorage.getItem('user'))
+  const token = saved.token
+
+  // ** Get initial Data
+
+  axios.get("http://api.peckpoint.com/api/v1/contacts", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  }).then(dataa => {
+           addData(dataa.data.data)
+        })
+    
+
   const [modal, setModal] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')

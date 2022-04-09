@@ -60,6 +60,14 @@ const PagesRoutes = [
     layout: 'BlankLayout'
   },
   {
+    path: '/contact-boarding',
+    component: lazy(() => import('../../views/forms/ShareContactList')),
+    layout: 'BlankLayout',
+    meta: {
+      authRoute: true
+    }
+  },
+  {
     path: '/pages/reset-password-basic',
     component: lazy(() => import('../../views/pages/authentication/ResetPasswordBasic')),
     layout: 'BlankLayout'

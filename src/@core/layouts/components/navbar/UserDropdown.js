@@ -39,7 +39,6 @@ const UserDropdown = () => {
   const userAvatar = (userData && userData.avatar) || defaultAvatar
 
   const user = JSON.parse(localStorage.getItem('user'))
-  console.warn(user)
 
   return (
     <UncontrolledDropdown tag='li' className='dropdown-user nav-item'>
@@ -51,11 +50,6 @@ const UserDropdown = () => {
         <Avatar img={userAvatar} imgHeight='40' imgWidth='40' status='online' />
       </DropdownToggle>
       <DropdownMenu end>
-        <DropdownItem tag={Link} to='/pages/profile'>
-          <User size={14} className='me-75' />
-          <span className='align-middle'>Profile</span>
-        </DropdownItem>
-        <DropdownItem divider />
         <DropdownItem tag={Link} to='/pages/account-settings'>
           <Settings size={14} className='me-75' />
           <span className='align-middle'>Settings</span>

@@ -18,22 +18,26 @@ export default [
       {
         id: 'all-messages',
         title: 'All Messages',
-        icon: <BarChart size={12} />
+        icon: <BarChart size={12} />,
+        navLink: '/allmessages'
       },
       {
         id: 'recieved-messages',
         title: 'Recieved Messages',
-        icon: <PhoneIncoming size={12} />
+        icon: <PhoneIncoming size={12} />,
+        navLink: '/recievedmessages'
       },
       {
         id: 'sent-mesages',
         title: 'Sent Messages',
-        icon: <PhoneOutgoing size={12} />
+        icon: <PhoneOutgoing size={12} />,
+        navLink: '/sentmessages'
       },
       {
         id: 'campaigns',
         title: 'Campaigns',
-        icon: <PieChart size={12} />
+        icon: <PieChart size={12} />,
+        navLink: '/campaigns'
       }
     ]
   },
@@ -52,31 +56,36 @@ export default [
     {
       id: 'sending-servers',
       title: 'Sending Servers',
-      icon: <Send size={12} />
+      icon: <Send size={12} />,
+      navLink: '/sending-servers'
    
     },
     {
       id: 'sender-id',
       title: 'Sender ID',
-      icon: <Book size={12} />
+      icon: <Book size={12} />,
+      navLink: '/senderid'
       
     },
     {
       id: 'numbers',
       title: 'Numbers',
-      icon: <Phone size={12} />
+      icon: <Phone size={12} />,
+      navLink: '/numbers'
       
     },
     {
       id: 'keywords',
       title: 'Keywords',
-      icon: <Hash size={12} />
+      icon: <Hash size={12} />,
+      navLink: '/keywords'
      
     },
     {
-      id: 'template-tags',
-      title: 'Template Tags',
-      icon: <Tag size={12} />
+      id: 'sms-templates',
+      title: 'SMS Templates',
+      icon: <Tag size={12} />,
+      navLink: '/sms-templates'
       
     }
   ]
@@ -84,7 +93,8 @@ export default [
 {
   id: 'blacklist',
   title: 'Blacklist',
-  icon: <Shield size={20} />
+  icon: <Shield size={20} />,
+  navLink: '/blacklist'
 },
 {
   id: 'sms',
@@ -92,19 +102,22 @@ export default [
   icon: <MessageSquare size={20} />,
   children: [
     {
-      id: 'plans-table',
+      id: 'campaign-builder',
       title: 'Campaign Builder',
-      icon: <Server size={12} />
+      icon: <Server size={12} />,
+      navLink: '/sms-campaign-builder'
     },
     {
       id: 'Quick Send',
       title: 'Quick Send',
-      icon: <Send size={12} />
+      icon: <Send size={12} />,
+      navLink: '/sms-quick-send'
     },
     {
-      id: 'plans-currency',
+      id: 'send-using-file',
       title: 'Send Using File',
-      icon: <FileText size={12} />
+      icon: <FileText size={12} />,
+      navLink: '/sms-send-using-file'
     }
   ]
 },
@@ -114,19 +127,22 @@ export default [
   icon: <PhoneCall size={20} />,
   children: [
     {
-      id: 'plans-table',
+      id: 'campaign-builder',
       title: 'Campaign Builder',
-      icon: <Server size={12} />
+      icon: <Server size={12} />,
+      navLink: '/mms-campaign-builder'
     },
     {
       id: 'Quick Send',
       title: 'Quick Send',
-      icon: <Send size={12} />
+      icon: <Send size={12} />,
+      navLink: '/mms-quick-send'
     },
     {
-      id: 'plans-currency',
+      id: 'send-using-file',
       title: 'Send Using File',
-      icon: <FileText size={12} />
+      icon: <FileText size={12} />,
+      navLink: '/mms-send-using-file'
     }
   ]
 },
@@ -138,17 +154,20 @@ export default [
     {
       id: 'plans-table',
       title: 'Campaign Builder',
-      icon: <Server size={12} />
+      icon: <Server size={12} />,
+      navLink: '/voice-campaign-builder'
     },
     {
       id: 'Quick Send',
       title: 'Quick Send',
-      icon: <Send size={12} />
+      icon: <Send size={12} />,
+      navLink: '/voice-quick-send'
     },
     {
-      id: 'plans-currency',
+      id: 'voice-send-using-file',
       title: 'Send Using File',
-      icon: <FileText size={12} />
+      icon: <FileText size={12} />,
+      navLink: '/voice-send-using-file'
     }
   ]
 },
@@ -160,28 +179,33 @@ export default [
     {
       id: 'plans-table',
       title: 'Campaign Builder',
-      icon: <Server size={12} />
+      icon: <Server size={12} />,
+      navLink: '/whatsapp-campaign-builder'
     },
     {
       id: 'Quick Send',
       title: 'Quick Send',
-      icon: <Send size={12} />
+      icon: <Send size={12} />,
+      navLink: '/whatsapp-quick-send'
     },
     {
-      id: 'plans-currency',
+      id: 'whatsapp-send-using-file',
       title: 'Send Using File',
-      icon: <FileText size={12} />
+      icon: <FileText size={12} />,
+      navLink: '/whatsapp-send-using-file'
     }
   ]
 },
 {
   id: 'chat-box',
   title: 'Chat Box',
-  icon: <Slack size={20} />
+  icon: <Slack size={20} />,
+  navLink: '/chat-box'
 },
 {
   id: 'developers',
   title: 'Developers',
-  icon: <Code size={20} />
+  icon: <Code size={20} />,
+  navLink: '/developers'
 }
 ]
