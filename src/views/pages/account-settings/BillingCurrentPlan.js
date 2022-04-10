@@ -94,6 +94,8 @@ const BillingCurrentPlan = () => {
     })
   }
 
+  const user = JSON.parse(localStorage.getItem('user'))
+
   return (
     <Fragment>
       <Card>
@@ -105,7 +107,7 @@ const BillingCurrentPlan = () => {
             <Col md='6'>
               <div className='mb-2 pb-50'>
                 <h5>
-                  Your Current Plan is <strong>Basic</strong>
+                  Your Current Plan is {user.user.is_subscribed}
                 </h5>
                 <span>A simple start for everyone</span>
               </div>
