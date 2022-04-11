@@ -37,7 +37,7 @@ const SupportTracker = props => {
           startAngle: -150,
           endAngle: 150,
           hollow: {
-            size: '65%'
+            size: '0%'
           },
           track: {
             background: '#fff',
@@ -74,14 +74,14 @@ const SupportTracker = props => {
       stroke: {
         dashArray: 8
       },
-      labels: ['Completed Tickets']
+      labels: ['']
     },
-    series = [83]
+    series = [0]
 
   return data !== null ? (
     <Card>
       <CardHeader className='pb-0'>
-        <CardTitle tag='h4'>{data.title}</CardTitle>
+        <CardTitle tag='h4'>SMS Reports</CardTitle>
         <UncontrolledDropdown className='chart-dropdown'>
           <DropdownToggle color='' className='bg-transparent btn-sm border-0 p-50'>
             Last 7 days
@@ -98,8 +98,8 @@ const SupportTracker = props => {
       <CardBody>
         <Row>
           <Col sm='2' className='d-flex flex-column flex-wrap text-center'>
-            <h1 className='font-large-2 fw-bolder mt-2 mb-0'>{data.totalTicket}</h1>
-            <CardText>Tickets</CardText>
+            <h1 className='font-large-2 fw-bolder mt-2 mb-0'>0</h1>
+            <CardText></CardText>
           </Col>
           <Col sm='10' className='d-flex justify-content-center'>
             <Chart options={options} series={series} type='radialBar' height={270} id='support-tracker-card' />
@@ -107,16 +107,16 @@ const SupportTracker = props => {
         </Row>
         <div className='d-flex justify-content-between mt-1'>
           <div className='text-center'>
-            <CardText className='mb-50'>New Tickets</CardText>
-            <span className='font-large-1 fw-bold'>{data.newTicket}</span>
+            <CardText className='mb-50'>Sent SMS</CardText>
+            <span className='font-large-1 fw-bold'>0</span>
           </div>
           <div className='text-center'>
-            <CardText className='mb-50'>Open Tickets</CardText>
-            <span className='font-large-1 fw-bold'>{data.openTicket}</span>
+            <CardText className='mb-50'>Pending SMS</CardText>
+            <span className='font-large-1 fw-bold'>0</span>
           </div>
           <div className='text-center'>
-            <CardText className='mb-50'>Response Time</CardText>
-            <span className='font-large-1 fw-bold'>{data.responseTime}d</span>
+            <CardText className='mb-50'>Failed SMS</CardText>
+            <span className='font-large-1 fw-bold'>0</span>
           </div>
         </div>
       </CardBody>

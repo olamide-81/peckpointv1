@@ -20,7 +20,6 @@ import {
 
 const CardNavigation = () => {
   // ** States
-  const [activeTab, setTabActive] = useState('1')
   const [activePill, setPillActive] = useState('1')
 
   const togglePills = tab => {
@@ -29,17 +28,12 @@ const CardNavigation = () => {
     }
   }
 
-  const toggleTabs = tab => {
-    if (activeTab !== tab) {
-      setTabActive(tab)
-    }
-  }
   return (
     <Fragment>
-      <h5 className='mt-3 mb-2'>Navigation</h5>
+     
       <Row>
-        <Col md='6'>
-          <Card className='text-center'>
+        <Col md='12'>
+          <Card className='text-left'>
             <CardHeader>
               <Nav pills>
                 <NavItem>
@@ -59,77 +53,22 @@ const CardNavigation = () => {
                       togglePills('2')
                     }}
                   >
-                    Profile
+                    Current Plan
                   </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink disabled>Disabled</NavLink>
                 </NavItem>
               </Nav>
             </CardHeader>
             <CardBody>
               <TabContent activeTab={activePill}>
                 <TabPane tabId='1'>
-                  <CardTitle tag='h4'>Special title treatment</CardTitle>
-                  <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                  <Button color='primary' outline>
-                    Go somewhere
-                  </Button>
+                  <CardTitle tag='h4'>Good Afternoon Adam</CardTitle>
+                  <CardText>Welcome back to your personalized Dashboard. Check out charts, resources, and useful Ultimate SMS solutions tailored to your account.</CardText>
                 </TabPane>
                 <TabPane tabId='2'>
-                  <CardTitle tag='h4'>Special title </CardTitle>
-                  <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+                  <CardTitle tag='h4'>Current Plan </CardTitle>
+                  <CardText>You are currently subscribed to the Standard plan $49, your subscription will expire in 5 months from now on 11th Oct 22, 12:00 AM.</CardText>
                   <Button color='primary' outline>
-                    Go somewhere
-                  </Button>
-                </TabPane>
-              </TabContent>
-            </CardBody>
-          </Card>
-        </Col>
-        <Col md='6'>
-          <Card className='text-center'>
-            <CardHeader>
-              <Nav tabs>
-                <NavItem>
-                  <NavLink
-                    active={activeTab === '1'}
-                    onClick={() => {
-                      toggleTabs('1')
-                    }}
-                  >
-                    Home
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    active={activeTab === '2'}
-                    onClick={() => {
-                      toggleTabs('2')
-                    }}
-                  >
-                    Profile
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink disabled>Disabled</NavLink>
-                </NavItem>
-              </Nav>
-            </CardHeader>
-            <CardBody>
-              <TabContent activeTab={activeTab}>
-                <TabPane tabId='1'>
-                  <CardTitle tag='h4'>Special title treatment</CardTitle>
-                  <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                  <Button color='primary' outline>
-                    Go somewhere
-                  </Button>
-                </TabPane>
-                <TabPane tabId='2'>
-                  <CardTitle tag='h4'>Special title </CardTitle>
-                  <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                  <Button color='primary' outline>
-                    Go somewhere
+                    More Info
                   </Button>
                 </TabPane>
               </TabContent>

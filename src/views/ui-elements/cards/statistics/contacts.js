@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 // ** Third Party Components
 import axios from 'axios'
-import { Users } from 'react-feather'
+import { User } from 'react-feather'
 
 // ** Custom Components
 import StatsWithAreaChart from '@components/widgets/stats/StatsWithAreaChart'
@@ -27,10 +27,10 @@ const contactgroups = ({}) => {
 
   return data !== null ? (
     <StatsWithAreaChart
-      icon={<Users size={21} />}
+      icon={<User size={21} />}
       color='primary'
       stats={userData.user.is_subscribed}
-      statTitle='Contact Groups'
+      statTitle='Contacts'
       series={data.series}
       type='area'
     />

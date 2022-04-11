@@ -51,8 +51,9 @@ const ShareContactList = () => {
     }
   }
 }
-const user_name = getGet('userName')
+const user_name = getGet('username')
 // this would return the value of username in the url 0r any other
+
 
   return (
     <Card >

@@ -2,15 +2,12 @@
 import { useContext } from 'react'
 
 // ** Icons Imports
-import { List } from 'react-feather'
+import { List, Eye } from 'react-feather'
 
 // ** Custom Components
 import Avatar from '@components/avatar'
 import Timeline from '@components/timeline'
 import AvatarGroup from '@components/avatar-group'
-
-// ** Utils
-import { kFormatter } from '@utils'
 
 // ** Context
 import { ThemeColors } from '@src/utility/context/ThemeColors'
@@ -21,13 +18,16 @@ import { Row, Col, Card, CardHeader, CardTitle, CardBody } from 'reactstrap'
 // ** Demo Components
 import InvoiceList from '@src/views/apps/invoice/list'
 import Sales from '@src/views/ui-elements/cards/analytics/Sales'
-import AvgSessions from '@src/views/ui-elements/cards/analytics/AvgSessions'
+import AvgSessions from '@src/views/ui-elements/cards/basic/CardNavigation'
 import CardAppDesign from '@src/views/ui-elements/cards/advance/CardAppDesign'
 import SupportTracker from '@src/views/ui-elements/cards/analytics/SupportTracker'
 import OrdersReceived from '@src/views/ui-elements/cards/statistics/OrdersReceived'
-import SubscribersGained from '@src/views/ui-elements/cards/statistics/SubscribersGained'
+import Contacts from '@src/views/ui-elements/cards/statistics/contacts'
 import Contactgroups from '@src/views/ui-elements/cards/statistics/contactgroups'
+import Blacklist from '@src/views/ui-elements/cards/statistics/blacklist'
+import SMStemplates from '@src/views/ui-elements/cards/statistics/smstemplates'
 import CardCongratulations from '@src/views/ui-elements/cards/advance/CardCongratulations'
+import StatsHorizontal from '@components/widgets/stats/StatsHorizontal'
 
 /*
 // ** Images
@@ -134,13 +134,23 @@ const AnalyticsDashboard = () => {
        {/* <Col lg='6' sm='12'>
           <CardCongratulations />
         </Col> */}
-        <Col lg='3' sm='6'>
-          <Contactgroups kFormatter={kFormatter} />
+         <Col lg='3' sm='6'>
+          <StatsHorizontal icon={<Eye size={21} />} color='info' stats='0' statTitle='Contact Groups' />
         </Col>
       
         <Col lg='3' sm='6'>
-          <SubscribersGained kFormatter={kFormatter} />
+          <StatsHorizontal icon={<Eye size={21} />} color='info' stats='0' statTitle='Contacts' />
         </Col>
+      
+
+        <Col lg='3' sm='6'>
+          <StatsHorizontal icon={<Eye size={21} />} color='info' stats='0' statTitle='Blacklist' />
+        </Col>
+      
+        <Col lg='3' sm='6'>
+          <StatsHorizontal icon={<Eye size={21} />} color='info' stats='0' statTitle='Sms Templates' />
+        </Col>
+      
       </Row>
       <Row className='match-height'>
         <Col lg='6' xs='12'>
@@ -173,11 +183,11 @@ const AnalyticsDashboard = () => {
         </Col>
       </Row> 
       */}
-      <Row className='match-height'>
+       {/*  <Row className='match-height'>
         <Col xs='12'>
           <InvoiceList />
         </Col>
-      </Row>
+      </Row>*/}
     </div>
   )
 }

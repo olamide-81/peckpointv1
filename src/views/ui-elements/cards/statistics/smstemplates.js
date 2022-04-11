@@ -30,7 +30,7 @@ const contactgroups = ({}) => {
       icon={<Users size={21} />}
       color='primary'
       stats={userData.user.is_subscribed}
-      statTitle='Contact Groups'
+      statTitle='SMS Templates'
       series={data.series}
       type='area'
     />
