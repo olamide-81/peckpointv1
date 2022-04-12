@@ -43,9 +43,9 @@ const BootstrapCheckbox = forwardRef((props, ref) => (
 const Contact = () => {
   // ** States
   const [data, addData] = useState([])
+  
   const saved = JSON.parse(localStorage.getItem('user'))
   const token = saved.token
-  
   // ** Get initial Data
   axios.get("https://api.peckpoint.com/api/v1/contacts", {
     headers: {
@@ -56,6 +56,8 @@ const Contact = () => {
            addData(dataa.data.data)
       })
     
+    
+
 
   const [modal, setModal] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)

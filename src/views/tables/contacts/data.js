@@ -2,13 +2,34 @@
 // import Avatar from '@components/avatar'
 
 // ** Third Party Components
-// import axios from 'axios'
+import axios from 'axios'
 import { MoreVertical, Edit, FileText, Archive, Trash } from 'react-feather'
 // ** Reactstrap Imports
 import { Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 
 // ** Vars
 // const states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary']
+
+const saved = JSON.parse(localStorage.getItem('user'))
+const token = saved.token
+
+// const updateContact = (id, data) => {
+//   axios.patch(`https://api.peckpoint.com/api/v1/contacts/${id}`, data, {
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//       'Content-Type': 'application/json'
+//     }
+//   })
+// }
+
+const deleteContact = (id) => {
+  axios.delete(`https://api.peckpoint.com/api/v1/contacts/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  })
+}
 
 const status = {
   1: { title: 'Current', color: 'light-primary' },
@@ -208,7 +229,10 @@ export const columns = [
                 <Archive size={15} />
                 <span className='align-middle ms-50'>Archive</span>
               </DropdownItem>
-              <DropdownItem tag='a' href='/' className='w-100' onClick={e => e.preventDefault()}>
+              <DropdownItem tag='a' href='/' className='w-100' onClick={e => {
+                e.preventDefault()
+                deleteContact(row => row.id)
+                }}>
                 <Trash size={15} />
                 <span className='align-middle ms-50'>Delete</span>
               </DropdownItem>
