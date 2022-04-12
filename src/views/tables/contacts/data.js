@@ -6,10 +6,9 @@ import axios from 'axios'
 import { MoreVertical, Edit, FileText, Archive, Trash } from 'react-feather'
 // ** Reactstrap Imports
 import { Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
-
 // ** Vars
 // const states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary']
-
+  
 const saved = JSON.parse(localStorage.getItem('user'))
 const token = saved.token
 
@@ -30,6 +29,15 @@ const deleteContact = (id) => {
     }
   })
 }
+
+let dmodal = { id: '', firstname: '', lastname: '', gender: '', dob: '', phone_number: '', email: '' }, openUodal = false
+
+const updateData = (data) => {
+  dmodal = data
+  openUodal = !openUodal
+}
+
+export { dmodal, openUodal }
 
 const status = {
   1: { title: 'Current', color: 'light-primary' },
@@ -213,7 +221,7 @@ export const columns = [
   {
     name: 'Actions',
     allowOverflow: true,
-    cell: () => {
+    cell: (row) => {
       return (
         <div className='d-flex'>
           <UncontrolledDropdown>
@@ -221,9 +229,12 @@ export const columns = [
               <MoreVertical size={15} />
             </DropdownToggle>
             <DropdownMenu end>
-              <DropdownItem tag='a' href='/' className='w-100' onClick={e => e.preventDefault()}>
+              <DropdownItem tag='a' href='/' className='w-100' onClick={e => {
+                e.preventDefault()
+                updateData({ id: row.id, firstname: row.firstname, lastname: row.lastname, gender: row.gender, dob: row.dob, phone_number: row.phone_number, email: row.email })
+              }}>
                 <FileText size={15} />
-                <span className='align-middle ms-50'>Details</span>
+                <span className='align-middle ms-50'>Update</span>
               </DropdownItem>
               <DropdownItem tag='a' href='/' className='w-100' onClick={e => e.preventDefault()}>
                 <Archive size={15} />
