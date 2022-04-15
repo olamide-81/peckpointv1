@@ -3,8 +3,6 @@ import { Button, Card, CardTitle, CardBody, CardText, CardSubtitle, CardLink, Ca
 
 // ** Images
 import img1 from '@src/assets/images/slider/04.jpg'
-import img2 from '@src/assets/images/slider/03.jpg'
-import img3 from '@src/assets/images/slider/06.jpg'
 
 const CardTitles = () => {
   return (
@@ -29,7 +27,7 @@ const CardTitles = () => {
             <CardTitle tag='h4'>Card Title</CardTitle>
             <CardSubtitle className='text-muted'>Support card subtitle</CardSubtitle>
           </CardBody>
-          <img className='img-fluid' src={img2} alt='Card cap' />
+          <img className='img-fluid' src={img1} alt='Card cap' />
           <CardBody>
             <CardText>Bear claw sesame snaps gummies chocolate.</CardText>
             <CardLink href='/' onClick={e => e.preventDefault()}>
@@ -46,7 +44,7 @@ const CardTitles = () => {
           <CardBody>
             <CardTitle tag='h4'>Card Title</CardTitle>
             <CardSubtitle className='text-muted'>Support card subtitle</CardSubtitle>
-            <img className='img-fluid my-2' src={img3} alt='Card cap' />
+            <img className='img-fluid my-2' src={img1} alt='Card cap' />
             <CardText>Bear claw sesame snaps gummies chocolate.</CardText>
             <CardLink href='/' onClick={e => e.preventDefault()}>
               Card Link

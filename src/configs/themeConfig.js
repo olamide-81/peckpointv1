@@ -4,7 +4,7 @@
 const themeConfig = {
   app: {
     appName: 'PeckPoint',
-    appLogoImage: require('@src/assets/images/logo/logo.png').default
+    appLogoImage: require('@src/assets/images/logo/logop.png').default
   },
   layout: {
     isRTL: false,

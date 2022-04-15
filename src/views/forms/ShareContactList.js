@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 
 const ShareContactList = () => {
   const [dob, setPicker] = useState(new Date())
-  const [gender, setGender] = useState({
+  const [cgender, setGender] = useState({
     male : false,
     female : false
   })
@@ -22,6 +22,14 @@ const ShareContactList = () => {
 
 
   async function createcontact() {
+    let gender = 'male'
+    for (g in cgender) {
+        if (cgender[g]) {
+          gender = g
+          break
+        }
+    }
+
     const item = {firstname, lastname, phone_number, email, address, gender, username, dob, profile_image}
   
      const result = await fetch("https://api.peckpoint.com/api/v1/contact-boarding", {
@@ -107,11 +115,11 @@ const user_name = getGet('username')
               <Input type='file' name='profileimage' id='profileimage' placeholder='Profile Picture' value={profile_image} onChange={(e) => setImage(e.target.value) }  />
             </Col>
             <Col md='6' sm='12' className='mb-1'>
-              <Input type='checkbox' checked={gender.male} onClick={() => setGender({female : false, male : !gender.male })} id='basic-cb-unchecked' value={gender}/>
+              <Input type='checkbox' checked={cgender.male} readOnly onClick={() => setGender({female : false, male : !cgender.male })} id='basic-cb-unchecked'/>
               <Label for='basic-cb-unchecked' className='form-check-label'>
                 Male
               </Label>
-              <Input type='checkbox' checked={gender.female} onClick={() => setGender({ male: false, female: !gender.female })} id='basic-cb-unchecked_fm' value={gender} />
+              <Input type='checkbox' checked={cgender.female} readOnly onClick={() => setGender({ male: false, female: !cgender.female })} id='basic-cb-unchecked_fm' />
               <Label for='basic-cb-unchecked_fm' className='form-check-label'>
                 Female
               </Label>

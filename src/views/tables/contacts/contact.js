@@ -1,12 +1,14 @@
 // ** React Imports
-import { Fragment, useState, forwardRef } from 'react'
+import { Fragment, useState, forwardRef, useEffect } from 'react'
+
 // ** Table Data & Columns
-import { columns } from './data'
+import { columns, dmodal, openUodal } from './data'
 
 //import { delayLog } from './delayLog'
 // ** Add New Modal Component
 import AddNewModal from './AddNewModal'
 
+import UpdateModal from './Update'
 
 import DataTable from 'react-data-table-component'
 
@@ -43,10 +45,12 @@ const BootstrapCheckbox = forwardRef((props, ref) => (
 const Contact = () => {
   // ** States
   const [data, addData] = useState([])
+  
+  
+  // const [mdata, addMdata] = useState({}) 
   const saved = JSON.parse(localStorage.getItem('user'))
   const token = saved.token
-  
-  // ** Get initial Data
+ 
   axios.get("https://api.peckpoint.com/api/v1/contacts", {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -55,16 +59,22 @@ const Contact = () => {
   }).then(dataa => {
            addData(dataa.data.data)
       })
-    
 
   const [modal, setModal] = useState(false)
+  const [umodal, setUmodal] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
+ 
+
+  useEffect(() => {
+    setUmodal(openUodal)
+  }, [openUodal])
+
 
   // ** Function to handle Modal toggle
   const handleModal = () => setModal(!modal)
-
+  const handleUmodal = () => setUmodal(!umodal)
   // ** Function to handle filter
   const handleFilter = e => {
     const value = e.target.value
@@ -222,6 +232,7 @@ const Contact = () => {
               <span className='align-middle ms-50'>Add Contact</span>
             </Button>
           </div>
+           
         </CardHeader>
         <Row className='justify-content-end mx-0'>
           <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
@@ -255,6 +266,8 @@ const Contact = () => {
         </div>
       </Card>
       <AddNewModal open={modal} handleModal={handleModal} />
+      
+      <UpdateModal open={umodal} data={dmodal} handleModal={handleUmodal} />
     </Fragment>
   )
 }

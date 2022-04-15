@@ -51,11 +51,6 @@ const Clipboard = () => {
 
   return (
     <Fragment>
-      <ExtensionsHeader
-        title='Share Your Link '
-        subTitle='Copy to clipboard and forward to users who you want to add to your contact list'
-        
-      />
       <Row>
         <Col sm='12'>
           <Card>
@@ -64,7 +59,7 @@ const Clipboard = () => {
             </CardHeader>
             <CardBody>
               <Row>
-                <Col xl='3' md='4' sm='6' className='pe-sm-0 mb-md-0 mb-1'>
+                <Col xl='8' md='4' sm='6' className='pe-sm-0 mb-md-0 mb-1'>
                   <Input value={value} onChange={handleCopy} />
                 </Col>
                 <Col md='2' sm='12'>

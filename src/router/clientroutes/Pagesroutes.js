@@ -16,6 +16,16 @@ const PagesRoutes = [
     layout: 'BlankLayout'
   },
   {
+    path: '/pages/birthday-templates',
+    component: lazy(() => import('../../views/tables/birthdaytable')),
+    className: 'chat-application'
+  },
+  {
+    path: '/pages/birthday',
+    component: lazy(() => import('../../views/ui-elements/cards/basic/CardImages')),
+    className: 'chat-application'
+  },
+  {
     path: '/pages/login-cover',
     component: lazy(() => import('../../views/pages/authentication/LoginCover')),
     layout: 'BlankLayout'
