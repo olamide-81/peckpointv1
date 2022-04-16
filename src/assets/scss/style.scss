@@ -9,3 +9,180 @@ NOTE:
 ------
 PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+.balance-header {
+	color: blue;
+	margin: 10px;
+}
+
+.birthdaycardf {
+	width: auto;
+	height: auto;
+	max-height: 350px;
+	max-width: 500px;
+}
+
+.birthdaycard {
+	background-color: #f9f5f6;
+	margin: 0px;
+	max-height: 350px;
+	max-width: 500px;
+}
+.birthdaycard img {
+ width: 500px;
+}
+
+.section-2 {
+	justify-content: space-between;
+	display: flex;
+	margin-right: 100px;
+	margin-bottom: 30px;
+}
+.footer img{
+	margin-left: 0;
+	float: left;
+	display: flex;
+	align-items: flex-start;	
+}
+ .download {
+	 background-color: green;
+	 color: white;
+	 border-radius: 10px;
+	 height: 50px;
+ }
+
+ .happy-birthday {
+	width: 100px;
+	max-width: 170px;
+	height: 100px;
+	max-height: 80px;
+	margin-top: 20px;
+	float: left;
+}
+
+ .baloon {
+	width: 100px;
+	max-width: 250px;
+}
+
+.section-2 h2 {
+	text-align: left; 
+	color: #6e2f99; 
+	margin-top: 15px;
+	max-width: 100px;
+	max-height: 20px;
+	font-size: 10px;
+	font-style: normal;
+	margin-left: 40px;
+	
+}
+
+.section-2 p {
+	text-align: center; 
+	color: #6e2f99; 
+	margin-top: -10px;
+	font-style: normal;
+	max-width: 150px;
+	max-height: 20px;
+	letter-spacing: normal;
+	font-size: 6px;
+	margin-left: 40px;
+	
+}
+
+.button {
+	margin-top: 20px;
+	margin-bottom: 40px;
+}
+
+.profile-picture{
+	border-radius: 50%;
+	width: 1px;
+	max-width: 100px;
+	max-height: 100px;
+	height: 270px;
+	margin-top: 20px;
+	margin-left: 40px;
+}
+
+.gift {
+	max-width: 350px;
+	align-items: flex-start;
+	margin-top: -20px;
+	margin-left: -20px;
+}
+
+@media screen and (max-width: 800px) {
+    .birthdaycardf {
+		width: 450px;
+		height: 430px;
+		max-width: 350px;
+		margin: 0px;
+		background-color: #f9f5f6;
+		max-height: 300px;
+	}
+
+	.birthdaycard {
+		background-color: #f9f5f6;
+		margin: 0px;
+		width: 450px;
+		height: 430px;
+		max-width: 300px;
+		max-height: 200px;
+	}
+
+	.baloon {
+		width: 100px;
+		max-width: 250px;
+	}
+	.happy-birthday {
+		width: 100px;
+		max-width: 170px;
+		height: 100px;
+		max-height: 80px;
+		margin-top: 20px;
+		float: left;
+	}
+
+	.profile-picture {
+		max-width: 70px;
+		max-height: 70px;
+		margin-top: 20px;
+		margin-left: 20px;
+	}
+
+	.section-2 h2 {
+		text-align: left; 
+		color: #6e2f99; 
+		margin-top: 15px;
+		max-width: 100px;
+		max-height: 20px;
+		font-size: 9px;
+		font-style: normal;
+		margin-left: 20px;
+	}
+
+	.section-2 {
+		display: flex;
+		margin: 0;
+		margin-right: 20px;
+		margin-bottom: 20px;
+	}
+	
+	.section-2 p {
+		text-align: center; 
+		color: #6e2f99; 
+		margin-top: -10px;
+		font-style: normal;
+		max-width: 150px;
+		max-height: 20px;
+		letter-spacing: normal;
+		font-size: 5px;
+		margin-left: 10px;
+	}
+	.gift {
+		width: 100px;
+		max-width: 250px;
+		align-items: flex-start;
+	}
+
+}

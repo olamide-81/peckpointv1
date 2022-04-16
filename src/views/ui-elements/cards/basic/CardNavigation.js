@@ -22,12 +22,15 @@ const CardNavigation = () => {
   // ** States
   const [activePill, setPillActive] = useState('1')
 
+  const user = JSON.parse(localStorage.getItem('user'))
+
   const togglePills = tab => {
     if (activePill !== tab) {
       setPillActive(tab)
     }
   }
 
+  const defaultmessage = ('You are currently not subscribed to any plan at the moment.') 
   return (
     <Fragment>
      
@@ -61,12 +64,12 @@ const CardNavigation = () => {
             <CardBody>
               <TabContent activeTab={activePill}>
                 <TabPane tabId='1'>
-                  <CardTitle tag='h4'>Good Afternoon Adam</CardTitle>
+                  <CardTitle tag='h4'>Good Afternoon {user.user.name}</CardTitle>
                   <CardText>Welcome back to your personalized Dashboard. Check out charts, resources, and useful Ultimate SMS solutions tailored to your account.</CardText>
                 </TabPane>
                 <TabPane tabId='2'>
                   <CardTitle tag='h4'>Current Plan </CardTitle>
-                  <CardText>You are currently subscribed to the Standard plan $49, your subscription will expire in 5 months from now on 11th Oct 22, 12:00 AM.</CardText>
+                  <CardText>{defaultmessage}</CardText>
                   <Button color='primary' outline>
                     More Info
                   </Button>

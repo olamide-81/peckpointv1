@@ -5,6 +5,7 @@ import UserDropdown from './UserDropdown'
 import NavbarSearch from './NavbarSearch'
 import NotificationDropdown from './NotificationDropdown'
 
+
 // ** Third Party Components
 import { Sun, Moon } from 'react-feather'
 
@@ -32,6 +33,7 @@ const NavbarUser = props => {
           <ThemeToggler />
         </NavLink>
       </NavItem>
+      <CartDropdown/>
       <UserDropdown />
     </ul>
   )

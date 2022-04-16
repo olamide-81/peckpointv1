@@ -11,9 +11,7 @@ const ThemeNavbar = props => {
 
   return (
     <Fragment>
-      
         <NavbarBookmarks setMenuVisibility={setMenuVisibility} />
-      
       <NavbarUser skin={skin} setSkin={setSkin} />
     </Fragment>
   )

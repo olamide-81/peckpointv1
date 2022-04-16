@@ -12,6 +12,11 @@ const ClientDashboardRoutes = [
     component: lazy(() => import('../../views/tables/contacts'))
   },
   {
+    path: '/groups',
+    className: 'chat-application',
+    component: lazy(() => import('../../views/tables/groups'))
+  },
+  {
     path: '/allmessages',
     className: 'chat-application',
     component: lazy(() => import('../../views/pages/misc/Maintenance'))
@@ -33,9 +38,9 @@ const ClientDashboardRoutes = [
     component: lazy(() => import('../../views/pages/misc/Maintenance'))
   },
   {
-    path: '/sending-servers',
+    path: '/pages/birthday-templates',
     className: 'chat-application',
-    component: lazy(() => import('../../views/pages/misc/Maintenance'))
+    component: lazy(() => import('../../views/tables/birthdaytable'))
   },
   {
     path: '/senderid',

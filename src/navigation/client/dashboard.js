@@ -1,5 +1,5 @@
 // ** Icons Import
-import { Home, Send, MessageSquare, CheckSquare, Calendar, FileText, Circle, Book, Tag, Phone, Hash, Users, Shield, CreditCard, DollarSign, UserX, X, User, UserCheck, Settings, MapPin, Globe, ShoppingBag, Upload, Mail, Grid, BarChart, PhoneCall, Image, MessageCircle, Slack, Code, PhoneIncoming, PhoneOutgoing, PieChart, Server } from 'react-feather'
+import { Home, Send, MessageSquare, CheckSquare, Calendar, FileText, Circle, Book, Tag, Phone, Hash, Users, Shield, CreditCard, DollarSign, UserX, X, User, UserCheck, Settings, MapPin, Globe, ShoppingBag, Upload, Mail, Grid, BarChart, PhoneCall, Image, MessageCircle, Slack, Code, PhoneIncoming, PhoneOutgoing, PieChart, Server, Gift, Sidebar } from 'react-feather'
 
 
 export default [
@@ -46,6 +46,25 @@ export default [
   title: 'Contacts',
   icon: <User size={20} />,
   navLink: '/contacts'
+},
+{
+  id: 'birthdays',
+  title: 'Birthday',
+  icon: <Gift size={20} />,
+  children: [
+    {
+      id: 'cards',
+      title: 'Cards',
+      icon: <ShoppingBag size={12} />,
+      navLink: '/pages/birthday'
+    },
+    {
+      id: 'templates',
+      title: 'Templates',
+      icon: <Sidebar size={12} />,
+      navLink: '/pages/birthday-templates'
+    }
+  ]
 },
 {
   id: 'sending',

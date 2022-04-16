@@ -18,7 +18,7 @@ import { Row, Col, Card, CardHeader, CardTitle, CardBody } from 'reactstrap'
 // ** Demo Components
 import InvoiceList from '@src/views/apps/invoice/list'
 import Sales from '@src/views/ui-elements/cards/analytics/Sales'
-import AvgSessions from '@src/views/ui-elements/cards/basic/CardNavigation'
+import Cardtab from '@src/views/ui-elements/cards/basic/CardNavigation'
 import CardAppDesign from '@src/views/ui-elements/cards/advance/CardAppDesign'
 import SupportTracker from '@src/views/ui-elements/cards/analytics/SupportTracker'
 import OrdersReceived from '@src/views/ui-elements/cards/statistics/OrdersReceived'
@@ -36,6 +36,7 @@ import ceo from '@src/assets/images/portrait/small/avatar-s-9.jpg'*/
 
 // ** Styles
 import '@styles/react/libs/charts/apex-charts.scss'
+import axios from 'axios'
 
 const AnalyticsDashboard = () => {
   // ** Context
@@ -128,6 +129,44 @@ const AnalyticsDashboard = () => {
     }
   ]*/
 
+ 
+  const saved = JSON.parse(localStorage.getItem('user'))
+  const token = saved.token
+
+     // ** Get initial Data
+  axios.get("https://api.peckpoint.com/api/v1/contacts", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  }).then(dataa => {
+           localStorage.setItem('contacts', JSON.stringify(dataa.data.data))
+      })
+
+      axios.get("https://api.peckpoint.com/api/v1/groups", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      }).then(dataa => {
+               localStorage.setItem('groups', JSON.stringify(dataa.data.data))
+          })
+
+      // retrieving our data and converting it back into an array
+     const retrievedData = localStorage.getItem("contacts")
+     const movies2 = JSON.parse(retrievedData)
+ 
+    //making sure it still is an array
+     const contactsno = (movies2.length)
+
+        // retrieving our data and converting it back into an array
+        const retrievedDatagroups = localStorage.getItem("groups")
+        const groups = JSON.parse(retrievedDatagroups)
+    
+       //making sure it still is an array
+        const groupsno = (groups.length)
+    
+   
   return (
     <div id='dashboard-analytics'>
       <Row className='match-height'>
@@ -135,11 +174,11 @@ const AnalyticsDashboard = () => {
           <CardCongratulations />
         </Col> */}
          <Col lg='3' sm='6'>
-          <StatsHorizontal icon={<Eye size={21} />} color='info' stats='0' statTitle='Contact Groups' />
+          <StatsHorizontal icon={<Eye size={21} />} color='info' stats={groupsno} statTitle='Contact Groups' />
         </Col>
       
         <Col lg='3' sm='6'>
-          <StatsHorizontal icon={<Eye size={21} />} color='info' stats='0' statTitle='Contacts' />
+          <StatsHorizontal icon={<Eye size={21} />} color='info' stats={contactsno} statTitle='Contacts' />
         </Col>
       
 
@@ -154,7 +193,7 @@ const AnalyticsDashboard = () => {
       </Row>
       <Row className='match-height'>
         <Col lg='6' xs='12'>
-          <AvgSessions primary={colors.primary.main} />
+          <Cardtab primary={colors.primary.main} />
         </Col>
         <Col lg='6' xs='12'>
           <SupportTracker primary={colors.primary.main} danger={colors.danger.main} />

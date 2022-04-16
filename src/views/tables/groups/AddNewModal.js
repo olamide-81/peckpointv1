@@ -6,8 +6,6 @@ import { toast } from 'react-toastify'
 import Flatpickr from 'react-flatpickr'
 import { User, Briefcase, Mail, Calendar, DollarSign, X, Phone } from 'react-feather'
 
-import ShareLink from '../../extensions/copy-to-clipboard'
-
 // ** Reactstrap Imports
 import { Modal, Input, Label, Button, ModalHeader, ModalBody, InputGroup, InputGroupText } from 'reactstrap'
 
@@ -18,9 +16,8 @@ import '@styles/react/libs/flatpickr/flatpickr.scss'
 const AddNewModal = ({ open, handleModal }) => {
   // ** State
   
-  const [firstname, setfirstName] = useState("")
-  const [lastname, setlastName] = useState("")
-  const [phone_number, setphoneNumber] = useState("")
+  const [name, Setname] = useState("")
+  const [description, setDescription] = useState("")
   //const [phone_number2, setphoneNumber2] = useState("")
   //const [email, setEmail] = useState("")
 
@@ -28,9 +25,9 @@ const AddNewModal = ({ open, handleModal }) => {
   const token = saved.token
 
   async function createcontact() {
-    const item = {firstname, lastname, phone_number}
+    const item = {name, description}
   
-     const result = await fetch("https://api.peckpoint.com/api/v1/contacts", {
+     const result = await fetch("https://api.peckpoint.com/api/v1/groups", {
        method: 'POST',
        body:JSON.stringify(item),
        headers: {
@@ -95,40 +92,29 @@ const AddNewModal = ({ open, handleModal }) => {
       contentClassName='pt-0'
     >
       <ModalHeader className='mb-1' toggle={handleModal} close={CloseBtn} tag='div'>
-        <h5 className='modal-title'>New Record</h5>
+        <h5 className='modal-title'>New Group</h5>
       </ModalHeader>
       <ModalBody className='flex-grow-1'>
         <div className='mb-1'>
           <Label className='form-label' for='full-name'>
-            First Name
+            Name
           </Label>
           <InputGroup>
             <InputGroupText>
               <User size={15} />
             </InputGroupText>
-            <Input id='full-name' placeholder='Bruce Wayne' name='firstname' value={firstname} onChange={(e) => setfirstName(e.target.value) }  />
+            <Input id='name' placeholder='New Group' name='name' value={name} onChange={(e) => Setname(e.target.value) }  />
           </InputGroup>
         </div>
         <div className='mb-1'>
           <Label className='form-label' for='post'>
-            Last Name
+           Description
           </Label>
           <InputGroup>
             <InputGroupText>
               <User size={15} />
             </InputGroupText>
-            <Input id='post' placeholder='Last name' name='lastname' value={lastname} onChange={(e) => setlastName(e.target.value) }  />
-          </InputGroup>
-        </div>
-        <div className='mb-1'>
-          <Label className='form-label' for='post'>
-            Phone Number
-          </Label>
-          <InputGroup>
-            <InputGroupText>
-              <Phone size={15} />
-            </InputGroupText>
-            <Input id='post' placeholder='phone number' name='phonenumber' value={phone_number} onChange={(e) => setphoneNumber(e.target.value) }  />
+            <Input id='post' placeholder='Description' name='description' value={description} onChange={(e) => setDescription(e.target.value) }  />
           </InputGroup>
         </div>
         <Button className='me-1' color='primary' onClick={createcontact}>
@@ -139,11 +125,6 @@ const AddNewModal = ({ open, handleModal }) => {
         </Button>
       </ModalBody>
 
-      <ModalBody className='flex-grow-1'>
-           <div className='mb-1'>
-           <ShareLink />
-           </div>
-         </ModalBody>
 
       {/*   <ModalBody className='flex-grow-1'>
         <div className='mb-1'>

@@ -183,3 +183,4 @@ const [cgender, setGender] = useState({
   )
 }
 
+export default UpdateModal
