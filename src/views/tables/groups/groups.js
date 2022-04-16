@@ -1,6 +1,5 @@
 // ** React Imports
 import { Fragment, useState, forwardRef, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 
 // ** Table Data & Columns
 import { columns, dmodal, openUodal } from './data'
@@ -52,7 +51,7 @@ const Contact = () => {
   const saved = JSON.parse(localStorage.getItem('user'))
   const token = saved.token
  
-  axios.get("https://api.peckpoint.com/api/v1/contacts", {
+  axios.get("https://api.peckpoint.com/api/v1/groups", {
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json'
@@ -198,7 +197,7 @@ const Contact = () => {
     <Fragment>
       <Card>
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Contacts</CardTitle>
+          <CardTitle tag='h4'>Groups</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
             <UncontrolledButtonDropdown>
               <DropdownToggle color='secondary' caret outline>
@@ -230,12 +229,8 @@ const Contact = () => {
             </UncontrolledButtonDropdown>
             <Button className='ms-2' color='primary' onClick={handleModal}>
               <Plus size={15} />
-              <span className='align-middle ms-50'>Add Contact</span>
+              <span className='align-middle ms-50'>Add Group</span>
             </Button>
-            <Button className='ms-2' color='primary' onClick={handleModal} tag={Link} to='/groups'>
-              <span className='align-middle ms-50'>Groups</span>
-            </Button>
-          
           </div>
            
         </CardHeader>

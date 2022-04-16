@@ -15,7 +15,7 @@ import img4 from '@src/assets/images/avatars/7.png'
 
 const CardImages = () => {
   
-
+  const user = JSON.parse(localStorage.getItem('user'))
   const printRef = useRef()
 
   const handleDownloadImage = async () => {
@@ -51,8 +51,7 @@ const CardImages = () => {
                 <div>
                 <img src={img4} className='profile-picture'/> 
                 <h2>ADAM FIU</h2>
-                <p>- With Love from Peter Ifeanyi</p>
-                <p>2nd April</p>
+                <p>- With Love from {user.user.name}</p>
                 </div>
                 </div>
                 <img src={img3} className='gift'/>

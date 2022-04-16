@@ -143,12 +143,28 @@ const AnalyticsDashboard = () => {
            localStorage.setItem('contacts', JSON.stringify(dataa.data.data))
       })
 
+      axios.get("https://api.peckpoint.com/api/v1/groups", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      }).then(dataa => {
+               localStorage.setItem('groups', JSON.stringify(dataa.data.data))
+          })
+
       // retrieving our data and converting it back into an array
      const retrievedData = localStorage.getItem("contacts")
      const movies2 = JSON.parse(retrievedData)
  
     //making sure it still is an array
      const contactsno = (movies2.length)
+
+        // retrieving our data and converting it back into an array
+        const retrievedDatagroups = localStorage.getItem("groups")
+        const groups = JSON.parse(retrievedDatagroups)
+    
+       //making sure it still is an array
+        const groupsno = (groups.length)
     
    
   return (
@@ -158,7 +174,7 @@ const AnalyticsDashboard = () => {
           <CardCongratulations />
         </Col> */}
          <Col lg='3' sm='6'>
-          <StatsHorizontal icon={<Eye size={21} />} color='info' stats='0' statTitle='Contact Groups' />
+          <StatsHorizontal icon={<Eye size={21} />} color='info' stats={groupsno} statTitle='Contact Groups' />
         </Col>
       
         <Col lg='3' sm='6'>
