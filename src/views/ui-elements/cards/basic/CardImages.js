@@ -42,50 +42,93 @@ const CardImages = () => {
     }
   }
   const [conts, setConts] = useState([])
-
+  const today = [], thisWeek = [], thisMonth = [], sorts = ['Today', 'This Week', 'This Month']
   axios.get('https://api.peckpoint.com/api/v1/contacts', {
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json'
     }
   }).then(res => {
-    setConts(res.data.data)    
+    const data = res.data.data
+    
+    data.forEach((v, i) => {
+      // console.log(Date.parse(v.dob))
+        if (v.dob !== null && !isNaN(Date.parse(v.dob))) {
+          const date = new Date(), mdate = new Date(Date.parse(v.dob))
+            const currDate = Math.floor(Date.parse(`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`) / 1000)
+            if (Math.floor(Date.parse(v.dob) / 1000) < currDate + 86400) {
+                today.push(data[i])
+            } else if (Math.floor(Date.parse(v.dob) / 1000) < currDate + (604800 - (86400 * date.getDay()))) {
+                thisWeek.push(data[i])
+            } else if (mdate.getMonth === date.getDate()) {
+                thisMonth.push(data[i])
+            }
+        }
+    })
+
+    // console.log(today)
+
+    setConts([today, thisWeek, thisMonth])
+
   })
-  // console.log(conts)
+  
   return (
     <Fragment>
       <Row>
+        <div className="sortTab"> 
+            <span>Show Card for - </span>
+            <select onChange={(e) => {
+            if (document.querySelectorAll(`.${e.target.value}`).length) {
+                document.querySelector(`.${e.target.value}`).scrollIntoView()
+              }
+            }}>
+              <option value="today">Today</option>
+              <option value="thisweek">This Week</option>
+              <option value="thismonth">This Month</option>
+            </select>
+        </div>
 
         {
           conts.map((e, i) => ( 
-            <Col xl='6' key={i} md='6'>
-              <Card className='birthdaycardf' responsive="true">
-                <div className='birthdaycardf' ref={printRef}>
-                  <CardBody className='birthdaycard'>
-                    <CardTitle className='birthdaycard'>
-                      <img src={img1} className='baloon' />
-                      <div className='section-2'>
-                        <img src={img2} className='happy-birthday' />
-                        <div>
-                          <img src={img4} className='profile-picture' />
-                          <h2>{(`${e.firstname} ${e.lastname}`).toUpperCase()}</h2>
-                          <p>- With Love from {user.user.name}</p>
+            
+            [
+            e.length ? <div key={i} style={{
+                padding : '8px 0px',
+                margin:'auto',
+                width:'calc(100% - 40px)'
+            }} className={((sorts[i]).replace(' ', '')).toLowerCase()}>{sorts[i]}</div> : '', 
+
+            e.map((ee, ii) => (
+              <Col xl='6' key={i * ii} md='6'>
+                <Card className='birthdaycardf' responsive="true">
+                  <div className='birthdaycardf' ref={printRef}>
+                    <CardBody className='birthdaycard'>
+                      <CardTitle className='birthdaycard'>
+                        <img src={img1} className='baloon' />
+                        <div className='section-2'>
+                          <img src={img2} className='happy-birthday' />
+                          <div>
+                            <img src={img4} className='profile-picture' />
+                            <h2>{(`${ee.firstname} ${ee.lastname}`).toUpperCase()}</h2>
+                            <p>- With Love from {user.user.name}</p>
+                          </div>
                         </div>
-                      </div>
-                      <img src={img3} className='gift' />
-                    </CardTitle>
-                  </CardBody>
-                </div>
-              </Card>
-              <Button color='primary' outline className='button' onClick={handleDownloadImage}>
-                Download
-              </Button>
-            </Col>
+                        <img src={img3} className='gift' />
+                      </CardTitle>
+                    </CardBody>
+                  </div>
+                </Card>
+                <Button color='primary' outline className='button' onClick={handleDownloadImage}>
+                  Download
+                </Button>
+              </Col>
+            ))
+          ]
+            
           ))
         }
-        
 
-        <Col xl='6' md='6'>
+        {/* <Col xl='6' md='6'>
           <Card className='birthdaycardf' responsive="true">
             <div className='birthdaycardf' ref={printRef}>
             <CardBody className='birthdaycard'>
@@ -170,7 +213,7 @@ const CardImages = () => {
           <Button color='primary' outline className='button'>
               Download
             </Button>
-        </Col>
+        </Col> */}
       </Row>
     </Fragment>
   )
