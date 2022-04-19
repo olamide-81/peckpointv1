@@ -53,13 +53,13 @@ const CardImages = () => {
     
     data.forEach((v, i) => {
       // console.log(Date.parse(v.dob))
-      if (v.dob !== null && !isNaN(Date.parse(v.dob))) {
-
+      if (!isNaN(Date.parse(v.dob))) {
+      
         const date = new Date(), mdate = new Date(Date.parse(v.dob))
 
-            const currDate = Math.floor(Date.parse(`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`) / 1000)
+            const currDate = Math.floor(Date.parse(`${date.getFullYear()}-${date.getMonth() - 1}-${date.getDate()}`) / 1000)
 
-          const tDate = Math.floor(Date.parse(`${mdate.getFullYear()}-${mdate.getMonth() + 1}-${mdate.getDate()}`) / 1000)
+          const tDate = Math.floor(Date.parse(`${mdate.getFullYear()}-${mdate.getMonth() - 1}-${mdate.getDate()}`) / 1000)
     
             if (tDate < currDate + 86400) {
                 today.push(data[i])
