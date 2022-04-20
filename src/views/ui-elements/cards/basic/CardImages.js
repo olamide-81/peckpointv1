@@ -12,7 +12,7 @@ import { Card, CardImg, CardTitle, CardBody, CardImgOverlay, CardText, Row, Col,
 import img1 from '@src/assets/images/banner/birthdaybaloon.jpeg'
 import img2 from '@src/assets/images/banner/happybirthday.jpeg'
 import img3 from '@src/assets/images/banner/gift.jpeg'
-import img4 from '@src/assets/images/avatars/7.png'
+import img4 from '@src/assets/images/avatars/avatar-blank.png'
 
 
 const CardImages = () => {
