@@ -1,6 +1,6 @@
 // ** React Imports
 import { useState, useEffect } from 'react'
-// import { toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 
 // ** Third Party Components
 import Flatpickr from 'react-flatpickr'
@@ -15,13 +15,13 @@ import '@styles/react/libs/flatpickr/flatpickr.scss'
 
 const UpdateModal = ({ open, handleModal, data }) => {
   // ** State
-
-  const [firstname, setfirstName] = useState(data.firstname)
-  const [lastname, setlastName] = useState(data.lastname)
-  const [phone_number, setphoneNumber] = useState(data.phone_number)
-  const [dob, setdob] = useState(data.dob)
-  const [address, setaddress] = useState(data.address)
-  const [email, setEmail] = useState(data.email)
+console.log(data)
+  const [firstname, setfirstName] = useState('')
+  const [lastname, setlastName] = useState('')
+  const [phone_number, setphoneNumber] = useState('')
+  const [dob, setdob] = useState('')
+  const [address, setaddress] = useState('')
+  const [email, setEmail] = useState('')
 const [cgender, setGender] = useState({
     male : (data.gender === 'male'),
     female: (data.gender === 'female')
@@ -33,7 +33,7 @@ const [cgender, setGender] = useState({
       setlastName(data.lastname)
       setphoneNumber(data.phone_number)
       setdob(data.dob)
-      setaddress(data.address)
+      // setaddress(data.address)
       setEmail(data.email)
       setGender({
           male: (data.gender === 'male'),
@@ -42,7 +42,7 @@ const [cgender, setGender] = useState({
   }, [data])
     async function updateContact() {
         let gender = 'male'
-        for (g in cgender) {
+        for (const g in cgender) {
             if (cgender[g]) {
                 gender = g
                 break
@@ -52,7 +52,7 @@ const [cgender, setGender] = useState({
     const item = {firstname, lastname, phone_number, gender, dob, address, email}
         
      const result = await fetch(`https://api.peckpoint.com/api/v1/contacts/${data.id}`, {
-       method: 'Patch',
+       method: 'patch',
        body:JSON.stringify(item),
        headers: {
         Authorization: `Bearer ${token}`,
@@ -79,7 +79,7 @@ const [cgender, setGender] = useState({
       contentClassName='pt-0'
     >
       <ModalHeader className='mb-1' toggle={handleModal} close={CloseBtn} tag='div'>
-        <h5 className='modal-title'>Update Contact</h5>
+        <h5 className='modal-title'>Update Record</h5>
       </ModalHeader>
       <ModalBody className='flex-grow-1'>
         <div className='mb-1'>
@@ -136,7 +136,7 @@ const [cgender, setGender] = useState({
             <InputGroupText>
               <Home size={15} />
             </InputGroupText>
-            <Input id='address' placeholder='Address' name='address' value={address} onChange={(e) => setaddress(e.target.value) }  />
+            <Input id='address' placeholder='Address' name='address' value={address} onChange={ (e) => setaddress(e.target.value) }  />
           </InputGroup>
         </div>
 

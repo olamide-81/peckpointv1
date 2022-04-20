@@ -23,7 +23,7 @@ const ShareContactList = () => {
 
   async function createcontact() {
     let gender = 'male'
-    for (g in cgender) {
+    for (const g in cgender) {
         if (cgender[g]) {
           gender = g
           break

@@ -30,7 +30,7 @@ const deleteContact = (id) => {
   })
 }
 
-let dmodal = { id: '', firstname: '', lastname: '', gender: '', dob: '', phone_number: '', email: '' }, openUodal = false
+let dmodal = { id: '', firstname: '', lastname: '', gender: '', dob: '', phone_number: '', email: '', address: '' }, openUodal = false
 
 const updateData = (data) => {
   dmodal = data
