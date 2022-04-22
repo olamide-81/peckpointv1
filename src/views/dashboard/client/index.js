@@ -1,5 +1,5 @@
 // ** React Imports
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 // ** Icons Imports
 import { List, Eye } from 'react-feather'
@@ -37,11 +37,50 @@ import ceo from '@src/assets/images/portrait/small/avatar-s-9.jpg'*/
 // ** Styles
 import '@styles/react/libs/charts/apex-charts.scss'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
-const AnalyticsDashboard = () => {
+const AnalyticsDashboard = () => { 
   // ** Context
   const { colors } = useContext(ThemeColors)
+  const [contactsno, setContacts] = useState('')
+  const [groupno, setGroup] = useState('')
 
+  const user = JSON.parse(localStorage.getItem('user'))
+  const token = user.token
+
+  useEffect(() => {
+      const contactnofetch = async () => {
+        try {
+          const response = await axios.get('https://api.peckpoint.com/api/v1/contacts', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          })
+          setContacts((response.data.data).length)
+        } catch (err) {
+          toast.warn(err.message)
+        }
+      }
+      contactnofetch()
+  })
+
+  useEffect(() => {
+    const groupnofetch = async () => {
+      try {
+        const response = await axios.get('https://api.peckpoint.com/api/v1/groups', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        })
+        setGroup((response.data.data).length)
+      } catch (err) {
+        toast.warn(err.message)
+      }
+    }
+    groupnofetch()
+})
   // ** Vars 
   /*
   const avatarGroupArr = [
@@ -128,43 +167,6 @@ const AnalyticsDashboard = () => {
       metaClassName: 'me-1'
     }
   ]*/
-
- 
-  const saved = JSON.parse(localStorage.getItem('user'))
-  const token = saved.token
-
-     // ** Get initial Data
-  axios.get("https://api.peckpoint.com/api/v1/contacts", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  }).then(dataa => {
-           localStorage.setItem('contacts', JSON.stringify(dataa.data.data))
-      })
-
-      axios.get("https://api.peckpoint.com/api/v1/groups", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      }).then(dataa => {
-               localStorage.setItem('groups', JSON.stringify(dataa.data.data))
-          })
-
-      // retrieving our data and converting it back into an array
-     const retrievedData = localStorage.getItem("contacts")
-     const movies2 = JSON.parse(retrievedData)
- 
-    //making sure it still is an array
-     const contactsno = (movies2.length)
-
-        // retrieving our data and converting it back into an array
-        const retrievedDatagroups = localStorage.getItem("groups")
-        const groups = JSON.parse(retrievedDatagroups)
-    
-       //making sure it still is an array
-        const groupsno = (groups.length)
     
    
   return (
@@ -174,7 +176,7 @@ const AnalyticsDashboard = () => {
           <CardCongratulations />
         </Col> */}
          <Col lg='3' sm='6'>
-          <StatsHorizontal icon={<Eye size={21} />} color='info' stats={groupsno} statTitle='Contact Groups' />
+          <StatsHorizontal icon={<Eye size={21} />} color='info' stats={groupno} statTitle='Contact Groups' />
         </Col>
       
         <Col lg='3' sm='6'>

@@ -19,6 +19,24 @@ import {
 } from 'reactstrap'
 
 const CardNavigation = () => {
+  let timeOfDay
+  const date = new Date()
+  const hours = date.getHours()
+  const styles = {
+    fontSize: 35
+  }
+
+  if (hours < 12) {
+    timeOfDay = 'Morning'
+    styles.color = "#D90000"
+  } else if (hours >= 12 && hours < 17) {
+    timeOfDay = 'Afternoon'
+    styles.color = "#04733F"
+  } else {
+    timeOfDay = 'Evening'
+    styles.color = "#04756F"
+  }
+
   // ** States
   const [activePill, setPillActive] = useState('1')
 
@@ -30,7 +48,7 @@ const CardNavigation = () => {
     }
   }
 
-  const defaultmessage = ('You are currently not subscribed to any plan at the moment.') 
+  const defaultmessage = (user.user.plan === null) ? 'No Active Plan' : `You are currently subscribed to the ${user.user.plan}`
   return (
     <Fragment>
      
@@ -64,8 +82,8 @@ const CardNavigation = () => {
             <CardBody>
               <TabContent activeTab={activePill}>
                 <TabPane tabId='1'>
-                  <CardTitle tag='h4'>Good Afternoon {user.user.name}</CardTitle>
-                  <CardText>Welcome back to your personalized Dashboard. Check out charts, resources, and useful Ultimate SMS solutions tailored to your account.</CardText>
+                  <CardTitle tag='h4'>Good {timeOfDay} {user.user.name}</CardTitle>
+                  <CardText>Welcome back to your personalized Dashboard. Check out charts, resources, and useful PeckPoint SMS solutions tailored to your account.</CardText>
                 </TabPane>
                 <TabPane tabId='2'>
                   <CardTitle tag='h4'>Current Plan </CardTitle>

@@ -21,8 +21,8 @@ const token = saved.token
 //   })
 // }
 
-const deleteContact = (id) => {
-  axios.delete(`https://api.peckpoint.com/api/v1/contacts/${id}`, {
+const deleteGroup = (id) => {
+  axios.delete(`https://api.peckpoint.com/api/v1/groups/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json'
@@ -30,7 +30,7 @@ const deleteContact = (id) => {
   })
 }
 
-let dmodal = { id: '', firstname: '', lastname: '', gender: '', dob: '', phone_number: '', email: '' }, openUodal = false
+let dmodal = { id: '', name: '', description: '' }, openUodal = false
 
 const updateData = (data) => {
   dmodal = data
@@ -203,18 +203,18 @@ export const columns = [
             <DropdownMenu end>
               <DropdownItem tag='a' href='/' className='w-100' onClick={e => {
                 e.preventDefault()
-                updateData({ id: row.id, firstname: row.firstname, lastname: row.lastname, gender: row.gender, dob: row.dob, phone_number: row.phone_number, email: row.email })
+                updateData({ id: row.id, name: row.name, description: row.description})
               }}>
                 <FileText size={15} />
                 <span className='align-middle ms-50'>Update</span>
               </DropdownItem>
               <DropdownItem tag='a' href='/' className='w-100' onClick={e => e.preventDefault()}>
                 <Archive size={15} />
-                <span className='align-middle ms-50'>Archive</span>
+                <span className='align-middle ms-50'>Add Contact</span>
               </DropdownItem>
               <DropdownItem tag='a' href='/' className='w-100' onClick={e => {
                 e.preventDefault()
-                deleteContact(row => row.id)
+                deleteGroup(row => row.id)
                 }}>
                 <Trash size={15} />
                 <span className='align-middle ms-50'>Delete</span>
@@ -276,7 +276,7 @@ export const multiLingColumns = [
   },
   {
     name: 'Actions',
-    allowOverflow: true,
+    allowOverflow: false,
     cell: () => {
       return (
         <div className='d-flex'>
