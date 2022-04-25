@@ -39,8 +39,6 @@ axios.post('https://api.peckpoint.com/api/v2/verify-account', {
   status = res.data
 })
 
-console.log(tok)
-
 const VerifyEmailBasic = () => {
   return (
     <div className='auth-wrapper auth-basic px-2'>
