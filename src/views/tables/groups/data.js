@@ -196,12 +196,7 @@ export const columns = [
     cell: (row) => {
       return (
         <div className='d-flex'>
-          <UncontrolledDropdown>
-            <DropdownToggle className='pe-1' tag='span'>
-              <MoreVertical size={15} />
-            </DropdownToggle>
-            <DropdownMenu end>
-              <DropdownItem tag='a' href='/' className='w-100' onClick={e => {
+          <DropdownItem tag='a' href='/' className='w-100' onClick={e => {
                 e.preventDefault()
                 updateData({ id: row.id, name: row.name, description: row.description})
               }}>
@@ -219,9 +214,6 @@ export const columns = [
                 <Trash size={15} />
                 <span className='align-middle ms-50'>Delete</span>
               </DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
-          <Edit size={15} />
         </div>
       )
     }

@@ -224,21 +224,12 @@ export const columns = [
     cell: (row) => {
       return (
         <div className='d-flex'>
-          <UncontrolledDropdown>
-            <DropdownToggle className='pe-1' tag='span'>
-              <MoreVertical size={15} />
-            </DropdownToggle>
-            <DropdownMenu end>
-              <DropdownItem tag='a' href='/' className='w-100' onClick={e => {
+          <DropdownItem tag='a' href='/' className='w-100' onClick={e => {
                 e.preventDefault()
                 updateData({ id: row.id, firstname: row.firstname, lastname: row.lastname, gender: row.gender, dob: row.dob, phone_number: row.phone_number, email: row.email })
               }}>
                 <FileText size={15} />
                 <span className='align-middle ms-50'>Update</span>
-              </DropdownItem>
-              <DropdownItem tag='a' href='/' className='w-100' onClick={e => e.preventDefault()}>
-                <Archive size={15} />
-                <span className='align-middle ms-50'>Archive</span>
               </DropdownItem>
               <DropdownItem tag='a' href='/' className='w-100' onClick={e => {
                 e.preventDefault()
@@ -247,9 +238,6 @@ export const columns = [
                 <Trash size={15} />
                 <span className='align-middle ms-50'>Delete</span>
               </DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
-          <Edit size={15} />
         </div>
       )
     }
@@ -327,7 +315,7 @@ export const multiLingColumns = [
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
-          <Edit size={15} />
+          <Trash size={15} />
         </div>
       )
     }

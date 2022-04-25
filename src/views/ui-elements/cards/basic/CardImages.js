@@ -21,15 +21,17 @@ const CardImages = () => {
   const token = user.token
   
 
-  const printRef = useRef()
+  const printRef = useRef([])
 
-  const handleDownloadImage = async () => {
-    const element = printRef.current
+  const handleDownloadImage = async (o) => {
+    
+    const element = printRef.current[o]
+    
     const canvas = await html2canvas(element)
 
     const data = canvas.toDataURL('image/jpg')
     const link = document.createElement('a')
-
+    // console.log(element)
     if (typeof link.download === 'string') {
       link.href = data
       link.download = 'image.jpg'
@@ -62,11 +64,11 @@ const CardImages = () => {
           const tDate = Math.floor(Date.parse(`${mdate.getFullYear()}-${mdate.getMonth() - 1}-${mdate.getDate()}`) / 1000)
     
             if (tDate < currDate + 86400) {
-                today.push(data[i])
+                today[i] = data[i]
             } else if (tDate < currDate + (604800 - (86400 * date.getDay()))) {
-                thisWeek.push(data[i])
+                thisWeek[i] = data[i]
             } else if (mdate.getMonth === date.getDate()) {
-                thisMonth.push(data[i])
+                thisMonth[i] = data[i]
             }
         }
     })
@@ -103,10 +105,15 @@ const CardImages = () => {
                 width:'calc(100% - 40px)'
             }} className={((sorts[i]).replace(' ', '')).toLowerCase()}>{sorts[i]}</div> : '', 
 
-            e.map((ee, ii) => (
-              <Col xl='6' key={i * ii} md='6'>
+            e.map((ee, ii) => {
+              if (ee !== undefined) {
+              return (
+              <Col xl='6' key={ii} md='6'>
                 <Card className='birthdaycardf' responsive="true">
-                  <div className='birthdaycardf' ref={printRef}>
+                  <div className='birthdaycardf' ref={e => {
+                    const ez = printRef.current[ii] = e
+                    return ez
+                  }}>
                     <CardBody className='birthdaycard'>
                       <CardTitle className='birthdaycard'>
                         <img src={img1} className='baloon' />
@@ -123,19 +130,25 @@ const CardImages = () => {
                     </CardBody>
                   </div>
                 </Card>
-                <Button color='primary' outline className='button' onClick={handleDownloadImage}>
+                <Button color='primary' outline className='button' onClick={() => handleDownloadImage(ii)}>
                   Download
                 </Button>
               </Col>
-            ))
+            )
+          }
+        }
+            )
           ]
             
           ))
         }
 
-        {/* <Col xl='6' md='6'>
+       {/* <Col xl='6' md='6'>
           <Card className='birthdaycardf' responsive="true">
-            <div className='birthdaycardf' ref={printRef}>
+            <div className='birthdaycardf' key={printRef.current.length} ref={e => {
+              const ez = printRef.current[printRef.current.length] = e
+                return ez
+              }}>
             <CardBody className='birthdaycard'>
               <CardTitle className='birthdaycard'> 
                 <img src={img1} className='baloon'/> 
@@ -152,12 +165,16 @@ const CardImages = () => {
             </CardBody>
             </div>
           </Card>
-          <Button color='primary' outline className='button' onClick={handleDownloadImage}>
+          <Button color='primary' key={1} outline className='button' onClick={() => handleDownloadImage(printRef.current.length)}>
               Download
             </Button>
         </Col>
         <Col xl='6' md='6'>
           <Card className='birthdaycardf' responsive="true">
+            <div className="birthdaycardf" key={printRef.current.length} ref={e => {
+              const ez = printRef.current[printRef.current.length] = e
+              return ez
+            }}>
             <CardBody className='birthdaycard'>
               <CardTitle className='birthdaycard'> 
                 <img src={img1} className='baloon'/> 
@@ -172,13 +189,18 @@ const CardImages = () => {
                 <img src={img3} className='gift'/>
                 </CardTitle>
             </CardBody>
+            </div>
           </Card>
-          <Button color='primary' outline className='button'>
+          <Button color='primary' key={2} onClick={() => handleDownloadImage(printRef.current.length)} outline className='button'>
               Download
             </Button>
         </Col>
         <Col xl='6' md='6'>
           <Card className='birthdaycardf' responsive="true">
+            <div className="birthdaycardf" key={printRef.current.length} ref={e => {
+              const ez = printRef.current[printRef.current.length] = e
+              return ez
+            }}>
             <CardBody className='birthdaycard'>
               <CardTitle className='birthdaycard'> 
                 <img src={img1} className='baloon'/> 
@@ -193,13 +215,15 @@ const CardImages = () => {
                 <img src={img3} className='gift'/>
                 </CardTitle>
             </CardBody>
+            </div>
           </Card>
-          <Button color='primary' onClick={handleDownloadImage} outline className='button'>
+          <Button color='primary' key={3} onClick={() => handleDownloadImage(printRef.current.length)} outline className='button'>
               Download
             </Button>
         </Col>
         <Col xl='6' md='6'>
           <Card className='birthdaycardf' responsive="true">
+            <div className="birthdaycardf" ref={printRef[4]}>
             <CardBody className='birthdaycard'>
               <CardTitle className='birthdaycard'> 
                 <img src={img1} className='baloon'/> 
@@ -214,12 +238,13 @@ const CardImages = () => {
                 <img src={img3} className='gift'/>
                 </CardTitle>
             </CardBody>
+            </div>
           </Card>
-          <Button color='primary' outline className='button'>
+          <Button color='primary' key={4} onClick={() => handleDownloadImage(printRef.current.length)} outline className='button'>
               Download
             </Button>
-        </Col> */}
-      </Row>
+        </Col>*/}
+      </Row> 
     </Fragment>
   )
 }

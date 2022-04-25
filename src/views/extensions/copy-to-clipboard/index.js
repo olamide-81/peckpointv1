@@ -51,29 +51,12 @@ const Clipboard = () => {
 
   return (
     <Fragment>
-      <Row>
-        <Col sm='12'>
-          <Card>
-            <CardHeader>
-              <CardTitle tag='h4'>Contact List Link</CardTitle>
-            </CardHeader>
-            <CardBody>
-              <Row>
-                <Col xl='8' md='4' sm='6' className='pe-sm-0 mb-md-0 mb-1'>
-                  <Input value={value} onChange={handleCopy} />
-                </Col>
-                <Col md='2' sm='12'>
-                  <CopyToClipboard onCopy={onCopy} text={value}>
-                    <Button color='primary' outline>
-                      Copy!
-                    </Button>
-                  </CopyToClipboard>
-                </Col>
-              </Row>
-            </CardBody>
-          </Card>
-        </Col>
-      </Row>
+      <Input className='inputbtn' value={value} onChange={handleCopy} /> 
+        <CopyToClipboard onCopy={onCopy} text={value}>
+           <Button className='sharebtn' color='primary' outline>
+             Share Link
+            </Button>
+        </CopyToClipboard>
     </Fragment>
   )
 }

@@ -45,7 +45,20 @@ export default [
   id: 'contacts',
   title: 'Contacts',
   icon: <User size={20} />,
-  navLink: '/contacts'
+  children: [
+    {
+      id: 'contacts',
+      title: 'Contact List',
+      icon: <User size={12} />,
+      navLink: '/contacts'
+    },
+    {
+      id: 'groups',
+      title: 'Groups',
+      icon: <Users size={12} />,
+      navLink: '/groups'
+    }
+  ]
 },
 {
   id: 'birthdays',
