@@ -2,6 +2,8 @@
 import { Fragment, useState, forwardRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
+import ShareLink from '../../extensions/copy-to-clipboard'
+
 // ** Table Data & Columns
 import { columns, dmodal, openUodal } from './data'
 
@@ -228,14 +230,23 @@ const Contact = () => {
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledButtonDropdown>
+            <UncontrolledButtonDropdown className='importbtn'>
+              <DropdownToggle color='secondary' caret outline>
+                <Share size={15} />
+                <span className='align-middle ms-50'>Import</span>
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem className='w-100' onClick={() => downloadCSV(data)}>
+                  <FileText size={15} />
+                  <span className='align-middle ms-50'>CSV</span>
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledButtonDropdown>
+            <ShareLink />
             <Button className='ms-2' color='primary' onClick={handleModal}>
               <Plus size={15} />
               <span className='align-middle ms-50'>Add Contact</span>
             </Button>
-            <Button className='ms-2' color='primary' onClick={handleModal} tag={Link} to='/groups'>
-              <span className='align-middle ms-50'>Groups</span>
-            </Button>
-          
           </div>
            
         </CardHeader>
