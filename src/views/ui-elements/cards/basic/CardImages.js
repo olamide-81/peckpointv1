@@ -85,9 +85,32 @@ const CardImages = () => {
         <div className="sortTab"> 
             <span>Show Card for - </span>
             <select onChange={(e) => {
-            if (document.querySelectorAll(`.${e.target.value}`).length) {
-                document.querySelector(`.${e.target.value}`).scrollIntoView()
-              }
+              const arr = ["today", "thisweek", "thismonth"]
+
+               const cards = document.querySelectorAll(`[main="${e.target.value}"]`)
+            
+              
+                arr.forEach((v) => {
+                  if (v !== e.target.value) {
+
+                    if (document.querySelectorAll(`[main="${v}"]`).length) {
+                      
+                     const e = document.querySelectorAll(`[main="${v}"]`)
+                       e.forEach((v, i) => {
+                         e[i].style.display = 'none'
+                       })
+                    }
+                  }
+                })
+
+                  if (cards.length) {
+                 cards.forEach((v, i) => {
+                         cards[i].style.display = 'block'
+                       })
+                      } else { 
+                        //display empty state
+                      }
+
             }}>
               <option value="today">Today</option>
               <option value="thisweek">This Week</option>
@@ -95,20 +118,20 @@ const CardImages = () => {
             </select>
         </div>
 
+            <div className="cardss">
         {
           conts.map((e, i) => ( 
             
-            [
-            e.length ? <div key={i} style={{
-                padding : '8px 0px',
-                margin:'auto',
-                width:'calc(100% - 40px)'
-            }} className={((sorts[i]).replace(' ', '')).toLowerCase()}>{sorts[i]}</div> : '', 
+            // e.length ? <div key={i} style={{
+            //     padding : '8px 0px',
+            //     margin:'auto',
+            //     width:'calc(100% - 40px)'
+            // }} className={((sorts[i]).replace(' ', '')).toLowerCase()}>{sorts[i]}</div> : '', 
 
             e.map((ee, ii) => {
               if (ee !== undefined) {
               return (
-              <Col xl='6' key={ii} md='6'>
+                <Col xl='6' main={((sorts[i]).replace(' ', '')).toLowerCase()} key={ii} md='6'>
                 <Card className='birthdaycardf' responsive="true">
                   <div className='birthdaycardf' ref={e => {
                     const ez = printRef.current[ii] = e
@@ -138,11 +161,11 @@ const CardImages = () => {
           }
         }
             )
-          ]
+          // ]
             
           ))
         }
-
+  </div>
        {/* <Col xl='6' md='6'>
           <Card className='birthdaycardf' responsive="true">
             <div className='birthdaycardf' key={printRef.current.length} ref={e => {
