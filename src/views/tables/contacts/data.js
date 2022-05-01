@@ -221,6 +221,7 @@ export const columns = [
   {
     name: 'Actions',
     allowOverflow: true,
+    minWidth: '250px',
     cell: (row) => {
       return (
         <div className='d-flex'>

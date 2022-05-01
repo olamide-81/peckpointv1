@@ -14,11 +14,17 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 	margin: 10px;
 }
 
+
 .birthdaycardf {
 	width: auto;
 	height: auto;
 	max-height: 350px;
 	max-width: 500px;
+}
+
+.table-scrollable{
+	overflow-x: visible;
+	overflow-y: visible;
 }
 
 .sortTab {
@@ -132,7 +138,9 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 	margin-top: -20px;
 	margin-left: -20px;
 }
-
+div[role=columnheader] {
+	justify-content: center;
+}
 @media screen and (max-width: 800px) {
     .birthdaycardf {
 		width: 450px;
