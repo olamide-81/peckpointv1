@@ -13,9 +13,10 @@ import { Modal, Input, Label, Button, ModalHeader, ModalBody, InputGroup, InputG
 // ** Styles
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 
-const UpdateModal = ({ open, handleModal, data }) => {
+const UpdateModal = ({ open, handleModall, data }) => {
   // ** State
-console.log(data)
+  // console.log(handleModall)
+  
   const [firstname, setfirstName] = useState('')
   const [lastname, setlastName] = useState('')
   const [phone_number, setphoneNumber] = useState('')
@@ -68,17 +69,17 @@ const [cgender, setGender] = useState({
   }
 
   // ** Custom close btn
-  const CloseBtn = <X className='cursor-pointer' size={15} onClick={handleModal} />
+  const CloseBtn = <X className='cursor-pointer' size={15} onClick={handleModall} />
 
   return (
     <Modal
       isOpen={open}
-      toggle={handleModal}
+      toggle={handleModall}
       className='sidebar-sm'
       modalClassName='modal-slide-in'
       contentClassName='pt-0'
     >
-      <ModalHeader className='mb-1' toggle={handleModal} close={CloseBtn} tag='div'>
+      <ModalHeader className='mb-1' toggle={handleModall} close={CloseBtn} tag='div'>
         <h5 className='modal-title'>Update Record</h5>
       </ModalHeader>
       <ModalBody className='flex-grow-1'>
@@ -173,7 +174,7 @@ const [cgender, setGender] = useState({
         <Button className='me-1' color='primary' onClick={updateContact}>
           Submit
         </Button>
-        <Button color='secondary' onClick={handleModal} outline>
+        <Button color='secondary' onClick={handleModall} outline>
           Cancel
         </Button>
       </ModalBody>

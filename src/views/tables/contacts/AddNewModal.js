@@ -17,7 +17,7 @@ import '@styles/react/libs/flatpickr/flatpickr.scss'
 
 const AddNewModal = ({ open, handleModal }) => {
   // ** State
-  
+
   const [firstname, setfirstName] = useState("")
   const [lastname, setlastName] = useState("")
   const [phone_number, setphoneNumber] = useState("")

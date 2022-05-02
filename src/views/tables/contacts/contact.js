@@ -61,7 +61,7 @@ const Contact = () => {
     }
   }).then(dataa => {
            addData(dataa.data.data)
-      })
+  })
 
   const [modal, setModal] = useState(false)
   const [umodal, setUmodal] = useState(false)
@@ -283,7 +283,7 @@ const Contact = () => {
       </Card>
       <AddNewModal open={modal} handleModal={handleModal} />
       
-      <UpdateModal open={umodal} data={dmodal} handleModal={handleUmodal} />
+      <UpdateModal open={umodal} data={dmodal} handleModall={handleUmodal} />
     </Fragment>
   )
 }

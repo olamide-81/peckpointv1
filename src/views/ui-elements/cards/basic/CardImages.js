@@ -59,26 +59,30 @@ const CardImages = () => {
       
         const date = new Date(), mdate = new Date(Date.parse(v.dob))
 
-            const currDate = Math.floor(Date.parse(`${date.getFullYear()}-${date.getMonth() - 1}-${date.getDate()}`) / 1000)
+          const currDate = Math.floor(Date.parse(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`) / 1000) // today's date
 
-          const tDate = Math.floor(Date.parse(`${mdate.getFullYear()}-${mdate.getMonth() - 1}-${mdate.getDate()}`) / 1000)
-    
-            if (tDate < currDate + 86400) {
+          const tDate = Math.floor(Date.parse(`${mdate.getFullYear()}-${mdate.getMonth() + 1}-${mdate.getDate()}`) / 1000) // user date
+
+        console.log(date.getDay())
+
+            if (tDate > currDate && tDate < currDate + 86400) {
                 today[i] = data[i]
-            } else if (tDate < currDate + (604800 - (86400 * date.getDay()))) {
+                console.log('tod')
+            } else if ((tDate > currDate + 86400) && (tDate >= currDate + (604800 - (86400 * (date.getDay() + 1))))) {
                 thisWeek[i] = data[i]
+                console.log('thiswee')
             } else if (mdate.getMonth === date.getDate()) {
                 thisMonth[i] = data[i]
+                console.log('thismon')
             }
         }
     })
-
-    // console.log(today)
 
     setConts([today, thisWeek, thisMonth])
 
   })
   
+
   return (
     <Fragment>
       <Row>
@@ -130,8 +134,11 @@ const CardImages = () => {
 
             e.map((ee, ii) => {
               if (ee !== undefined) {
+                console.log(document.querySelectorAll('.cardss *').length)
               return (
-                <Col xl='6' main={((sorts[i]).replace(' ', '')).toLowerCase()} key={ii} md='6'>
+                <Col xl='6' style={{
+                  display: ((sorts[i]).replace(' ', '')).toLowerCase() !== document.querySelector('.sortTab select').value ? 'none' : 'unset'
+                }} main={((sorts[i]).replace(' ', '')).toLowerCase()} key={ii} md='6'>
                 <Card className='birthdaycardf' responsive="true">
                   <div className='birthdaycardf' ref={e => {
                     const ez = printRef.current[ii] = e
