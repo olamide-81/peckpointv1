@@ -68,7 +68,7 @@ const CardImages = () => {
                 today[i] = data[i]
             } else if ((tDate >= currDate + 86400) && (tDate <= currDate + (604800 - (86400 * date.getDay())))) {
                 thisWeek[i] = data[i]
-            } else if (mdate.getMonth === date.getDate()) {
+            } else if (mdate.getMonth() === date.getDate()) {
                 thisMonth[i] = data[i]
             }
         }
