@@ -8,7 +8,7 @@ import { Card, CardBody, CardTitle, CardText, Button } from 'reactstrap'
 
 // ** Styles
 import '@styles/react/pages/page-authentication.scss'
-import axios from 'axios'
+
 //import { toast } from 'react-toastify'
 
 

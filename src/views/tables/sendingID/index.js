@@ -23,9 +23,13 @@ const CardTitles = () => {
          Authorization: `Bearer ${token}`
         }
      }).then(res => res.json())
-     setData(Object.values(resultsender))
+
+    if (resultsender.success) {
+     setData(resultsender.data)
+     }
+
   }, [])
-  console.warn(data.data)
+
 
   async function createsenderid() {
     const item = {name}
