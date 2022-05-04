@@ -64,7 +64,7 @@ const CardImages = () => {
 
           const tDate = Math.floor(Date.parse(`${mdate.getFullYear()}-${mdate.getMonth() + 1}-${mdate.getDate()}`) / 1000) // user date
 
-            if (tDate > currDate && tDate < currDate + 86400) {
+            if (tDate >= currDate && tDate < currDate + 86400) {
                 today[i] = data[i]
             } else if ((tDate >= currDate + 86400) && (tDate <= currDate + (604800 - (86400 * date.getDay())))) {
                 thisWeek[i] = data[i]
