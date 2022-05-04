@@ -55,6 +55,7 @@ const CardImages = () => {
     
     data.forEach((v, i) => {
       // console.log(Date.parse(v.dob))
+
       if (!isNaN(Date.parse(v.dob))) {
       
         const date = new Date(), mdate = new Date(Date.parse(v.dob))
@@ -63,25 +64,23 @@ const CardImages = () => {
 
           const tDate = Math.floor(Date.parse(`${mdate.getFullYear()}-${mdate.getMonth() + 1}-${mdate.getDate()}`) / 1000) // user date
 
-        console.log(date.getDay())
-
             if (tDate > currDate && tDate < currDate + 86400) {
                 today[i] = data[i]
-                console.log('tod')
-            } else if ((tDate > currDate + 86400) && (tDate >= currDate + (604800 - (86400 * (date.getDay() + 1))))) {
+            } else if ((tDate >= currDate + 86400) && (tDate <= currDate + (604800 - (86400 * date.getDay())))) {
                 thisWeek[i] = data[i]
-                console.log('thiswee')
             } else if (mdate.getMonth === date.getDate()) {
                 thisMonth[i] = data[i]
-                console.log('thismon')
             }
         }
-    })
+    }) 
 
     setConts([today, thisWeek, thisMonth])
 
+    if (!today.length && !thisWeek.length && !thisMonth) {
+        /// empty message
+    }
+
   })
-  let tots = 0  
 
   return (
     <Fragment>
@@ -125,30 +124,18 @@ const CardImages = () => {
             <div className="cardss">
         {
           conts.map((e, i) => ( 
-            
-            // e.length ? <div key={i} style={{
-            //     padding : '8px 0px',
-            //     margin:'auto',
-            //     width:'calc(100% - 40px)'
-            // }} className={((sorts[i]).replace(' ', '')).toLowerCase()}>{sorts[i]}</div> : '', 
+    
 
             e.map((ee, ii) => {
               if (ee !== undefined) {
-                console.log(document.querySelectorAll('.cardss *').length, tots)
-          
+                let e = 'none'
+                if (((sorts[i]).replace(' ', '')).toLowerCase() === document.querySelector('.sortTab select').value) {
+                  e = 'unset' 
                 
+                }
               return (
                 <Col xl='6' style={{
-                  display: () => {
-                    
-                    if (((sorts[i]).replace(' ', '')).toLowerCase() !== document.querySelector('.sortTab select').value) {
-                      tots = tots + 1
-                      return 'unset'
-                    } else {
-                      return 'none' 
-                    }
-                  
-                  }
+                  display: e
                 }} main={((sorts[i]).replace(' ', '')).toLowerCase()} key={ii} md='6'>
                 <Card className='birthdaycardf' responsive="true">
                   <div className='birthdaycardf' ref={e => {
