@@ -2,13 +2,14 @@
 import { Fragment, useState, forwardRef, useEffect } from 'react'
 
 // ** Table Data & Columns
-import { columns, dmodal, openUodal } from './data'
+import { columns, dmodal, openUodal, openAmodal, Admodal } from './data'
 
 //import { delayLog } from './delayLog'
 // ** Add New Modal Component
 import AddNewModal from './AddNewModal'
 
 import UpdateModal from './Update'
+import AddContact from './addContact'
 
 import DataTable from 'react-data-table-component'
 
@@ -62,6 +63,7 @@ const Contact = () => {
 
   const [modal, setModal] = useState(false)
   const [umodal, setUmodal] = useState(false)
+  const [admodal, setAdmodal] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
@@ -71,10 +73,15 @@ const Contact = () => {
     setUmodal(openUodal)
   }, [openUodal])
 
+  useEffect(() => {
+    setAdmodal(openAmodal)
+  }, [openAmodal])
+
 
   // ** Function to handle Modal toggle
   const handleModal = () => setModal(!modal)
   const handleUmodal = () => setUmodal(!umodal)
+  const handleAdmodal = () => setAdmodal(!admodal)
   // ** Function to handle filter
   const handleFilter = e => {
     const value = e.target.value
@@ -268,6 +275,7 @@ const Contact = () => {
       <AddNewModal open={modal} handleModal={handleModal} />
       
       <UpdateModal open={umodal} data={dmodal} handleModal={handleUmodal} />
+      <AddContact open={admodal} data={Admodal} handleModal={handleAdmodal} />
     </Fragment>
   )
 }

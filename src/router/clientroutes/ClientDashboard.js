@@ -45,7 +45,7 @@ const ClientDashboardRoutes = [
   {
     path: '/senderid',
     className: 'chat-application',
-    component: lazy(() => import('../../views/pages/misc/Maintenance'))
+    component: lazy(() => import('../../views/tables/sendingID/index'))
   },
   {
     path: '/numbers',

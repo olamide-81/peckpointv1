@@ -6,8 +6,35 @@ import { Card, CardBody, CardTitle, CardText, Button } from 'reactstrap'
 
 // ** Styles
 import '@styles/react/pages/page-authentication.scss'
+import axios from 'axios'
+//import { toast } from 'react-toastify'
 
 const VerifyEmailBasic = () => {
+
+  const getGet = (val) => {
+    const str = (window.location.search).substring(1)
+  
+    const ee = str.split('&')
+  
+    for (const e in ee) {
+      const c = ee[e].split('=')
+      if (c[0] === val) {
+        return c[1]
+      }
+    }
+  }
+  const token = getGet('token')
+
+
+  axios.post("https://api.peckpoint.com/api/v1/verify-account", {
+    token: {token},
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    //toast.info(err.messsage)
+    //console.log(data.message)
+ 
   return (
     <div className='auth-wrapper auth-basic px-2'>
       <div className='auth-inner my-2'>
@@ -28,7 +55,9 @@ const VerifyEmailBasic = () => {
           </CardBody>
         </Card>
       </div>
+      
     </div>
+    
   )
 }
 

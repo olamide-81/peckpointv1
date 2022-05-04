@@ -59,7 +59,12 @@ const AnalyticsDashboard = () => {
           })
           setContacts((response.data.data).length)
         } catch (err) {
-          toast.warn(err.message)
+          if (err.message === 'Request failed with status code 400') {
+            toast.info('No Contact or group created yet')
+          } else {
+            toast.warn(err.message)
+          }
+          
         }
       }
       contactnofetch()
@@ -76,7 +81,11 @@ const AnalyticsDashboard = () => {
         })
         setGroup((response.data.data).length)
       } catch (err) {
-        toast.warn(err.message)
+        if (err.message === 'Request failed with status code 400') {
+         
+        } else {
+          toast.warn(err.message)
+        }
       }
     }
     groupnofetch()
