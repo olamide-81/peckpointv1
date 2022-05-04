@@ -81,7 +81,7 @@ const CardImages = () => {
     setConts([today, thisWeek, thisMonth])
 
   })
-  
+  let tots = 0  
 
   return (
     <Fragment>
@@ -134,10 +134,21 @@ const CardImages = () => {
 
             e.map((ee, ii) => {
               if (ee !== undefined) {
-                console.log(document.querySelectorAll('.cardss *').length)
+                console.log(document.querySelectorAll('.cardss *').length, tots)
+          
+                
               return (
                 <Col xl='6' style={{
-                  display: ((sorts[i]).replace(' ', '')).toLowerCase() !== document.querySelector('.sortTab select').value ? 'none' : 'unset'
+                  display: () => {
+                    
+                    if (((sorts[i]).replace(' ', '')).toLowerCase() !== document.querySelector('.sortTab select').value) {
+                      tots = tots + 1
+                      return 'unset'
+                    } else {
+                      return 'none' 
+                    }
+                  
+                  }
                 }} main={((sorts[i]).replace(' ', '')).toLowerCase()} key={ii} md='6'>
                 <Card className='birthdaycardf' responsive="true">
                   <div className='birthdaycardf' ref={e => {
