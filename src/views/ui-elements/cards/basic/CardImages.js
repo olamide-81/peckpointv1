@@ -4,7 +4,7 @@ import { Fragment, React, useRef, useState } from 'react'
 import html2canvas from 'html2canvas'
 
 import axios from 'axios'
-
+import { useSkin } from '@hooks/useSkin'
 // ** Reactstrap Imports
 import { Card, CardImg, CardTitle, CardBody, CardImgOverlay, CardText, Row, Col, Button } from 'reactstrap'
 
@@ -16,7 +16,9 @@ import img4 from '@src/assets/images/avatars/avatar-blank.png'
 
 
 const CardImages = () => {
-  
+  const { skin } = useSkin()
+  const illustration = skin === 'dark' ? 'error-dark.svg' : 'error.svg',
+   empty = require(`@src/assets/images/pages/${illustration}`).default
   const user = JSON.parse(localStorage.getItem('user'))
   const token = user.token
   
@@ -68,20 +70,16 @@ const CardImages = () => {
                 today[i] = data[i]
             } else if ((tDate >= currDate + 86400) && (tDate <= currDate + (604800 - (86400 * date.getDay())))) {
                 thisWeek[i] = data[i]
-            } else if ((mdate.getMonth() === date.getMonth()) && (date.getFullYear() === mdate.getFullYear())) {
-                thisMonth[i] = data[i]
+            } else if ((date.getDate() < mdate.getDate())  && (mdate.getMonth() === date.getMonth()) && (date.getFullYear() === mdate.getFullYear())) {
+                // thisMonth[i] = data[i]
             }
         }
     }) 
 
     setConts([today, thisWeek, thisMonth])
 
-    if (!today.length && !thisWeek.length && !thisMonth) {
-        /// empty message
-    }
-
   })
-
+  let tots = 0
   return (
     <Fragment>
       <Row>
@@ -111,7 +109,7 @@ const CardImages = () => {
                          cards[i].style.display = 'block'
                        })
                       } else { 
-                        //display empty state
+                    document.querySelector('.cardss').innerHTML = `<div class="empty" style="display: flex; width: 100%; height: fit-content; justify-content: center; flex-direction: column; align-items: center;"><img src="${empty}" alt="no birthdays ${v}" style="width: 300px;"><h2 class="mt-2">No Birthdays around the selected time</h2></div>`
                       }
 
             }}>
@@ -123,10 +121,34 @@ const CardImages = () => {
 
             <div className="cardss">
         {
-          conts.map((e, i) => ( 
-    
+          conts.map((e, i) => { 
+              
+              if (!e.length) {
+                tots++
+              }
 
-            e.map((ee, ii) => {
+              if (tots === 3) {
+                  return (
+                    <div key={0} className="empty" style={{
+                      display:'flex',
+                      width: '100%',
+                      height: 'fit-content',
+                      justifyContent : 'center',
+                      flexDirection : 'column',
+                      alignItems: 'center'
+                    }}>
+                        <img src={empty} className="mb-3" style={{
+                            width: '300px'
+                        }} alt="no birthdays around this month"/>
+
+                        <h2 className="mt-2">No Birthdays are close by at the moment</h2>
+                    </div>
+                  )
+              }
+                // console.log(e.length)
+
+            if (e.length) {
+           return (e.map((ee, ii) => {
               if (ee !== undefined) {
                 let e = 'none'
                 if (((sorts[i]).replace(' ', '')).toLowerCase() === document.querySelector('.sortTab select').value) {
@@ -165,10 +187,12 @@ const CardImages = () => {
             )
           }
         }
-            )
+      
+            ))
+          }
           // ]
             
-          ))
+      })
         }
   </div>
        {/* <Col xl='6' md='6'>
