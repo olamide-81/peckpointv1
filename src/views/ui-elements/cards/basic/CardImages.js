@@ -109,7 +109,7 @@ const CardImages = () => {
                          cards[i].style.display = 'block'
                        })
                       } else { 
-                    document.querySelector('.cardss').innerHTML = `<div class="empty" style="display: flex; width: 100%; height: fit-content; justify-content: center; flex-direction: column; align-items: center;"><img src="${empty}" alt="no birthdays ${v}" style="width: 300px;"><h2 class="mt-2">No Birthdays around the selected time</h2></div>`
+                    document.querySelector('.cardss').innerHTML = `<div class="empty" style="display: flex; width: 100%; height: fit-content; justify-content: center; flex-direction: column; align-items: center;"><img src="${empty}" alt="no birthdays" style="width: 300px;"><h2 class="mt-2">No Birthdays around the selected time</h2></div>`
                       }
 
             }}>
