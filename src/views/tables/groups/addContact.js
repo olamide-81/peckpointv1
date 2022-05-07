@@ -5,7 +5,6 @@ import { toast } from 'react-toastify'
 // ** Third Party Components
 import Flatpickr from 'react-flatpickr'
 import { User, Briefcase, Mail, Calendar, DollarSign, X, Phone } from 'react-feather'
-
 // ** Reactstrap Imports
 import { Modal, Input, Label, Button, ModalHeader, ModalBody, InputGroup, InputGroupText } from 'reactstrap'
 
@@ -42,6 +41,7 @@ function AddContact({ open, handleModal }) {
     return result
     
   }
+
 
 { /*async function sendviaemail() {
     const emailitem = {email}

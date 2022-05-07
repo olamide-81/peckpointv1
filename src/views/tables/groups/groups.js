@@ -75,6 +75,7 @@ const Contact = () => {
 
   useEffect(() => {
     setAdmodal(openAmodal)
+ 
   }, [openAmodal])
 
 
