@@ -202,7 +202,7 @@ const Contact = () => {
 
   return (
     <Fragment>
-      <Card>
+      <Card className="groups">
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
           <CardTitle tag='h4'>Groups</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>

@@ -137,7 +137,7 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 	margin-top: -20px;
 	margin-left: -20px;
 }
-div[data-column-id="7"] div[role=columnheader] {
+div[data-column-id="7"] div[role=columnheader], .groups div[data-column-id="3"] div[role=columnheader] {
 	justify-content: center;
 }
 @media screen and (max-width: 800px) {

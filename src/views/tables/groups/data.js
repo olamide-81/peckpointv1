@@ -202,31 +202,32 @@ export const columns = [
   
   {
     name: 'Actions',
+    minWidth: '385px',
     allowOverflow: true,
     cell: (row) => {
       return (
         <div className='d-flex'>
-          <DropdownItem tag='a' href='/' className='w-100' onClick={e => {
+          <div className='w-100 dropdown-item' onClick={e => {
                 e.preventDefault()
                 updateData({ id: row.id, name: row.name, description: row.description})
               }}>
                 <FileText size={15} />
                 <span className='align-middle ms-50'>Update</span>
-              </DropdownItem>
-              <DropdownItem tag='a' href='/' className='w-100' onClick={e => {
+              </div>
+              <div className='w-100 dropdown-item' onClick={e => {
                 e.preventDefault()
                 AddContact({ id: row.id, name: row.name, description: row.description})
               }}>
                 <Archive size={15} />
                 <span className='align-middle ms-50'>Add Contact</span>
-              </DropdownItem>
-              <DropdownItem tag='a' href='/' className='w-100' onClick={e => {
+              </div>
+              <div className='w-100 dropdown-item' onClick={e => {
                 e.preventDefault()
-                deleteGroup(row => row.id)
+                deleteGroup(row.id)
                 }}>
                 <Trash size={15} />
                 <span className='align-middle ms-50'>Delete</span>
-              </DropdownItem>
+              </div>
         </div>
       )
     }

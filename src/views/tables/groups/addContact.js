@@ -13,7 +13,7 @@ import { Modal, Input, Label, Button, ModalHeader, ModalBody, InputGroup, InputG
 // ** Styles
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 
-const AddContact = ({ open, handleModal }) => {
+function AddContact({ open, handleModal }) {
   // ** State
   
   const [name, Setname] = useState("")
