@@ -109,9 +109,10 @@ const CardImages = () => {
                          cards[i].style.display = 'block'
                        })
                       } else { 
-                    document.querySelector('.cardss').innerHTML = `<div class="empty" style="display: flex; width: 100%; height: fit-content; justify-content: center; flex-direction: column; align-items: center;"><img src="${empty}" alt="no birthdays" style="width: 300px;"><h2 class="mt-2">No Birthdays around the selected time</h2></div>`
-                      }
-
+                    //     if (e.target.value !== 'today') {
+                    // document.querySelector('.cardss').innerHTML = `<div class="empty" style="display: flex; width: 100%; height: fit-content; justify-content: center; flex-direction: column; align-items: center;"><img src="${empty}" alt="no birthdays" style="width: 300px;"><h2 class="mt-2">No Birthdays around the selected time</h2></div>`
+                    // }
+                }
             }}>
               <option value="today">Today</option>
               <option value="thisweek">This Week</option>
@@ -126,10 +127,11 @@ const CardImages = () => {
               if (!e.length) {
                 tots++
               }
-
-              if (tots === 3) {
+           
+            const arrr = ["today", "thisweek", "thismonth"]
+            if (tots === 3 || (document.querySelector('.sortTab select').value === arrr[i] && !e.length)) {
                   return (
-                    <div key={0} className="empty" style={{
+                    <div key={i} className="empty" style={{
                       display:'flex',
                       width: '100%',
                       height: 'fit-content',
