@@ -221,23 +221,24 @@ export const columns = [
   {
     name: 'Actions',
     allowOverflow: true,
+    minWidth: '250px',
     cell: (row) => {
       return (
         <div className='d-flex'>
-          <DropdownItem tag='a' href='/' className='w-100' onClick={e => {
+          <div className='w-100 dropdown-item' onClick={e => {
                 e.preventDefault()
                 updateData({ id: row.id, firstname: row.firstname, lastname: row.lastname, gender: row.gender, dob: row.dob, phone_number: row.phone_number, email: row.email })
               }}>
                 <FileText size={15} />
                 <span className='align-middle ms-50'>Update</span>
-              </DropdownItem>
-              <DropdownItem tag='a' href='/' className='w-100' onClick={e => {
+              </div>
+              <div className='w-100 dropdown-item' onClick={e => {
                 e.preventDefault()
                 deleteContact(row => row.id)
                 }}>
                 <Trash size={15} />
                 <span className='align-middle ms-50'>Delete</span>
-              </DropdownItem>
+              </div>
         </div>
       )
     }

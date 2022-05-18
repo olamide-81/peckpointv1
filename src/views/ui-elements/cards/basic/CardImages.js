@@ -4,7 +4,7 @@ import { Fragment, React, useRef, useState } from 'react'
 import html2canvas from 'html2canvas'
 
 import axios from 'axios'
-
+import { useSkin } from '@hooks/useSkin'
 // ** Reactstrap Imports
 import { Card, CardImg, CardTitle, CardBody, CardImgOverlay, CardText, Row, Col, Button } from 'reactstrap'
 
@@ -16,7 +16,9 @@ import img4 from '@src/assets/images/avatars/avatar-blank.png'
 
 
 const CardImages = () => {
-  
+  const { skin } = useSkin()
+  const illustration = skin === 'dark' ? 'error-dark.svg' : 'error.svg',
+   empty = require(`@src/assets/images/pages/${illustration}`).default
   const user = JSON.parse(localStorage.getItem('user'))
   const token = user.token
   
@@ -55,39 +57,67 @@ const CardImages = () => {
     
     data.forEach((v, i) => {
       // console.log(Date.parse(v.dob))
+
       if (!isNaN(Date.parse(v.dob))) {
       
         const date = new Date(), mdate = new Date(Date.parse(v.dob))
 
-            const currDate = Math.floor(Date.parse(`${date.getFullYear()}-${date.getMonth() - 1}-${date.getDate()}`) / 1000)
+          const currDate = Math.floor(Date.parse(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`) / 1000) // today's date
 
-          const tDate = Math.floor(Date.parse(`${mdate.getFullYear()}-${mdate.getMonth() - 1}-${mdate.getDate()}`) / 1000)
-    
-            if (tDate < currDate + 86400) {
+          const tDate = Math.floor(Date.parse(`${mdate.getFullYear()}-${mdate.getMonth() + 1}-${mdate.getDate()}`) / 1000) // user date
+
+            if (tDate >= currDate && tDate < currDate + 86400) {
                 today[i] = data[i]
-            } else if (tDate < currDate + (604800 - (86400 * date.getDay()))) {
+            }
+
+             if (tDate <= currDate + (604800 - (86400 * date.getDay()))) {
                 thisWeek[i] = data[i]
-            } else if (mdate.getMonth === date.getDate()) {
+            }
+
+            if (mdate.getMonth() === date.getMonth()) {
                 thisMonth[i] = data[i]
             }
+            
         }
-    })
-
-    // console.log(today)
+    }) 
 
     setConts([today, thisWeek, thisMonth])
 
   })
-  
+  let tots = 0
   return (
     <Fragment>
       <Row>
         <div className="sortTab"> 
             <span>Show Card for - </span>
             <select onChange={(e) => {
-            if (document.querySelectorAll(`.${e.target.value}`).length) {
-                document.querySelector(`.${e.target.value}`).scrollIntoView()
-              }
+              const arr = ["today", "thisweek", "thismonth"]
+
+               const cards = document.querySelectorAll(`[main="${e.target.value}"]`)
+            
+              
+                arr.forEach((v) => {
+                  if (v !== e.target.value) {
+
+                    if (document.querySelectorAll(`[main="${v}"]`).length) {
+                      
+                     const e = document.querySelectorAll(`[main="${v}"]`)
+                       e.forEach((v, i) => {
+                         e[i].style.display = 'none'
+                       })
+                    }
+                  }
+                })
+
+                  if (cards.length) {
+                 cards.forEach((v, i) => {
+                         cards[i].style.display = 'block'
+                       })
+                      } else { 
+                    //     if (e.target.value !== 'today') {
+                    // document.querySelector('.cardss').innerHTML = `<div class="empty" style="display: flex; width: 100%; height: fit-content; justify-content: center; flex-direction: column; align-items: center;"><img src="${empty}" alt="no birthdays" style="width: 300px;"><h2 class="mt-2">No Birthdays around the selected time</h2></div>`
+                    // }
+                }
             }}>
               <option value="today">Today</option>
               <option value="thisweek">This Week</option>
@@ -95,20 +125,47 @@ const CardImages = () => {
             </select>
         </div>
 
+            <div className="cardss">
         {
-          conts.map((e, i) => ( 
-            
-            [
-            e.length ? <div key={i} style={{
-                padding : '8px 0px',
-                margin:'auto',
-                width:'calc(100% - 40px)'
-            }} className={((sorts[i]).replace(' ', '')).toLowerCase()}>{sorts[i]}</div> : '', 
+          conts.map((e, i) => { 
+              
+              if (!e.length) {
+                tots++
+              }
+           
+            const arrr = ["today", "thisweek", "thismonth"]
+            if (tots === 3 || (document.querySelector('.sortTab select').value === arrr[i] && !e.length)) {
+                  return (
+                    <div key={i} className="empty" style={{
+                      display:'flex',
+                      width: '100%',
+                      height: 'fit-content',
+                      justifyContent : 'center',
+                      flexDirection : 'column',
+                      alignItems: 'center'
+                    }}>
+                        <img src={empty} className="mb-3" style={{
+                            width: '300px'
+                        }} alt="no birthdays around this month"/>
 
-            e.map((ee, ii) => {
+                        <h2 className="mt-2">No Birthdays are close by at the moment</h2>
+                    </div>
+                  )
+              }
+                // console.log(e.length)
+
+            if (e.length) {
+           return (e.map((ee, ii) => {
               if (ee !== undefined) {
+                let e = 'none'
+                if (((sorts[i]).replace(' ', '')).toLowerCase() === document.querySelector('.sortTab select').value) {
+                  e = 'unset' 
+                
+                }
               return (
-              <Col xl='6' key={ii} md='6'>
+                <Col xl='6' style={{
+                  display: e
+                }} main={((sorts[i]).replace(' ', '')).toLowerCase()} key={ii} md='6'>
                 <Card className='birthdaycardf' responsive="true">
                   <div className='birthdaycardf' ref={e => {
                     const ez = printRef.current[ii] = e
@@ -137,12 +194,14 @@ const CardImages = () => {
             )
           }
         }
-            )
-          ]
+      
+            ))
+          }
+          // ]
             
-          ))
+      })
         }
-
+  </div>
        {/* <Col xl='6' md='6'>
           <Card className='birthdaycardf' responsive="true">
             <div className='birthdaycardf' key={printRef.current.length} ref={e => {

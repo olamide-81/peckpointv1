@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { reset, login } from '../../../redux/authentication'
 import '@styles/react/pages/page-authentication.scss'
+import LoadingSpinner from "../../ui-elements/cards/basic/Spinner"
 // ** Context
 import { AbilityContext } from '@src/utility/context/Can'
 
@@ -20,6 +21,7 @@ const LoginCover = () => {
     email: '',
     password: ''
   })
+  const [isLoading, setIsLoading] = useState(false)
 
   const { email, password } = formData
 
@@ -32,10 +34,12 @@ const LoginCover = () => {
   useEffect(() => {
     if (isError) {
       toast.error(message)
+      setIsLoading(false)
     }
 
     if (isSuccess || user) {
       history.push('/')
+      setIsLoading(false)
     }
 
     dispatch(reset())
@@ -49,6 +53,7 @@ const LoginCover = () => {
   }
 
   const onSubmit = (e) => {
+    setIsLoading(true)
     e.preventDefault()
 
     const userData = {
@@ -66,6 +71,7 @@ const LoginCover = () => {
 
   return (
     <div className='auth-wrapper auth-cover'>
+    {isLoading ? <LoadingSpinner /> : login}
       <Row className='auth-inner m-0'>
         <Link className='brand-logo' to='/' onClick={e => e.preventDefault()}>
           <h2 className='brand-text text-primary ms-1'>PeckPoint</h2>
@@ -109,7 +115,7 @@ const LoginCover = () => {
                   Remember Me
                 </Label>
               </div>
-              <Button type='submit' color='primary' block>
+              <Button type='submit' color='primary' block disabled={isLoading}>
                 Sign in
               </Button>
             </Form>

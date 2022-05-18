@@ -6,7 +6,7 @@ import axios from 'axios'
 import { MoreVertical, Edit, FileText, Archive, Trash } from 'react-feather'
 // ** Reactstrap Imports
 import { Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
-import AddContact from './addContact'
+// import AddContact from './addContact'
 // ** Vars
 // const states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary']
   
@@ -202,31 +202,32 @@ export const columns = [
   
   {
     name: 'Actions',
+    minWidth: '385px',
     allowOverflow: true,
     cell: (row) => {
       return (
         <div className='d-flex'>
-          <DropdownItem tag='a' href='/' className='w-100' onClick={e => {
-                e.preventDefault()
+          <div className='w-100 dropdown-item' onClick={() => {
+                
                 updateData({ id: row.id, name: row.name, description: row.description})
               }}>
                 <FileText size={15} />
                 <span className='align-middle ms-50'>Update</span>
-              </DropdownItem>
-              <DropdownItem tag='a' href='/' className='w-100' onClick={e => {
-                e.preventDefault()
-                AddContact({ id: row.id, name: row.name, description: row.description})
+              </div>
+              <div className='w-100 dropdown-item' onClick={() => {
+                
+            AddData({ id: row.id, name: row.name, description: row.description})
               }}>
                 <Archive size={15} />
                 <span className='align-middle ms-50'>Add Contact</span>
-              </DropdownItem>
-              <DropdownItem tag='a' href='/' className='w-100' onClick={e => {
-                e.preventDefault()
-                deleteGroup(row => row.id)
+              </div>
+              <div className='w-100 dropdown-item' onClick={() => {
+                
+                deleteGroup(row.id)
                 }}>
                 <Trash size={15} />
                 <span className='align-middle ms-50'>Delete</span>
-              </DropdownItem>
+              </div>
         </div>
       )
     }

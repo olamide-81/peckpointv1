@@ -23,9 +23,44 @@ const CardTitles = () => {
          Authorization: `Bearer ${token}`
         }
      }).then(res => res.json())
-     setData(Object.values(resultsender))
+
+    if (resultsender.success) {
+     setData(resultsender.data)
+     }
+
   }, [])
-  console.warn(data.data)
+
+async function deletesender (id) {
+  
+  const result = await fetch(`https://api.peckpoint.com/api/v1/sender-ids/${id}`, {
+    method: 'DELETE',
+    headers: {
+     Authorization: `Bearer ${token}`,
+     'Content-Type': 'application/json'
+    }
+ })
+ .then(res => res.json())
+   .then(data => {
+     toast.info(data.message)
+   })
+ return result
+}
+
+async function approvesender (id) {
+  
+  const result = await fetch(`https://api.peckpoint.com/api/v1/approve-sender-ids/${id}`, {
+    method: 'patch',
+    headers: {
+     Authorization: `Bearer ${token}`,
+     'Content-Type': 'application/json'
+    }
+ })
+ .then(res => res.json())
+   .then(data => {
+     toast.info(data.message)
+   })
+ return result
+}
 
   async function createsenderid() {
     const item = {name}
@@ -76,10 +111,10 @@ const CardTitles = () => {
                 <CardText>
                 {data.name}
                 </CardText>
-                <Button color='primary' outline className='sender-id-btn'>
-                  Update
+                <Button color='primary' outline className='sender-id-btn' onClick={() => approvesender(data.id) }>
+                  Approve
                 </Button>
-                <Button color='primary' outline>
+                <Button color='primary' outline onClick={() => deletesender(data.id) }>
                   Delete
                 </Button>
               </CardBody>

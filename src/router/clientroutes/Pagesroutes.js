@@ -78,7 +78,7 @@ const PagesRoutes = [
     }
   },
   {
-    path: '/verified',
+    path: '/signin',
     component: lazy(() => import('../../views/pages/authentication/VerifyEmailBasic')),
     layout: 'BlankLayout',
     meta: {

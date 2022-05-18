@@ -1,6 +1,7 @@
 // ** React Imports
 import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
+import LoadingSpinner from "../../ui-elements/cards/basic/Spinner"
 
 // ** Third Party Components
 import Flatpickr from 'react-flatpickr'
@@ -13,9 +14,10 @@ import { Modal, Input, Label, Button, ModalHeader, ModalBody, InputGroup, InputG
 // ** Styles
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 
-const UpdateModal = ({ open, handleModal, data }) => {
+const UpdateModal = ({ open, handleModall, data }) => {
   // ** State
-console.log(data)
+  // console.log(handleModall)
+  
   const [firstname, setfirstName] = useState('')
   const [lastname, setlastName] = useState('')
   const [phone_number, setphoneNumber] = useState('')
@@ -26,6 +28,7 @@ const [cgender, setGender] = useState({
     male : (data.gender === 'male'),
     female: (data.gender === 'female')
   })
+  const [isLoading, setIsLoading] = useState(false)
   const saved = JSON.parse(localStorage.getItem('user'))
   const token = saved.token
   useEffect(() => {
@@ -50,7 +53,8 @@ const [cgender, setGender] = useState({
         }
 
     const item = {firstname, lastname, phone_number, gender, dob, address, email}
-        
+
+    setIsLoading(true)    
      const result = await fetch(`https://api.peckpoint.com/api/v1/contacts/${data.id}`, {
        method: 'patch',
        body:JSON.stringify(item),
@@ -62,24 +66,25 @@ const [cgender, setGender] = useState({
     .then(res => res.json())
       .then(data => {
         toast.info(data.message)
+        setIsLoading(false)
       })
    return result
     
   }
 
   // ** Custom close btn
-  const CloseBtn = <X className='cursor-pointer' size={15} onClick={handleModal} />
+  const CloseBtn = <X className='cursor-pointer' size={15} onClick={handleModall} />
 
   return (
     <Modal
       isOpen={open}
-      toggle={handleModal}
+      toggle={handleModall}
       className='sidebar-sm'
       modalClassName='modal-slide-in'
       contentClassName='pt-0'
     >
-      <ModalHeader className='mb-1' toggle={handleModal} close={CloseBtn} tag='div'>
-        <h5 className='modal-title'>Update Record</h5>
+      <ModalHeader className='mb-1' toggle={handleModall} close={CloseBtn} tag='div'>
+        <h5 className='modal-title'>Update Contacts</h5>
       </ModalHeader>
       <ModalBody className='flex-grow-1'>
         <div className='mb-1'>
@@ -170,10 +175,10 @@ const [cgender, setGender] = useState({
               {/* </InputGroup> */}
            </div>
 
-        <Button className='me-1' color='primary' onClick={updateContact}>
-          Submit
+        <Button className='me-1' color='primary' onClick={updateContact} disabled={isLoading}>
+          Update
         </Button>
-        <Button color='secondary' onClick={handleModal} outline>
+        <Button color='secondary' onClick={handleModall} outline>
           Cancel
         </Button>
       </ModalBody>

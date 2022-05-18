@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { register, reset } from '../../../redux/authentication'
+import LoadingSpinner from "../../ui-elements/cards/basic/Spinner"
 
 // ** Custom Hooks
 import { useSkin } from '@hooks/useSkin'
@@ -16,6 +17,7 @@ import InputPasswordToggle from '@components/input-password-toggle'
 
 // ** Reactstrap Imports
 import { Row, Col, CardTitle, CardText, Form, Label, Input, Button } from 'reactstrap'
+
 
 // ** Styles
 import '@styles/react/pages/page-authentication.scss'
@@ -32,6 +34,7 @@ const RegisterCover = () => {
     username: '',
     phone: ''
   })
+  const [isLoading, setIsLoading] = useState(false)
   // ** Hooks
   const { skin } = useSkin()
 
@@ -49,11 +52,13 @@ const RegisterCover = () => {
     useEffect(() => {
       if (isError) {
         toast.error(message)
+        setIsLoading(false)
       }
   
       if (isSuccess) {
         history.push('/verifyemail')
         toast.success('Account created successfully please verify your email before logging in ')
+        setIsLoading(false)
       }
   
       dispatch(reset())
@@ -67,6 +72,7 @@ const RegisterCover = () => {
     }
   
     const onSubmit = (e) => {
+      setIsLoading(true)
       e.preventDefault()
   
       if (password !== password_confirmation) {
@@ -86,6 +92,7 @@ const RegisterCover = () => {
 
   return (
     <div className='auth-wrapper auth-cover'>
+      {isLoading ? <LoadingSpinner /> : register}
       <Row className='auth-inner m-0'>
         <Link className='brand-logo' to='/' onClick={e => e.preventDefault()}>
           <h2 className='brand-text text-primary ms-1'>PeckPoint</h2>
@@ -176,7 +183,7 @@ const RegisterCover = () => {
                   </a>
                 </Label>
               </div>
-              <Button type='submit' color='primary' block>
+              <Button type='submit' color='primary' block disabled={isLoading}>
                 Sign up
               </Button>
             </Form>

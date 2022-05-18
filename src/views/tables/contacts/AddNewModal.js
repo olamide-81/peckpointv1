@@ -1,6 +1,7 @@
 // ** React Imports
 import { useState } from 'react'
 import { toast } from 'react-toastify'
+import LoadingSpinner from "../../ui-elements/cards/basic/Spinner"
 
 // ** Third Party Components
 import Flatpickr from 'react-flatpickr'
@@ -17,10 +18,11 @@ import '@styles/react/libs/flatpickr/flatpickr.scss'
 
 const AddNewModal = ({ open, handleModal }) => {
   // ** State
-  
+
   const [firstname, setfirstName] = useState("")
   const [lastname, setlastName] = useState("")
   const [phone_number, setphoneNumber] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
   //const [phone_number2, setphoneNumber2] = useState("")
   //const [email, setEmail] = useState("")
 
@@ -29,7 +31,7 @@ const AddNewModal = ({ open, handleModal }) => {
 
   async function createcontact() {
     const item = {firstname, lastname, phone_number}
-  
+    setIsLoading(true)
      const result = await fetch("https://api.peckpoint.com/api/v1/contacts", {
        method: 'POST',
        body:JSON.stringify(item),
@@ -37,10 +39,12 @@ const AddNewModal = ({ open, handleModal }) => {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
        }
+       
     })
     .then(res => res.json())
       .then(data => {
         toast.info(data.message)
+        setIsLoading(false)
       })
     return result
     
@@ -98,6 +102,7 @@ const AddNewModal = ({ open, handleModal }) => {
         <h5 className='modal-title'>New Record</h5>
       </ModalHeader>
       <ModalBody className='flex-grow-1'>
+      {isLoading ? <LoadingSpinner /> : CloseBtn}
         <div className='mb-1'>
           <Label className='form-label' for='full-name'>
             First Name
@@ -131,7 +136,7 @@ const AddNewModal = ({ open, handleModal }) => {
             <Input id='post' placeholder='phone number' name='phonenumber' value={phone_number} onChange={(e) => setphoneNumber(e.target.value) }  />
           </InputGroup>
         </div>
-        <Button className='me-1' color='primary' onClick={createcontact}>
+        <Button className='me-1' color='primary' onClick={createcontact} disabled={isLoading}>
           Submit
         </Button>
         <Button color='secondary' onClick={handleModal} outline>

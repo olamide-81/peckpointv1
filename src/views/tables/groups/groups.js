@@ -75,6 +75,7 @@ const Contact = () => {
 
   useEffect(() => {
     setAdmodal(openAmodal)
+ 
   }, [openAmodal])
 
 
@@ -202,7 +203,7 @@ const Contact = () => {
 
   return (
     <Fragment>
-      <Card>
+      <Card className="groups">
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
           <CardTitle tag='h4'>Groups</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
@@ -241,7 +242,7 @@ const Contact = () => {
           </div>
            
         </CardHeader>
-        <Row className='justify-content-end mx-0'>
+        <Row className='justify-content-end mx-0' className='clear-search'>
           <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
             <Label className='me-1' for='search-input'>
               Search
@@ -260,7 +261,6 @@ const Contact = () => {
           <DataTable
             noHeader
             pagination
-            selectableRows
             columns={columns}
             paginationPerPage={7}
             className='react-dataTable'
@@ -268,7 +268,6 @@ const Contact = () => {
             paginationDefaultPage={currentPage + 1}
             paginationComponent={CustomPagination}
             data={searchValue.length ? filteredData : data}
-            selectableRowsComponent={BootstrapCheckbox}
           />
         </div>
       </Card>
