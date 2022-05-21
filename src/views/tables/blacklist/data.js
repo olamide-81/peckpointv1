@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 import { MoreVertical, Edit, FileText, Archive, Trash } from 'react-feather'
 // ** Reactstrap Imports
 import { Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
+import LoadingSpinner from "../../ui-elements/cards/basic/Spinner"
 // ** Vars
 // const states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary']
   
@@ -38,13 +39,8 @@ const token = saved.token
   return result 
 }*/ }
 
-function refreshPage() {
-  window.location.reload(false)
-}
-
-
 const deleteContact = (id) => {
-  axios.delete(`https://api.peckpoint.com/api/v1/contacts/${id}`, {
+  axios.delete(`https://api.peckpoint.com/api/v1/remove-blacklist-contact/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json'
@@ -53,9 +49,7 @@ const deleteContact = (id) => {
   .then(res => res.json())
     .then(data => {
       toast.info(data.message)
-      if (data.success === true) {
-       refreshPage()
-       }
+      
     })
 }
 

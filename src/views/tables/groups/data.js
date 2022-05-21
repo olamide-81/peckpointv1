@@ -21,13 +21,24 @@ const token = saved.token
 //     }
 //   })
 // }
+function refreshPage() {
+  window.location.reload(false)
+}
 
 const deleteGroup = (id) => {
+  
   axios.delete(`https://api.peckpoint.com/api/v1/groups/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json'
     }
+  })
+  .then(res => res.json())
+  .then(data => {
+    toast.info(data.message)
+    if (data.success === true) {
+     refreshPage()
+     }
   })
 }
 
@@ -216,7 +227,7 @@ export const columns = [
               </div>
               <div className='w-100 dropdown-item' onClick={() => {
                 
-            AddData({ id: row.id, name: row.name, description: row.description})
+            AddData(row.id)
               }}>
                 <Archive size={15} />
                 <span className='align-middle ms-50'>Add Contact</span>

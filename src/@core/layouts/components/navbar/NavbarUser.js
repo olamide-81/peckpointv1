@@ -4,17 +4,20 @@ import CartDropdown from './CartDropdown'
 import UserDropdown from './UserDropdown'
 import NavbarSearch from './NavbarSearch'
 import NotificationDropdown from './NotificationDropdown'
+import { useState } from 'react'
 
 
 // ** Third Party Components
 import { Sun, Moon } from 'react-feather'
 
 // ** Reactstrap Imports
-import { NavItem, NavLink } from 'reactstrap'
+import { Button, NavItem, NavLink, Modal, ModalHeader, ModalBody, ModalFooter, Label, Input} from 'reactstrap'
 
 const NavbarUser = props => {
   // ** Props
   const { skin, setSkin } = props
+  const [formModal, setFormModal] = useState(false)
+  const [amount, setAmount] = useState('')
 
   // ** Function to toggle Theme (Light/Dark)
   const ThemeToggler = () => {
@@ -34,6 +37,25 @@ const NavbarUser = props => {
         </NavLink>
       </NavItem>
       <CartDropdown/>
+      <Button outline onClick={() => setFormModal(!formModal)}>
+                  Top Up
+                </Button>
+                <Modal isOpen={formModal} toggle={() => setFormModal(!formModal)} className='modal-dialog-centered'>
+          <ModalHeader toggle={() => setFormModal(!formModal)}>Top Up</ModalHeader>
+          <ModalBody>
+            <div className='mb-2'>
+              <Label className='form-label' for='amount'>
+                Amount:
+              </Label>
+              <Input type='number' id='amount' placeholder='amount' value={amount} onChange={(e) => setAmount(e.target.value) }  />
+            </div>
+          </ModalBody>
+          <ModalFooter>
+            <Button color='primary'>
+              Checkout
+            </Button>{' '}
+          </ModalFooter>
+        </Modal>
       <UserDropdown />
     </ul>
   )

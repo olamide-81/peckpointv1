@@ -121,6 +121,7 @@ function AddContact({ open, handleModal }) {
            data.map((data, index) => ([
                 <DropdownItem className='w-100' key={index}>
                   <span className='align-middle ms-50'>{data.name}</span>
+                  <Input id='post' placeholder='Description' name='description' value={contactname} onChange={(e) => Setcontactname(e.target.value) } />
                 </DropdownItem>
                  ])
                  )
