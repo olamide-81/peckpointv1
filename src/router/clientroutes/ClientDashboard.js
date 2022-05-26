@@ -17,6 +17,11 @@ const ClientDashboardRoutes = [
     component: lazy(() => import('../../views/tables/blacklist'))
   },
   {
+    path: '/all-contacts-blacklist',
+    className: 'chat-application',
+    component: lazy(() => import('../../views/tables/allcontactsblacklist'))
+  },
+  {
     path: '/groups',
     className: 'chat-application',
     component: lazy(() => import('../../views/tables/groups'))

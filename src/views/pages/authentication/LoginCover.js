@@ -9,6 +9,7 @@ import { toast } from 'react-toastify'
 import { reset, login } from '../../../redux/authentication'
 import '@styles/react/pages/page-authentication.scss'
 import LoadingSpinner from "../../ui-elements/cards/basic/Spinner"
+import { DefaultRoute } from '../../../router/clientroutes'
 // ** Context
 import { AbilityContext } from '@src/utility/context/Can'
 
@@ -38,7 +39,7 @@ const LoginCover = () => {
     }
 
     if (isSuccess || user) {
-      history.push('/')
+      history.push(DefaultRoute)
       setIsLoading(false)
     }
 
