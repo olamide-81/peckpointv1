@@ -201,7 +201,7 @@ const Contact = () => {
       <Card>
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
           <CardTitle tag='h4'>Contacts</CardTitle>
-          <div className='d-flex mt-md-0 mt-1'>
+          <div className='flex-md-row flex-column'>
             <UncontrolledButtonDropdown>
               <DropdownToggle color='secondary' caret outline>
                 <Share size={15} />
@@ -230,7 +230,8 @@ const Contact = () => {
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledButtonDropdown>
-            <UncontrolledButtonDropdown className='importbtn'>
+            <ShareLink/>
+            <UncontrolledButtonDropdown className='importbtn' className='add-btn-contact'>
               <DropdownToggle color='secondary' caret outline>
                 <Share size={15} />
                 <span className='align-middle ms-50'>Import</span>
@@ -242,16 +243,15 @@ const Contact = () => {
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledButtonDropdown>
-            <ShareLink />
-            <Button className='ms-2' color='primary' onClick={handleModal}>
-              <Plus size={15} />
+            <Button className='ms-2' color='primary' onClick={handleModal} className='add-btn-contact'>
+              <Plus size={15} className='plus-sign'/>
               <span className='align-middle ms-50'>Add Contact</span>
             </Button>
           </div>
            
         </CardHeader>
-        <Row className='justify-content-end mx-0'>
-          <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
+        <Row className='justify-content-end mx-0'>{/**/}
+          <Col className='clear-search' md='6' sm='12' >
             <Label className='me-1' for='search-input'>
               Search
             </Label>
@@ -269,7 +269,6 @@ const Contact = () => {
           <DataTable
             noHeader
             pagination
-            selectableRows
             columns={columns}
             paginationPerPage={7}
             className='react-dataTable'
@@ -277,7 +276,7 @@ const Contact = () => {
             paginationDefaultPage={currentPage + 1}
             paginationComponent={CustomPagination}
             data={searchValue.length ? filteredData : data}
-            selectableRowsComponent={BootstrapCheckbox}
+           
           />
         </div>
       </Card>

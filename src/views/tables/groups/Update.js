@@ -1,6 +1,7 @@
 // ** React Imports
 import { useState, useEffect } from 'react'
 // import { toast } from 'react-toastify'
+import LoadingSpinner from "../../ui-elements/cards/basic/Spinner"
 
 // ** Third Party Components
 import Flatpickr from 'react-flatpickr'
@@ -19,6 +20,7 @@ const UpdateModal = ({ open, handleModal, data }) => {
   const [name, setName] = useState(data.name)
   const [description, setDescription] = useState(data.description)
   const saved = JSON.parse(localStorage.getItem('user'))
+  const [isLoading, setIsLoading] = useState(false)
   const token = saved.token
   useEffect(() => {
       setName(data.name)
@@ -27,7 +29,7 @@ const UpdateModal = ({ open, handleModal, data }) => {
     async function updateContact() {
 
     const item = {name, description}
-        
+    setIsLoading(true)  
      const result = await fetch(`https://api.peckpoint.com/api/v1/groups/${data.id}`, {
        method: 'patch',
        body:JSON.stringify(item),
@@ -39,6 +41,7 @@ const UpdateModal = ({ open, handleModal, data }) => {
     .then(res => res.json())
       .then(data => {
         toast.info(data.message)
+        setIsLoading(false)
       })
    return result
     
@@ -56,6 +59,7 @@ const UpdateModal = ({ open, handleModal, data }) => {
       contentClassName='pt-0'
     >
       <ModalHeader className='mb-1' toggle={handleModal} close={CloseBtn} tag='div'>
+      {isLoading ? <LoadingSpinner /> : handleModal}
         <h5 className='modal-title'>Update Record</h5>
       </ModalHeader>
       <ModalBody className='flex-grow-1'>
@@ -81,7 +85,7 @@ const UpdateModal = ({ open, handleModal, data }) => {
             <Input id='group-description' placeholder='Group Description' name='description' value={description} onChange={(e) => setDescription(e.target.value) }  />
           </InputGroup>
         </div>
-        <Button className='me-1' color='primary' onClick={updateContact}>
+        <Button className='me-1' color='primary' onClick={updateContact} disabled={isLoading}>
           Submit
         </Button>
         <Button color='secondary' onClick={handleModal} outline>

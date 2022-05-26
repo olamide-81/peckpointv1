@@ -1,8 +1,6 @@
 // ** React Imports
 import { Link } from 'react-router-dom'
 
-import axios from 'axios'
-
 // ** Reactstrap Imports
 import { Card, CardBody, CardTitle, CardText, Button } from 'reactstrap'
 

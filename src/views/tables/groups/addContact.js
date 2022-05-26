@@ -1,30 +1,46 @@
 // ** React Imports
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
 // ** Third Party Components
 import Flatpickr from 'react-flatpickr'
 import { User, Briefcase, Mail, Calendar, DollarSign, X, Phone } from 'react-feather'
 // ** Reactstrap Imports
-import { Modal, Input, Label, Button, ModalHeader, ModalBody, InputGroup, InputGroupText } from 'reactstrap'
+import { Modal, Input, Label, Button, ModalHeader, ModalBody, InputGroup, InputGroupText, UncontrolledButtonDropdown, DropdownMenu,
+  DropdownItem,
+  DropdownToggle } from 'reactstrap'
 
 
 // ** Styles
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 
 function AddContact({ open, handleModal }) {
-  // ** State
-  
-  const [name, Setname] = useState("")
-  const [description, setDescription] = useState("")
-  //const [phone_number2, setphoneNumber2] = useState("")
-  //const [email, setEmail] = useState("")
 
   const saved = JSON.parse(localStorage.getItem('user'))
   const token = saved.token
+  // ** State
+  
+  const [groupname, Setgroupname] = useState("")
+  const [contactname, Setcontactname] = useState("")
+  //const [phone_number2, setphoneNumber2] = useState("")
+  //const [email, setEmail] = useState("")
+  const [data, setData] = useState([])
 
-  async function addcontact() {
-    const item = {name, description}
+  useEffect(async() => {
+    const resultsender = await fetch("https://api.peckpoint.com/api/v1/groups", {
+        headers: {
+         Authorization: `Bearer ${token}`
+        }
+     }).then(res => res.json())
+
+    if (resultsender.success) {
+     setData(resultsender.data)
+     }
+
+  }, [])
+
+  async function addcontacttogroup() {
+    const item = {groupname, contactname}
   
      const result = await fetch("https://api.peckpoint.com/api/v1/groups", {
        method: 'POST',
@@ -96,15 +112,22 @@ function AddContact({ open, handleModal }) {
       </ModalHeader>
       <ModalBody className='flex-grow-1'>
         <div className='mb-1'>
-          <Label className='form-label' for='full-name'>
-            Group
-          </Label>
-          <InputGroup>
-            <InputGroupText>
-              <User size={15} />
-            </InputGroupText>
-            <Input id='name' placeholder='New Group' name='name' value={name} onChange={(e) => Setname(e.target.value) }  />
-          </InputGroup>
+          <UncontrolledButtonDropdown>
+              <DropdownToggle color='secondary' caret outline>
+                <span className='align-middle ms-50 mb-1'>Group Name</span>
+              </DropdownToggle>
+              <DropdownMenu>
+              {
+           data.map((data, index) => ([
+                <DropdownItem className='w-100' key={index}>
+                  <span className='align-middle ms-50'>{data.name}</span>
+                  <Input id='post' placeholder='Description' name='description' value={contactname} onChange={(e) => Setcontactname(e.target.value) } />
+                </DropdownItem>
+                 ])
+                 )
+              }
+              </DropdownMenu>
+            </UncontrolledButtonDropdown>
         </div>
         <div className='mb-1'>
           <Label className='form-label' for='post'>
@@ -114,10 +137,10 @@ function AddContact({ open, handleModal }) {
             <InputGroupText>
               <User size={15} />
             </InputGroupText>
-            <Input id='post' placeholder='Description' name='description' value={description} onChange={(e) => setDescription(e.target.value) }  />
+            <Input id='post' placeholder='Description' name='description' value={contactname} onChange={(e) => Setcontactname(e.target.value) }  />
           </InputGroup>
         </div>
-        <Button className='me-1' color='primary' onClick={addcontact}>
+        <Button className='me-1' color='primary' onClick={addcontacttogroup}>
           Submit
         </Button>
         <Button color='secondary' onClick={handleModal} outline>
@@ -142,7 +165,6 @@ function AddContact({ open, handleModal }) {
           Send Link 
         </Button>
       </ModalBody>
-
       <ModalBody className='flex-grow-1'>
         <div className='mb-1'>
           <Label className='form-label' for='post'>

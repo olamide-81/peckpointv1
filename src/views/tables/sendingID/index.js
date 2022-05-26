@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 
 // ** React Imports
 import { useEffect, useState } from 'react'
+import LoadingSpinner from "../../ui-elements/cards/basic/Spinner"
 
 
 const CardTitles = () => {
@@ -16,6 +17,11 @@ const CardTitles = () => {
   const [formModal, setFormModal] = useState(false)
   const [name, setName] = useState("")
   const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+
+  function refreshPage() {
+    window.location.reload(false)
+  }
 
   useEffect(async() => {
     const resultsender = await fetch("https://api.peckpoint.com/api/v1/sender-ids", {
@@ -30,10 +36,46 @@ const CardTitles = () => {
 
   }, [])
 
+async function deletesender (id) {
+  setIsLoading(true)
+  const result = await fetch(`https://api.peckpoint.com/api/v1/sender-ids/${id}`, {
+    method: 'DELETE',
+    headers: {
+     Authorization: `Bearer ${token}`,
+     'Content-Type': 'application/json'
+    }
+ })
+ .then(res => res.json())
+   .then(data => {
+     toast.info(data.message)
+     setIsLoading(false)
+     if (data.success === true) {
+      refreshPage()
+      }
+   })
+ return result
+}
+
+async function approvesender (id) {
+  setIsLoading(true)
+  const result = await fetch(`https://api.peckpoint.com/api/v1/approve-sender-ids/${id}`, {
+    method: 'patch',
+    headers: {
+     Authorization: `Bearer ${token}`,
+     'Content-Type': 'application/json'
+    }
+ })
+ .then(res => res.json())
+   .then(data => {
+     toast.info(data.message)
+     setIsLoading(false)
+   })
+ return result
+}
 
   async function createsenderid() {
     const item = {name}
-  
+    setIsLoading(true)
      const result = await fetch("https://api.peckpoint.com/api/v1/sender-ids", {
        method: 'POST',
        body:JSON.stringify(item),
@@ -45,6 +87,10 @@ const CardTitles = () => {
     .then(res => res.json())
       .then(data => {
         toast.info(data.message)
+        setIsLoading(false)
+        if (data.success === true) {
+          refreshPage()
+          }
       })
     return result
     
@@ -60,6 +106,7 @@ const CardTitles = () => {
           <ModalHeader toggle={() => setFormModal(!formModal)}>Create Sender ID</ModalHeader>
           <ModalBody>
             <div className='mb-2'>
+            {isLoading ? <LoadingSpinner /> : refreshPage}
               <Label className='form-label' for='email'>
                 Name:
               </Label>
@@ -67,7 +114,7 @@ const CardTitles = () => {
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button color='primary' onClick={createsenderid}>
+            <Button color='primary' onClick={createsenderid} disabled={isLoading}>
               Create
             </Button>{' '}
           </ModalFooter>
@@ -80,10 +127,10 @@ const CardTitles = () => {
                 <CardText>
                 {data.name}
                 </CardText>
-                <Button color='primary' outline className='sender-id-btn'>
-                  Update
+                <Button color='primary' outline className='sender-id-btn' onClick={() => approvesender(data.id) } disabled={isLoading}>
+                  Approve
                 </Button>
-                <Button color='primary' outline>
+                <Button color='primary' outline onClick={() => deletesender(data.id) } disabled={isLoading}>
                   Delete
                 </Button>
               </CardBody>
