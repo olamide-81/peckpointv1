@@ -1,11 +1,13 @@
 // ** React Imports
 import { useState, useEffect, Fragment } from 'react'
+import img from '@src/assets/images/svg/price.svg'
+
+import { toast } from 'react-toastify'
 
 // ** Third Party Components
-import axios from 'axios'
+
 
 // ** Demo Components
-import PricingFaqs from './PricingFaqs'
 import PricingCards from './PricingCards'
 import PricingTrial from './PricingTrial'
 import PricingHeader from './PricingHeader'
@@ -13,39 +15,70 @@ import PricingHeader from './PricingHeader'
 // ** Styles
 import '@styles/base/pages/page-pricing.scss'
 
+import { Card, CardTitle, CardBody, CardText, Row, Col, Button, CardImg } from 'reactstrap'
+
 const Pricing = () => {
   // ** States
-  const [data, setData] = useState(null),
-    [faq, setFaq] = useState(null),
+  const [data, setData] = useState([]),
     [duration, setDuration] = useState('monthly')
+    const saved = JSON.parse(localStorage.getItem('user'))
+    const token = saved.token
 
-  useEffect(() => {
-    axios.get('/pricing/data').then(res => {
-      const dataArr = [],
-        faqArr = []
+    useEffect(async() => {
+      const resultsender = await fetch("https://api.peckpoint.com/api/v1/plans", {
+          headers: {
+           Authorization: `Bearer ${token}`
+          }
+       }).then(res => res.json())
+  
+      if (resultsender.success) {
+       setData(resultsender.data)
+       }
+  
+    }, [])
 
-      Object.entries(res.data).forEach(([key, val]) => {
-        if (key !== 'qandA') {
-          dataArr.push(val)
-          setData([...dataArr])
-        } else {
-          faqArr.push(val)
-          setFaq(faqArr[0])
-        }
+    async function purchase() {
+       const result = await fetch("https://api.peckpoint.com/api/v1/subscriptions", {
+         method: 'POST',
+         headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+         }
       })
-    })
-  }, [])
+      .then(res => res.json())
+        .then(data => {
+          toast.info(data.message)
+        })
+      return result
+      
+    }
 
   return (
     <div id='pricing-table'>
       <PricingHeader duration={duration} setDuration={setDuration} />
-      {data !== null && faq !== null ? (
         <Fragment>
-          <PricingCards data={data} duration={duration} />
-          <PricingTrial />
-          <PricingFaqs data={faq} />
+       <Row>
+       {
+           data.map((data, index) => ([
+        <Col md='6' lg='4' key={index}>
+          <Card className='text-center mb-3'>
+            <CardBody>
+              <CardImg src={img} className='price-img'></CardImg>
+              <CardTitle tag='h4'>{data.name}</CardTitle>
+              <CardText>{data.description}</CardText>
+              <CardText className='price-cost'>Cost : ${data.cost}</CardText>
+              <CardText>Duration : {data.duration} months</CardText>
+              <Button color='primary' outline onClick={purchase}>
+                Purchase
+              </Button>
+            </CardBody>
+          </Card>
+        </Col>
+         ])
+         )
+      }
+      </Row>
         </Fragment>
-      ) : null}
     </div>
   )
 }
