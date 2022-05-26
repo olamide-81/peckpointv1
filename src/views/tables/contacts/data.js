@@ -264,7 +264,7 @@ export const columns = [
               </div>
               <div className='w-100 dropdown-item' onClick={e => {
                 e.preventDefault()
-                deleteContact(row => row.id)
+                deleteContact(row.id)
                 }} >
                 <Trash size={15} />
                 <span className='align-middle ms-50'>Delete</span>
