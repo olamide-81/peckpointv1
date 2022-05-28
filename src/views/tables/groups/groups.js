@@ -57,7 +57,7 @@ const Contact = () => {
   // ** States
   const [data, addData] = useState([])
   
-  //const [response, setResponse] = useState({})
+  const [response, setResponse] = useState({})
   // const [mdata, addMdata] = useState({}) 
 
   const options = [
@@ -66,10 +66,14 @@ const Contact = () => {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       }
+    }).then(res => {
+        setResponse(res.data)
     })
   ]
   
   console.log(options)
+  
+  console.log(response)
 
   const [selectedOption, setSelectedOption] = useState(null)
  
@@ -311,7 +315,7 @@ const Contact = () => {
           </div>
            
         </CardHeader>
-        <Row className='justify-content-end mx-0' className='clear-search'>
+        <Row className='justify-content-end mx-0 clear-search'>
           <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
             <Label className='me-1' for='search-input'>
               Search
