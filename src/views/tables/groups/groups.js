@@ -32,9 +32,19 @@ import {
   DropdownItem,
   DropdownToggle,
   UncontrolledButtonDropdown,
-  Table
+  Table,
+  Modal, 
+  ModalHeader, 
+  ModalBody, 
+  ModalFooter
 } from 'reactstrap'
 import axios from 'axios'
+
+import Select from 'react-select'
+
+const saved = JSON.parse(localStorage.getItem('user'))
+const token = saved.token
+
 
 // ** Bootstrap Checkbox Component
 const BootstrapCheckbox = forwardRef((props, ref) => (
@@ -47,11 +57,23 @@ const Contact = () => {
   // ** States
   const [data, addData] = useState([])
   
-  
+  //const [response, setResponse] = useState({})
   // const [mdata, addMdata] = useState({}) 
-  const saved = JSON.parse(localStorage.getItem('user'))
-  const token = saved.token
+
+  const options = [
+    axios.get("https://api.peckpoint.com/api/v1/groups", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+  ]
+  
+  console.log(options)
+
+  const [selectedOption, setSelectedOption] = useState(null)
  
+  
   axios.get("https://api.peckpoint.com/api/v1/groups", {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -61,12 +83,35 @@ const Contact = () => {
            addData(dataa.data.data)
       })
 
+
+      async function addtogroup() {
+        const item = {name}
+         const result = await fetch("https://api.peckpoint.com/api/v1/sender-ids", {
+           method: 'POST',
+           body:JSON.stringify(item),
+           headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+           }
+        })
+        .then(res => res.json())
+          .then(data => {
+            toast.info(data.message)
+            if (data.success === true) {
+              refreshPage()
+              }
+          })
+        return result
+        
+      }
+
   const [modal, setModal] = useState(false)
   const [umodal, setUmodal] = useState(false)
   const [admodal, setAdmodal] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
+  const [formModal, setFormModal] = useState(false)
  
 
   useEffect(() => {
@@ -239,6 +284,30 @@ const Contact = () => {
               <Plus size={15} />
               <span className='align-middle ms-50'>Add Group</span>
             </Button>
+            <Button color='primary' className='importbtn' onClick={() => setFormModal(!formModal)}>
+                  Add to group
+                </Button>
+                <Modal isOpen={formModal} toggle={() => setFormModal(!formModal)} className='modal-dialog-centered'>
+          <ModalHeader toggle={() => setFormModal(!formModal)}>Create Sender ID</ModalHeader>
+          <ModalBody>
+            <div className='mb-2'>
+              <Label className='form-label' for='email'>
+                Name:
+              </Label>
+              <Select
+        defaultValue={selectedOption}
+        onChange={setSelectedOption}
+        options={options}
+        isMulti={true}
+      />
+            </div>
+          </ModalBody>
+          <ModalFooter>
+            <Button color='primary' onClick={addtogroup}>
+              Create
+            </Button>{' '}
+          </ModalFooter>
+        </Modal>
           </div>
            
         </CardHeader>

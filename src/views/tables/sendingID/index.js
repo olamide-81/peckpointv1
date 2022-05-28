@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 
 // ** React Imports
 import { useEffect, useState } from 'react'
-import LoadingSpinner from "../../ui-elements/cards/basic/Spinner"
+import Spinner from '../../../@core/components/spinner/Fallback-spinner'
 
 
 const CardTitles = () => {
@@ -106,7 +106,7 @@ async function approvesender (id) {
           <ModalHeader toggle={() => setFormModal(!formModal)}>Create Sender ID</ModalHeader>
           <ModalBody>
             <div className='mb-2'>
-            {isLoading ? <LoadingSpinner /> : refreshPage}
+            {isLoading ? <Spinner /> : refreshPage}
               <Label className='form-label' for='email'>
                 Name:
               </Label>
