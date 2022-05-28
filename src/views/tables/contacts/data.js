@@ -3,6 +3,7 @@
 // ** Third Party Components
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import Spinner from '../../../@core/components/spinner/Fallback-spinner'
 import { MoreVertical, Edit, FileText, Archive, Trash } from 'react-feather'
 // ** Reactstrap Imports
 import { Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
@@ -39,9 +40,8 @@ const token = saved.token
 }*/ }
 
 function refreshPage() {
-  window.location.reload(false)
+  window.location.reload(true)
 }
-
 
 const deleteContact = (id) => {
   axios.delete(`https://api.peckpoint.com/api/v1/contacts/${id}`, {
@@ -55,6 +55,7 @@ const deleteContact = (id) => {
       toast.info(data.message)
       if (data.success === true) {
        refreshPage()
+
        }
     })
 }
@@ -186,6 +187,7 @@ export const columns = [
     minWidth: '250px',
     sortable: row => row.fullname,
     cell: row => (
+      <div>
       <div className='d-flex align-items-center'>
         {/* {row.avatar === undefined ? (
           <Avatar color={`light-${states[0]}`} content={row.fullname} initials />
@@ -197,6 +199,7 @@ export const columns = [
      
    
         </div>
+      </div>
       </div>
     )
   },
@@ -264,7 +267,7 @@ export const columns = [
               </div>
               <div className='w-100 dropdown-item' onClick={e => {
                 e.preventDefault()
-                deleteContact(row => row.id)
+                deleteContact(row.id)
                 }} >
                 <Trash size={15} />
                 <span className='align-middle ms-50'>Delete</span>

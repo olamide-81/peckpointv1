@@ -6,7 +6,6 @@ import { toast } from 'react-toastify'
 import { MoreVertical, Edit, FileText, Archive, Trash } from 'react-feather'
 // ** Reactstrap Imports
 import { Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
-import LoadingSpinner from "../../ui-elements/cards/basic/Spinner"
 // ** Vars
 // const states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary']
   
@@ -39,8 +38,13 @@ const token = saved.token
   return result 
 }*/ }
 
+function refreshPage() {
+  window.location.reload(false)
+}
+
+
 const deleteContact = (id) => {
-  axios.delete(`https://api.peckpoint.com/api/v1/remove-blacklist-contact/${id}`, {
+  axios.get(`https://api.peckpoint.com/api/v1/remove-blacklist-contact/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json'
@@ -49,19 +53,12 @@ const deleteContact = (id) => {
   .then(res => res.json())
     .then(data => {
       toast.info(data.message)
-      
+      if (data.success === true) {
+       refreshPage()
+       }
     })
 }
 
-
-let dmodal = { id: '', firstname: '', lastname: '', gender: '', dob: '', phone_number: '', email: '', address: '' }, openUodal = false
-
-const updateData = (data) => {
-  dmodal = data
-  openUodal = !openUodal
-}
-
-export { dmodal, openUodal }
 
 const status = {
   1: { title: 'Current', color: 'light-primary' },
@@ -249,19 +246,11 @@ export const columns = [
     cell: (row) => {
       return (
         <div className='d-flex'>
-          <div className='w-100 dropdown-item' onClick={e => {
-                e.preventDefault()
-                updateData({ id: row.id, firstname: row.firstname, lastname: row.lastname, gender: row.gender, dob: row.dob, phone_number: row.phone_number, email: row.email })
-              }}>
-                <FileText size={15} />
-                <span className='align-middle ms-50'>Update</span>
-              </div>
               <div className='w-100 dropdown-item' onClick={e => {
                 e.preventDefault()
-                deleteContact(row => row.id)
+                deleteContact(row.id)
                 }} >
-                <Trash size={15} />
-                <span className='align-middle ms-50'>Delete</span>
+                <span classname='remove'>Remove from Blacklist</span>
               </div>
         </div>
       )
