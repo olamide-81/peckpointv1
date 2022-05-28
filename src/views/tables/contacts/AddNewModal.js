@@ -1,7 +1,7 @@
 // ** React Imports
 import { useState } from 'react'
 import { toast } from 'react-toastify'
-import LoadingSpinner from "../../ui-elements/cards/basic/Spinner"
+import Spinner from '../../../@core/components/spinner/Fallback-spinner'
 
 // ** Third Party Components
 import Flatpickr from 'react-flatpickr'
@@ -16,9 +16,12 @@ import { Modal, Input, Label, Button, ModalHeader, ModalBody, InputGroup, InputG
 // ** Styles
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 
+
 const AddNewModal = ({ open, handleModal }) => {
   // ** State
-
+  // ** Custom close btn
+  const CloseBtn = <X className='cursor-pointer' size={15} onClick={handleModal} />
+  
   const [firstname, setfirstName] = useState("")
   const [lastname, setlastName] = useState("")
   const [phone_number, setphoneNumber] = useState("")
@@ -45,6 +48,7 @@ const AddNewModal = ({ open, handleModal }) => {
       .then(data => {
         toast.info(data.message)
         setIsLoading(false)
+        handleModal()
       })
     return result
     
@@ -87,9 +91,6 @@ const AddNewModal = ({ open, handleModal }) => {
   }
 */ }
 
-  // ** Custom close btn
-  const CloseBtn = <X className='cursor-pointer' size={15} onClick={handleModal} />
-
   return (
     <Modal
       isOpen={open}
@@ -98,11 +99,12 @@ const AddNewModal = ({ open, handleModal }) => {
       modalClassName='modal-slide-in'
       contentClassName='pt-0'
     >
+       <div>
+     {isLoading ? <Spinner /> : handleModal}
       <ModalHeader className='mb-1' toggle={handleModal} close={CloseBtn} tag='div'>
         <h5 className='modal-title'>New Record</h5>
       </ModalHeader>
       <ModalBody className='flex-grow-1'>
-      {isLoading ? <LoadingSpinner /> : handleModal}
         <div className='mb-1'>
           <Label className='form-label' for='full-name'>
             First Name
@@ -177,7 +179,7 @@ const AddNewModal = ({ open, handleModal }) => {
           Send Link 
         </Button>
       </ModalBody>*/}
-
+  </div>
     </Modal>
   )
 }

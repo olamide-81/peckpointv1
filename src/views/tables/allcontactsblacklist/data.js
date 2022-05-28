@@ -44,7 +44,7 @@ function refreshPage() {
 
 
 const deleteContact = (id) => {
-  axios.delete(`https://api.peckpoint.com/api/v1/blacklist-contact/${id}`, {
+  axios.get(`https://api.peckpoint.com/api/v1/blacklist-contact/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json'
@@ -59,15 +59,6 @@ const deleteContact = (id) => {
     })
 }
 
-
-let dmodal = { id: '', firstname: '', lastname: '', gender: '', dob: '', phone_number: '', email: '', address: '' }, openUodal = false
-
-const updateData = (data) => {
-  dmodal = data
-  openUodal = !openUodal
-}
-
-export { dmodal, openUodal }
 
 const status = {
   1: { title: 'Current', color: 'light-primary' },
@@ -255,16 +246,9 @@ export const columns = [
     cell: (row) => {
       return (
         <div className='d-flex'>
-          <div className='update-remove' onClick={e => {
-                e.preventDefault()
-                updateData({ id: row.id, firstname: row.firstname, lastname: row.lastname, gender: row.gender, dob: row.dob, phone_number: row.phone_number, email: row.email })
-              }}>
-                <FileText size={15} />
-                <span className='align-middle ms-50'>Update</span>
-              </div>
               <div className='w-100 dropdown-item' onClick={e => {
                 e.preventDefault()
-                deleteContact(row => row.id)
+                deleteContact(row.id)
                 }} >
                 <Trash size={15} />
                 <span className='align-middle ms-50'>Blacklist</span>

@@ -1,12 +1,12 @@
 // ** React Imports
-import { Fragment, useState, forwardRef, useEffect } from 'react'
+import { Fragment, useState, forwardRef } from 'react'
 import { Link } from 'react-router-dom'
 
 
 import ShareLink from '../../extensions/copy-to-clipboard'
 
 // ** Table Data & Columns
-import { columns, dmodal, openUodal } from './data'
+import { columns } from './data'
 
 //import { delayLog } from './delayLog'
 // ** Add New Modal Component
@@ -48,13 +48,12 @@ const BootstrapCheckbox = forwardRef((props, ref) => (
 
 const Contact = () => {
   // ** States
-  
-  
+  const [data, addData] = useState([])
   // const [mdata, addMdata] = useState({}) 
   const saved = JSON.parse(localStorage.getItem('user'))
   const token = saved.token
  
-  axios.get("https://api.peckpoint.com/api/v1/blacklist-contact", {
+  axios.get("https://api.peckpoint.com/api/v1/get-blacklist-contacts", {
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json'
@@ -64,18 +63,11 @@ const Contact = () => {
   })
 
   const [modal, setModal] = useState(false)
-  const [umodal, setUmodal] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
  
 
-  useEffect(() => {
-    setUmodal(openUodal)
-  }, [openUodal])
-
-
   // ** Function to handle Modal toggle
   const handleModal = () => setModal(!modal)
-  const handleUmodal = () => setUmodal(!umodal)
   // ** Function to handle filter
 
 
@@ -132,12 +124,11 @@ const Contact = () => {
             sortIcon={<ChevronDown size={10} />}
             paginationDefaultPage={currentPage + 1}
             paginationComponent={CustomPagination}
+            data={data}
           />
         </div>
       </Card>
       <AddNewModal open={modal} handleModal={handleModal} />
-      
-      <UpdateModal open={umodal} data={dmodal} handleModall={handleUmodal} />
     </Fragment>
   )
 }

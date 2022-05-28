@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { reset, login } from '../../../redux/authentication'
 import '@styles/react/pages/page-authentication.scss'
-import LoadingSpinner from "../../ui-elements/cards/basic/Spinner"
+import Spinner from '../../../@core/components/spinner/Fallback-spinner'
 import { DefaultRoute } from '../../../router/clientroutes'
 // ** Context
 import { AbilityContext } from '@src/utility/context/Can'
@@ -71,8 +71,9 @@ const LoginCover = () => {
     source = require(`@src/assets/images/pages/${illustration}`).default
 
   return (
+    <div>
+          {isLoading ? <Spinner /> : login}
     <div className='auth-wrapper auth-cover'>
-    {isLoading ? <LoadingSpinner /> : login}
       <Row className='auth-inner m-0'>
         <Link className='brand-logo' to='/' onClick={e => e.preventDefault()}>
           <h2 className='brand-text text-primary ms-1'>PeckPoint</h2>
@@ -146,6 +147,7 @@ const LoginCover = () => {
           </Col>
         </Col>
       </Row>
+    </div>
     </div>
   )
 }

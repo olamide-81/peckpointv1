@@ -19,6 +19,10 @@ const NavbarUser = props => {
   const [formModal, setFormModal] = useState(false)
   const [amount, setAmount] = useState('')
 
+  const saved = JSON.parse(localStorage.getItem('user'))
+  const token = saved.token
+  //const [isLoading, setIsLoading] = useState(false)
+
   // ** Function to toggle Theme (Light/Dark)
   const ThemeToggler = () => {
     if (skin === 'dark') {
@@ -26,6 +30,27 @@ const NavbarUser = props => {
     } else {
       return <Moon className='ficon' onClick={() => setSkin('dark')} />
     }
+  }
+
+  async function topup() {
+    const item = {amount}
+     const result = await fetch("https://api.peckpoint.com/api/v1/buy-units", {
+       method: 'POST',
+       body:JSON.stringify(item),
+       headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+       }
+    })
+    .then(res => res.json())
+      .then(data => {
+        toast.info(data.message)
+        if (data.success === true) {
+          refreshPage()
+          }
+      })
+    return result
+    
   }
 
   return (
@@ -47,11 +72,11 @@ const NavbarUser = props => {
               <Label className='form-label' for='amount'>
                 Amount:
               </Label>
-              <Input type='number' id='amount' placeholder='amount' value={amount} onChange={(e) => setAmount(e.target.value) }  />
+              <Input type='number' id='amount' placeholder='amount' value={amount} onChange={(e) => setAmount(e.target.value) } />
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button color='primary'>
+            <Button color='primary' onClick={topup}>
               Checkout
             </Button>{' '}
           </ModalFooter>
