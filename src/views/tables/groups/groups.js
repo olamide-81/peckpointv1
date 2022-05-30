@@ -40,7 +40,7 @@ import {
 } from 'reactstrap'
 import axios from 'axios'
 
-import Select from 'react-select'
+import AsyncSelect from 'react-select'
 
 const saved = JSON.parse(localStorage.getItem('user'))
 const token = saved.token
@@ -55,39 +55,37 @@ const BootstrapCheckbox = forwardRef((props, ref) => (
 
 const Contact = () => {
   // ** States
-  const [data, addData] = useState([])
-  
-  const [response, setResponse] = useState({})
+  //const [data, addData] = useState([])
+  const [contactsno, setContacts] = useState('')
+  const [selectedOption, setSelectedOption] = useState(null)
+  //const [response, setResponse] = useState({})
   // const [mdata, addMdata] = useState({}) 
 
-  const options = [
-    axios.get("https://api.peckpoint.com/api/v1/groups", {
+  //Handle Input Change Event
+  const handleInputChange = value => {
+    setContacts(value)
+  }
+
+  //Handle Selection
+  const handleChange = value => {
+    setSelectedOption(value)
+  }
+  console.log("a", selectedOption)
+  console.log("a", contactsno)
+
+  const groupsfetch = () => {
+    axios.get('https://api.peckpoint.com/api/v1/contacts', {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       }
     }).then(res => {
-        setResponse(res.data)
+      const data = res.data.data
+      console.log(data)
     })
-  ]
-  
-  console.log(options)
-  
-  console.log(response)
-
-  const [selectedOption, setSelectedOption] = useState(null)
+  }
+ groupsfetch()
  
-  
-  axios.get("https://api.peckpoint.com/api/v1/groups", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  }).then(dataa => {
-           addData(dataa.data.data)
-      })
-
-
       async function addtogroup() {
         const item = {name}
          const result = await fetch("https://api.peckpoint.com/api/v1/sender-ids", {
@@ -298,12 +296,16 @@ const Contact = () => {
               <Label className='form-label' for='email'>
                 Name:
               </Label>
-              <Select
-        defaultValue={selectedOption}
-        onChange={setSelectedOption}
-        options={options}
-        isMulti={true}
-      />
+              <AsyncSelect
+              cacheOptions
+              defaultOptions
+              getOptionLabel={e => e.firstname + e.lastname}
+              getOptionValue={e => e.id}
+              loadOptions={groupsfetch}
+              onInputChange={handleInputChange}
+              onChange={handleChange}
+               isMulti={true}
+               />
             </div>
           </ModalBody>
           <ModalFooter>
