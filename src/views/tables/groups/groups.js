@@ -50,14 +50,15 @@ const token = saved.token
 const BootstrapCheckbox = forwardRef((props, ref) => (
   <div className='form-check'>
     <Input type='checkbox' ref={ref} {...props} />
+  
   </div>
 ))
 
 const Contact = () => {
   // ** States
-  //const [data, addData] = useState([])
-  const [contactsno, setContacts] = useState('')
-  const [selectedOption, setSelectedOption] = useState(null)
+  const [data, addData] = useState([])
+  // const [contactsno, setContacts] = useState('')
+  // const [selectedOption, setSelectedOption] = useState(null)
   //const [response, setResponse] = useState({})
   // const [mdata, addMdata] = useState({}) 
 
@@ -70,25 +71,24 @@ const Contact = () => {
   const handleChange = value => {
     setSelectedOption(value)
   }
-  console.log("a", selectedOption)
-  console.log("a", contactsno)
+
 
   const groupsfetch = () => {
-    axios.get('https://api.peckpoint.com/api/v1/contacts', {
+    axios.get('https://api.peckpoint.com/api/v1/groups', {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       }
     }).then(res => {
-      const data = res.data.data
-      console.log(data)
+       addData(res.data.data)
     })
   }
+
  groupsfetch()
  
       async function addtogroup() {
         const item = {name}
-         const result = await fetch("https://api.peckpoint.com/api/v1/sender-ids", {
+         const result = await fetch("http://api.peckpoint.com/api/v1/sender-ids", {
            method: 'POST',
            body:JSON.stringify(item),
            headers: {
@@ -122,10 +122,9 @@ const Contact = () => {
 
   useEffect(() => {
     setAdmodal(openAmodal)
- 
   }, [openAmodal])
 
-
+ 
   // ** Function to handle Modal toggle
   const handleModal = () => setModal(!modal)
   const handleUmodal = () => setUmodal(!umodal)
