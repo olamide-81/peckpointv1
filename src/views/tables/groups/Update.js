@@ -16,7 +16,6 @@ import '@styles/react/libs/flatpickr/flatpickr.scss'
 
 const UpdateModal = ({ open, handleModal, data }) => {
   // ** State
-
   const [name, setName] = useState(data.name)
   const [description, setDescription] = useState(data.description)
   const saved = JSON.parse(localStorage.getItem('user'))
@@ -59,7 +58,9 @@ const UpdateModal = ({ open, handleModal, data }) => {
       contentClassName='pt-0'
     >
       <ModalHeader className='mb-1' toggle={handleModal} close={CloseBtn} tag='div'>
-      {isLoading ? <LoadingSpinner /> : handleModal}
+
+      {isLoading && <LoadingSpinner />}
+
         <h5 className='modal-title'>Update Record</h5>
       </ModalHeader>
       <ModalBody className='flex-grow-1'>

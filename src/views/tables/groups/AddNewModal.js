@@ -99,7 +99,7 @@ const AddNewModal = ({ open, handleModal }) => {
       </ModalHeader>
       <ModalBody className='flex-grow-1'>
         <div className='mb-1'>
-        {isLoading ? <LoadingSpinner /> : handleModal}
+        {isLoading && <LoadingSpinner />}
           <Label className='form-label' for='full-name'>
             Name
           </Label>

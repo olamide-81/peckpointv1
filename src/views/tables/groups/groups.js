@@ -1,8 +1,8 @@
 // ** React Imports
-import { Fragment, useState, forwardRef, useEffect } from 'react'
+import { Fragment, useState, forwardRef } from 'react'
 
 // ** Table Data & Columns
-import { columns, dmodal, openUodal, openAmodal, Admodal } from './data'
+// import { dmodal, openUodal, openAmodal, Admodal } from './data'
 
 //import { delayLog } from './delayLog'
 // ** Add New Modal Component
@@ -16,7 +16,7 @@ import DataTable from 'react-data-table-component'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 
-import { ChevronDown, Share, Printer, FileText, File, Grid, Copy, Plus } from 'react-feather'
+import { ChevronDown, Share, Printer, FileText, File, Grid, Copy, Plus, MoreVertical, Edit, Archive, Trash } from 'react-feather'
 
 // ** Reactstrap Imports
 import {
@@ -73,6 +73,11 @@ const Contact = () => {
   }
 
 
+  function refreshPage() {
+    window.location.reload(false)
+  }
+
+
   const groupsfetch = () => {
     axios.get('https://api.peckpoint.com/api/v1/groups', {
       headers: {
@@ -114,21 +119,127 @@ const Contact = () => {
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
   const [formModal, setFormModal] = useState(false)
- 
 
-  useEffect(() => {
-    setUmodal(openUodal)
-  }, [openUodal])
+  const deleteGroup = (id) => {
 
-  useEffect(() => {
-    setAdmodal(openAmodal)
-  }, [openAmodal])
+    axios.delete(`https://api.peckpoint.com/api/v1/groups/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => {
+        toast.info(res.data.message)
+        if (res.data.success === true) {
+          refreshPage()
+        }
+      })
+  }
 
- 
   // ** Function to handle Modal toggle
   const handleModal = () => setModal(!modal)
   const handleUmodal = () => setUmodal(!umodal)
   const handleAdmodal = () => setAdmodal(!admodal)
+
+  let dmodal = { id: '', name: '', description: '' }
+
+
+  const updateData = (data) => {
+    dmodal = data
+    handleUmodal()
+  }
+
+  let Admodal = { id: '', name: '', description: '' }
+
+
+  const AddData = (data) => {
+    Admodal = data
+    handleAdmodal()
+  }
+
+  // useEffect(() => {
+  //   setUmodal(openUodal)
+  // }, [openUodal])
+
+  // useEffect(() => {
+  //   setAdmodal(openAmodal)
+  // }, [openAmodal])
+
+ const columns = [
+    {
+      name: 'Name',
+      minWidth: '250px',
+      sortable: row => row.name,
+      cell: row => (
+        <div className='d-flex align-items-center'>
+          {/* {row.avatar === undefined ? (
+          <Avatar color={`light-${states[0]}`} content={row.fullname} initials />
+        ) : (
+          <Avatar img={require(`@src/assets/images/portrait/small/avatar-s-${row.avatar}`).default} />
+        )} */}
+          <div className='user-info text-truncate ms-1'>
+            <span className='d-block fw-bold text-truncate'>{row.name}</span>
+
+
+          </div>
+        </div>
+      )
+    },
+
+    {
+      name: 'Description',
+      sortable: true,
+      minWidth: '250px',
+      selector: row => row.description
+    },
+    // {
+    //   name: 'Status',
+    //   minWidth: '150px',
+    //   sortable: row => row.status.title,
+    //   cell: row => {
+    //     return (
+    //       <Badge color={status[row.status].color} pill>
+    //         {status[row.status].title}
+    //       </Badge>
+    //     )
+    //   }
+    // },
+
+    {
+      name: 'Actions',
+      minWidth: '385px',
+      allowOverflow: true,
+      cell: (row) => {
+        return (
+          <div className='d-flex'>
+            <div className='w-100 dropdown-item' onClick={() => {
+
+              updateData({ id: row.id, name: row.name, description: row.description })
+            }}>
+              <FileText size={15} />
+              <span className='align-middle ms-50'>Update</span>
+            </div>
+            <div className='w-100 dropdown-item' onClick={() => {
+
+              AddData(row.id)
+            }}>
+              <Archive size={15} />
+              <span className='align-middle ms-50'>Add Contact</span>
+            </div>
+            <div className='w-100 dropdown-item' onClick={() => {
+
+              deleteGroup(row.id)
+            }}>
+              <Trash size={15} />
+              <span className='align-middle ms-50'>Delete</span>
+            </div>
+          </div>
+        )
+      }
+    }
+  ]
+ 
+
   // ** Function to handle filter
   const handleFilter = e => {
     const value = e.target.value
