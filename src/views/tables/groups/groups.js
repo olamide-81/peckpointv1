@@ -55,8 +55,9 @@ const BootstrapCheckbox = forwardRef((props, ref) => (
 
 const Contact = () => {
   // ** States
-  //const [data, addData] = useState([])
+  const [data, addData] = useState([])
   const [contactsno, setContacts] = useState('')
+  const [groupname, setGroupname] = useState('')
   const [selectedOption, setSelectedOption] = useState(null)
   //const [response, setResponse] = useState({})
   // const [mdata, addMdata] = useState({}) 
@@ -73,6 +74,15 @@ const Contact = () => {
   console.log("a", selectedOption)
   console.log("a", contactsno)
 
+  axios.get("https://api.peckpoint.com/api/v1/groups", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  }).then(dataa => {
+           addData(dataa.data.data)
+  })
+
   const groupsfetch = () => {
     axios.get('https://api.peckpoint.com/api/v1/contacts', {
       headers: {
@@ -85,8 +95,9 @@ const Contact = () => {
     })
   }
  groupsfetch()
+
  
-      async function addtogroup() {
+   { /*   async function addtogroup() {
         const item = {name}
          const result = await fetch("https://api.peckpoint.com/api/v1/sender-ids", {
            method: 'POST',
@@ -105,6 +116,10 @@ const Contact = () => {
           })
         return result
         
+      }*/ } 
+
+      const send = () => {
+        console.warn(groupname)
       }
 
   const [modal, setModal] = useState(false)
@@ -306,10 +321,24 @@ const Contact = () => {
               onChange={handleChange}
                isMulti={true}
                />
+                <Input
+                  id="exampleSelect"
+                   name="select"
+                   type="select"
+                >
+                   {
+           data.map((data, index) => ([
+                <option key={index} value={groupname} onChange={(e) => setGroupname(e.target.value) }  >
+                 {data.name}
+                </option>
+                 ])
+                 )
+              }
+              </Input>
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button color='primary' onClick={addtogroup}>
+            <Button color='primary' onClick={send}>
               Create
             </Button>{' '}
           </ModalFooter>
@@ -342,7 +371,7 @@ const Contact = () => {
             sortIcon={<ChevronDown size={10} />}
             paginationDefaultPage={currentPage + 1}
             paginationComponent={CustomPagination}
-            data={searchValue.length ? filteredData : data}
+           data={searchValue.length ? filteredData : data}
           />
         </div>
       </Card>
