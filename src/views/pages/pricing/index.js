@@ -1,8 +1,9 @@
 // ** React Imports
 import { useState, useEffect, Fragment } from 'react'
 import img from '@src/assets/images/svg/price.svg'
+import { Link } from 'react-router-dom'
 
-import { toast } from 'react-toastify'
+//import { toast } from 'react-toastify'
 
 // ** Third Party Components
 
@@ -21,6 +22,7 @@ const Pricing = () => {
   // ** States
   const [data, setData] = useState([]),
     [duration, setDuration] = useState('monthly')
+    //const [info, setInfo] = useState('')
     const saved = JSON.parse(localStorage.getItem('user'))
     const token = saved.token
 
@@ -38,7 +40,8 @@ const Pricing = () => {
     }, [])
 
     async function purchase() {
-       const result = await fetch("https://api.peckpoint.com/api/v1/subscriptions", {
+      
+      { /* const result = await fetch("https://api.peckpoint.com/api/v1/subscriptions", {
          method: 'POST',
          headers: {
           Authorization: `Bearer ${token}`,
@@ -49,7 +52,7 @@ const Pricing = () => {
         .then(data => {
           toast.info(data.message)
         })
-      return result
+      return result*/ }
       
     }
 
@@ -60,7 +63,7 @@ const Pricing = () => {
        <Row>
        {
            data.map((data, index) => ([
-        <Col md='6' lg='4' key={index}>
+        <Col md='6' lg='4' key={index} value={data.name} >
           <Card className='text-center mb-3'>
             <CardBody>
               <CardImg src={img} className='price-img'></CardImg>
@@ -68,7 +71,7 @@ const Pricing = () => {
               <CardText>{data.description}</CardText>
               <CardText className='price-cost'>Cost : ${data.cost}</CardText>
               <CardText>Duration : {data.duration} months</CardText>
-              <Button color='primary' outline onClick={purchase}>
+              <Button color='primary' outline onClick={purchase} tag={Link} to={`/checkoutwizard/${data.id}`}>
                 Purchase
               </Button>
             </CardBody>

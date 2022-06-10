@@ -36,7 +36,7 @@ import {
   UncontrolledButtonDropdown,
   Table
 } from 'reactstrap'
-import axios from 'axios'
+//import axios from 'axios'
 
 // ** Bootstrap Checkbox Component
 const BootstrapCheckbox = forwardRef((props, ref) => (
@@ -53,15 +53,19 @@ const Contact = () => {
   // const [mdata, addMdata] = useState({}) 
   const saved = JSON.parse(localStorage.getItem('user'))
   const token = saved.token
- 
-  axios.get("https://api.peckpoint.com/api/v1/contacts", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  }).then(dataa => {
-           addData(dataa.data.data)
-  })
+
+  useEffect(async() => {
+    const resultsender = await fetch("https://api.peckpoint.com/api/v1/contacts", {
+        headers: {
+         Authorization: `Bearer ${token}`
+        }
+     }).then(res => res.json())
+
+    if (resultsender.success) {
+     addData(resultsender.data)
+     }
+
+  }, [])
 
   const [modal, setModal] = useState(false)
   const [umodal, setUmodal] = useState(false)

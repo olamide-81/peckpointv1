@@ -53,7 +53,9 @@ const [cgender, setGender] = useState({
         }
 
     const item = {firstname, lastname, phone_number, gender, dob, address, email}
-
+    function refreshPage() {
+      window.location.reload(true)
+    }
     setIsLoading(true)    
      const result = await fetch(`https://api.peckpoint.com/api/v1/contacts/${data.id}`, {
        method: 'patch',
@@ -67,6 +69,9 @@ const [cgender, setGender] = useState({
       .then(data => {
         toast.info(data.message)
         setIsLoading(false)
+        if (data.success === true) {
+          refreshPage()
+        }
       })
    return result
     

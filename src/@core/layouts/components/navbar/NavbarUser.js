@@ -5,6 +5,8 @@ import UserDropdown from './UserDropdown'
 import NavbarSearch from './NavbarSearch'
 import NotificationDropdown from './NotificationDropdown'
 import { useState } from 'react'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 
 // ** Third Party Components
@@ -18,10 +20,21 @@ const NavbarUser = props => {
   const { skin, setSkin } = props
   const [formModal, setFormModal] = useState(false)
   const [amount, setAmount] = useState('')
+  const [unit, SetUnit] = useState('')
+  const [data, setData] = useState([])
 
   const saved = JSON.parse(localStorage.getItem('user'))
   const token = saved.token
   //const [isLoading, setIsLoading] = useState(false)
+
+  axios.get("https://api.peckpoint.com/api/v1/units", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  }).then(dataa => {
+           setData(dataa.data.data)
+  })
 
   // ** Function to toggle Theme (Light/Dark)
   const ThemeToggler = () => {
@@ -52,7 +65,9 @@ const NavbarUser = props => {
     return result
     
   }
-
+  const handleChange = (e) => {
+    SetUnit(e.target.value)
+  }
   return (
     <ul className='nav navbar-nav align-items-center ms-auto'>
       <IntlDropdown />
@@ -68,12 +83,35 @@ const NavbarUser = props => {
                 <Modal isOpen={formModal} toggle={() => setFormModal(!formModal)} className='modal-dialog-centered'>
           <ModalHeader toggle={() => setFormModal(!formModal)}>Top Up</ModalHeader>
           <ModalBody>
+          <div className='mb-2'>
+              <Label className='form-label' for='email'>
+                Unit:
+              </Label>
+                <Input
+                  id="exampleSelect"
+                   name="select"
+                   type="select"
+                   onChange={handleChange}
+                   value={unit}  
+                >
+                   {
+           data.map((data, index) => ([
+                <option key={index} value={data.id}>
+                 {data.name}
+                </option>
+                 ])
+                 )
+              }
+              </Input>
+            </div>
+            <br/>
             <div className='mb-2'>
               <Label className='form-label' for='amount'>
                 Amount:
               </Label>
               <Input type='number' id='amount' placeholder='amount' value={amount} onChange={(e) => setAmount(e.target.value) } />
             </div>
+          
           </ModalBody>
           <ModalFooter>
             <Button color='primary' onClick={topup}>

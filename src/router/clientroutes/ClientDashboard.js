@@ -16,6 +16,11 @@ const ClientDashboardRoutes = [
     component: lazy(() => import('../../views/tables/contacts'))
   },
   {
+    path: "/checkoutwizard/:dataname",
+    className: 'chat-application',
+    component: lazy(() => import('../../views/forms/wizard/Checkout'))
+  },
+  {
     path: '/blacklist',
     className: 'chat-application',
     component: lazy(() => import('../../views/tables/blacklist'))
@@ -89,7 +94,7 @@ const ClientDashboardRoutes = [
   {
     path: '/sms-quick-send',
     className: 'chat-application',
-    component: lazy(() => import('../../views/pages/misc/Maintenance'))
+    component: lazy(() => import('../../views/pages/sms/Sms'))
   },
   {
     path: '/sms-send-using-file',

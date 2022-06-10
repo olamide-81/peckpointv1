@@ -36,11 +36,11 @@ import {
   Modal, 
   ModalHeader, 
   ModalBody, 
-  ModalFooter
+  ModalFooter,
+  FormGroup
 } from 'reactstrap'
 import axios from 'axios'
-
-import AsyncSelect from 'react-select'
+import { toast } from 'react-toastify'
 
 const saved = JSON.parse(localStorage.getItem('user'))
 const token = saved.token
@@ -56,32 +56,48 @@ const BootstrapCheckbox = forwardRef((props, ref) => (
 const Contact = () => {
   // ** States
   const [data, addData] = useState([])
-  const [contactsno, setContacts] = useState('')
-  const [groupname, setGroupname] = useState('')
-  const [selectedOption, setSelectedOption] = useState(null)
+  const [group_id, setGroupname] = useState('')
+  const [contact_id, setContacts] = useState('')
+  const [contactfetch, setContactfetch] = useState([])
   //const [response, setResponse] = useState({})
   // const [mdata, addMdata] = useState({}) 
 
   //Handle Input Change Event
-  const handleInputChange = value => {
-    setContacts(value)
-  }
+
 
   //Handle Selection
-  const handleChange = value => {
-    setSelectedOption(value)
-  }
-  console.log("a", selectedOption)
-  console.log("a", contactsno)
 
-  axios.get("https://api.peckpoint.com/api/v1/groups", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  }).then(dataa => {
-           addData(dataa.data.data)
-  })
+  useEffect(async() => {
+    const resultsender = await fetch("https://api.peckpoint.com/api/v1/groups", {
+        headers: {
+         Authorization: `Bearer ${token}`
+        }
+     }).then(res => res.json())
+
+    if (resultsender.success) {
+     addData(resultsender.data)
+     }
+
+  }, [])
+
+  useEffect(async() => {
+    const resultsender = await fetch("https://api.peckpoint.com/api/v1/contacts", {
+        headers: {
+         Authorization: `Bearer ${token}`
+        }
+     }).then(res => res.json())
+
+    if (resultsender.success) {
+     setContactfetch(resultsender.data)
+     }
+
+  }, [])
+
+  function refreshPage() {
+    window.location.reload(true)
+  }
+
+  console.warn(contactfetch)
 
   const groupsfetch = () => {
     axios.get('https://api.peckpoint.com/api/v1/contacts', {
@@ -97,9 +113,9 @@ const Contact = () => {
  groupsfetch()
 
  
-   { /*   async function addtogroup() {
-        const item = {name}
-         const result = await fetch("https://api.peckpoint.com/api/v1/sender-ids", {
+  async function addtogroup() {
+        const item = {group_id, contact_id}
+         const result = await fetch("https://api.peckpoint.com/api/v1/add-single-contacts", {
            method: 'POST',
            body:JSON.stringify(item),
            headers: {
@@ -112,14 +128,10 @@ const Contact = () => {
             toast.info(data.message)
             if (data.success === true) {
               refreshPage()
-              }
+            }
           })
         return result
         
-      }*/ } 
-
-      const send = () => {
-        console.warn(groupname)
       }
 
   const [modal, setModal] = useState(false)
@@ -263,6 +275,14 @@ const Contact = () => {
     link.click()
   }
 
+  const handleChanged = (e) => {
+    setGroupname(e.target.value)
+  }
+
+  const handleChange = (e) => {
+    setContacts(e.target.value)
+  }
+
   return (
     <Fragment>
       <Card className="groups">
@@ -305,41 +325,56 @@ const Contact = () => {
                   Add to group
                 </Button>
                 <Modal isOpen={formModal} toggle={() => setFormModal(!formModal)} className='modal-dialog-centered'>
-          <ModalHeader toggle={() => setFormModal(!formModal)}>Create Sender ID</ModalHeader>
+          <ModalHeader toggle={() => setFormModal(!formModal)}>Add contact to group</ModalHeader>
           <ModalBody>
             <div className='mb-2'>
               <Label className='form-label' for='email'>
                 Name:
               </Label>
-              <AsyncSelect
-              cacheOptions
-              defaultOptions
-              getOptionLabel={e => e.firstname + e.lastname}
-              getOptionValue={e => e.id}
-              loadOptions={groupsfetch}
-              onInputChange={handleInputChange}
-              onChange={handleChange}
-               isMulti={true}
-               />
                 <Input
                   id="exampleSelect"
                    name="select"
                    type="select"
+                   onChange={handleChanged}
+                   value={group_id}  
                 >
                    {
            data.map((data, index) => ([
-                <option key={index} value={groupname} onChange={(e) => setGroupname(e.target.value) }  >
+                <option key={index} value={data.id}>
                  {data.name}
                 </option>
                  ])
                  )
               }
               </Input>
+ <br/>
+ <FormGroup>
+    <Label for="exampleSelectMulti">
+      Select Multiple
+    </Label>
+    <Input
+      id="exampleSelectMulti"
+      multiple
+      name="selectMulti"
+      type="select"
+      onChange={handleChange}
+      value={contact_id}  
+    >
+       {
+             contactfetch.map((data, index) => ([
+                <option key={index} value={data.id}>
+                 {data.firstname}   {data.lastname}
+                </option>
+                 ])
+                 )
+              }
+    </Input>
+  </FormGroup>
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button color='primary' onClick={send}>
-              Create
+            <Button color='primary' onClick={addtogroup}>
+              Add
             </Button>{' '}
           </ModalFooter>
         </Modal>
