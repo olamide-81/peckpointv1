@@ -98,7 +98,7 @@ const LoginBasic = () => {
                   Remember Me
                 </Label>
               </div>
-              <Button color='primary' block>
+              <Button color='primary' block tag={Link} to='/admin/dashboard'>
                 Sign in
               </Button>
             </Form>
