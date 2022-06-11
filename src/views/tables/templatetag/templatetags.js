@@ -3,7 +3,7 @@ import { Fragment, useState, forwardRef } from 'react'
 
 // ** Table Data & Columns
 import { data, columns } from './data'
-
+import { Link } from 'react-router-dom'
 // ** Add New Modal Component
 import AddNewModal from './AddNewModal'
 
@@ -163,6 +163,7 @@ const Contact = () => {
     link.click()
   }
 
+
   return (
     <Fragment>
       <Card>
@@ -197,7 +198,7 @@ const Contact = () => {
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledButtonDropdown>
-            <Button className='ms-2' color='primary' onClick={handleModal}>
+            <Button className='ms-2' color='primary' tag={Link} to='/sms-templates-new'>
               <Plus size={15} />
               <span className='align-middle ms-50'>Add Template</span>
             </Button>
@@ -222,7 +223,6 @@ const Contact = () => {
           <DataTable
             noHeader
             pagination
-            selectableRows
             columns={columns}
             paginationPerPage={7}
             className='react-dataTable'
@@ -230,7 +230,6 @@ const Contact = () => {
             paginationDefaultPage={currentPage + 1}
             paginationComponent={CustomPagination}
             data={searchValue.length ? filteredData : data}
-            selectableRowsComponent={BootstrapCheckbox}
           />
         </div>
       </Card>

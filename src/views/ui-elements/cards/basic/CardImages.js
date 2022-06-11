@@ -47,42 +47,45 @@ const CardImages = () => {
   }
   const [conts, setConts] = useState([])
   const today = [], thisWeek = [], thisMonth = [], sorts = ['Today', 'This Week', 'This Month']
+
   axios.get('https://api.peckpoint.com/api/v1/contacts', {
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json'
     }
   }).then(res => {
+    
+    if (res.data.data !== undefined) {
     const data = res.data.data
     
     data.forEach((v, i) => {
       // console.log(Date.parse(v.dob))
 
       if (!isNaN(Date.parse(v.dob))) {
-      
+
+
         const date = new Date(), mdate = new Date(Date.parse(v.dob))
 
-          const currDate = Math.floor(Date.parse(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`) / 1000) // today's date
+        const currDate = Math.floor(Date.parse(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`) / 1000) // today's date
 
-          const tDate = Math.floor(Date.parse(`${mdate.getFullYear()}-${mdate.getMonth() + 1}-${mdate.getDate()}`) / 1000) // user date
+        const tDate = Math.floor(Date.parse(`${mdate.getFullYear()}-${mdate.getMonth() + 1}-${mdate.getDate()}`) / 1000) // user date
 
-            if (tDate >= currDate && tDate < currDate + 86400) {
-                today[i] = data[i]
-            }
+        if (tDate >= currDate && tDate < currDate + 86400) {
+          today[i] = data[i]
+        }
 
-             if (tDate <= currDate + (604800 - (86400 * date.getDay()))) {
-                thisWeek[i] = data[i]
-            }
+        if (tDate <= currDate + (604800 - (86400 * date.getDay()))) {
+          thisWeek[i] = data[i]
+        }
 
-            if (mdate.getMonth() === date.getMonth()) {
-                thisMonth[i] = data[i]
-            }
+        if (mdate.getMonth() === date.getMonth()) {
+          thisMonth[i] = data[i]
+        }
             
         }
     }) 
-
+  }
     setConts([today, thisWeek, thisMonth])
-
   })
   let tots = 0
   return (
@@ -127,14 +130,14 @@ const CardImages = () => {
 
             <div className="cardss">
         {
-          conts.map((e, i) => { 
-              
+           conts.map((e, i) => { 
               if (!e.length) {
                 tots++
               }
            
             const arrr = ["today", "thisweek", "thismonth"]
             if (tots === 3 || (document.querySelector('.sortTab select').value === arrr[i] && !e.length)) {
+
                   return (
                     <div key={i} className="empty" style={{
                       display:'flex',
@@ -151,6 +154,7 @@ const CardImages = () => {
                         <h2 className="mt-2">No Birthdays are close by at the moment</h2>
                     </div>
                   )
+
               }
                 // console.log(e.length)
 

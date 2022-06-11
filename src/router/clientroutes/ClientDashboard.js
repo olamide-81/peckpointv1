@@ -82,6 +82,11 @@ const ClientDashboardRoutes = [
     component: lazy(() => import('../../views/tables/templatetag'))
   },
   {
+    path: '/sms-templates-new',
+    className: 'chat-application',
+    component: lazy(() => import('../../views/pages/sms-template/Smstemplate'))
+  },
+  {
     path: '/blacklist',
     className: 'chat-application',
     component: lazy(() => import('../../views/pages/misc/Maintenance'))
@@ -89,7 +94,7 @@ const ClientDashboardRoutes = [
   {
     path: '/sms-campaign-builder',
     className: 'chat-application',
-    component: lazy(() => import('../../views/pages/misc/Maintenance'))
+    component: lazy(() => import('../../views/pages/sms/Campaignbuilder'))
   },
   {
     path: '/sms-quick-send',
@@ -99,7 +104,7 @@ const ClientDashboardRoutes = [
   {
     path: '/sms-send-using-file',
     className: 'chat-application',
-    component: lazy(() => import('../../views/pages/misc/Maintenance'))
+    component: lazy(() => import('../../views/pages/sms/Sendusingfile'))
   },
   {
     path: '/mms-campaign-builder',
