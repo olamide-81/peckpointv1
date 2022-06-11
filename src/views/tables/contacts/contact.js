@@ -4,9 +4,6 @@ import { Link } from 'react-router-dom'
 
 import ShareLink from '../../extensions/copy-to-clipboard'
 
-// ** Table Data & Columns
-import { columns, dmodal, openUodal } from './data'
-
 //import { delayLog } from './delayLog'
 // ** Add New Modal Component
 import AddNewModal from './AddNewModal'
@@ -18,7 +15,7 @@ import DataTable from 'react-data-table-component'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 
-import { ChevronDown, Share, Printer, FileText, File, Grid, Copy, Plus } from 'react-feather'
+import { ChevronDown, Share, Trash, Printer, FileText, File, Grid, Copy, Plus } from 'react-feather'
 
 // ** Reactstrap Imports
 import {
@@ -54,7 +51,7 @@ const Contact = () => {
   const saved = JSON.parse(localStorage.getItem('user'))
   const token = saved.token
 
-  useEffect(async() => {
+  useEffect(async () => {
     const resultsender = await fetch("https://api.peckpoint.com/api/v1/contacts", {
         headers: {
          Authorization: `Bearer ${token}`
@@ -72,16 +69,41 @@ const Contact = () => {
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
- 
-
-  useEffect(() => {
-    setUmodal(openUodal)
-  }, [openUodal])
-
 
   // ** Function to handle Modal toggle
   const handleModal = () => setModal(!modal)
   const handleUmodal = () => setUmodal(!umodal)
+
+  function refreshPage() {
+    window.location.reload(true)
+  }
+
+  const deleteContact = (id) => {
+    axios.delete(`https://api.peckpoint.com/api/v1/contacts/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        toast.info(data.message)
+        if (data.success === true) {
+          refreshPage()
+
+        }
+      })
+  }
+
+
+  let dmodal = { id: '', firstname: '', lastname: '', gender: '', dob: '', phone_number: '', email: '', address: '' }
+
+  const updateData = (data) => {
+    dmodal = data
+    setUmodal(true)
+  }
+
+
   // ** Function to handle filter
   const handleFilter = e => {
     const value = e.target.value
@@ -183,6 +205,87 @@ const Contact = () => {
     return result
   }
 
+  const columns = [
+    {
+      name: 'Name',
+      minWidth: '250px',
+      sortable: row => row.fullname,
+      cell: row => (
+        <div>
+          <div className='d-flex align-items-center'>
+
+            <div className='user-info text-truncate ms-1'>
+              <span className='d-block fw-bold text-truncate'>{row.firstname} {row.lastname}</span>
+
+
+            </div>
+          </div>
+        </div>
+      )
+    },
+
+    {
+      name: 'Phone Number',
+      sortable: true,
+      minWidth: '250px',
+      selector: row => row.phone_number
+    },
+
+    {
+      name: 'Email',
+      sortable: true,
+      minWidth: '250px',
+      selector: row => row.email
+    },
+
+    {
+      name: 'Date',
+      sortable: true,
+      minWidth: '150px',
+      selector: row => row.created_at
+    },
+
+    {
+      name: 'Gender',
+      sortable: false,
+      minWidth: '150px',
+      selector: row => row.gender
+    },
+
+    {
+      name: 'DOB',
+      sortable: true,
+      minWidth: '100px',
+      selector: row => row.dob
+    },
+
+    {
+      name: 'Actions',
+      allowOverflow: true,
+      minWidth: '250px',
+      cell: (row) => {
+        return (
+          <div className='d-flex'>
+            <div className='w-100 dropdown-item' onClick={e => {
+              e.preventDefault()
+              updateData({ id: row.id, firstname: row.firstname, lastname: row.lastname, gender: row.gender, dob: row.dob, phone_number: row.phone_number, email: row.email })
+            }}>
+              <FileText size={15} />
+              <span className='align-middle ms-50'>Update</span>
+            </div>
+            <div className='w-100 dropdown-item' onClick={e => {
+              e.preventDefault()
+              deleteContact(row.id)
+            }} >
+              <Trash size={15} />
+              <span className='align-middle ms-50'>Delete</span>
+            </div>
+          </div>
+        )
+      }
+    }
+  ]
+
   // ** Downloads CSV
   function downloadCSV(array) {
     const link = document.createElement('a')
@@ -235,7 +338,7 @@ const Contact = () => {
               </DropdownMenu>
             </UncontrolledButtonDropdown>
             <ShareLink/>
-            <UncontrolledButtonDropdown className='importbtn' className='add-btn-contact'>
+            <UncontrolledButtonDropdown className='add-btn-contact importbtn'>
               <DropdownToggle color='secondary' caret outline>
                 <Share size={15} />
                 <span className='align-middle ms-50'>Import</span>
@@ -247,7 +350,7 @@ const Contact = () => {
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledButtonDropdown>
-            <Button className='ms-2' color='primary' onClick={handleModal} className='add-btn-contact'>
+            <Button className='ms-2 add-btn-contact' color='primary' onClick={handleModal}>
               <Plus size={15} className='plus-sign'/>
               <span className='align-middle ms-50'>Add Contact</span>
             </Button>
