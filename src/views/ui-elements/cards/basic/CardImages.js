@@ -63,18 +63,17 @@ const CardImages = () => {
 
       if (!isNaN(Date.parse(v.dob))) {
 
-
         const date = new Date(), mdate = new Date(Date.parse(v.dob))
 
         const currDate = Math.floor(Date.parse(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`) / 1000) // today's date
 
-        const tDate = Math.floor(Date.parse(`${mdate.getFullYear()}-${mdate.getMonth() + 1}-${mdate.getDate()}`) / 1000) // user date
+        const UDate = Math.floor(Date.parse(`${mdate.getFullYear()}-${mdate.getMonth() + 1}-${mdate.getDate()}`) / 1000) // user date
 
-        if (tDate >= currDate && tDate < currDate + 86400) {
+        if (UDate >= currDate && UDate < currDate + 86400) {
           today[i] = data[i]
         }
 
-        if (tDate <= currDate + (604800 - (86400 * date.getDay()))) {
+        if ((UDate <= currDate - (604800 - (86400 * mdate.getDay()))) && mdate.getMonth() === date.getMonth())  {
           thisWeek[i] = data[i]
         }
 
@@ -134,10 +133,9 @@ const CardImages = () => {
               if (!e.length) {
                 tots++
               }
-           
+
             const arrr = ["today", "thisweek", "thismonth"]
             if (tots === 3 || (document.querySelector('.sortTab select').value === arrr[i] && !e.length)) {
-
                   return (
                     <div key={i} className="empty" style={{
                       display:'flex',
@@ -183,7 +181,7 @@ const CardImages = () => {
                           <div>
                             <img src={img4} className='profile-picture' />
                             <h2>{(`${ee.firstname} ${ee.lastname}`).toUpperCase()}</h2>
-                            <p>- With Love from {user.user.name}</p>
+                              <p>{ee.dob} - With Love from {user.user.name}</p>
                           </div>
                         </div>
                         <img src={img3} className='gift' />
