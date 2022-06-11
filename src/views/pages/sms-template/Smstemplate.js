@@ -11,31 +11,15 @@ import { toast } from 'react-toastify'
 const saved = JSON.parse(localStorage.getItem('user'))
 const token = saved.token
 
-const Sms = () => {
+const Smstemplate = () => {
 
-  const [data, addData] = useState([])
   const [dataa, setDataa] = useState([])
-  const [sender_id, setSenderID] = useState('')
   const [contact, getContact] = useState()
   const [message, setMessage] = useState('')
-  const [title, setTitle] = useState('')
-  const [sendingserver, SetSendingServer] = useState('')
+
 
   useEffect(async() => {
-    const resultsender = await fetch("https://api.peckpoint.com/api/v1/sender-ids", {
-        headers: {
-         Authorization: `Bearer ${token}`
-        }
-     }).then(res => res.json())
-
-    if (resultsender.success) {
-     addData(resultsender.data)
-     }
-
-  }, [])
-
-  useEffect(async() => {
-    const resultsender = await fetch("https://api.peckpoint.com/api/v1/contacts", {
+    const resultsender = await fetch("https://api.peckpoint.com/api/v1/groups", {
         headers: {
          Authorization: `Bearer ${token}`
         }
@@ -47,9 +31,6 @@ const Sms = () => {
 
   }, [])
 
-  const handleChange = (e) => {
-    setSenderID(e.target.value)
-  }
     // handle selection
     const handleChanged = (e) => {
       getContact(Array.isArray(e) ? e.map(x => x.id) : [])
@@ -66,8 +47,8 @@ const Sms = () => {
   }
 
 const send = () => {
-  const item = {contact, sender_id, message, title, sendingserver}
-  if (contact !== '' && sender_id !== '' && message !== '' && title !== '' && sendingserver !== '') {
+  const item = {contact, sender_id, message, sendingserver}
+  if (contact !== '' && sender_id !== '' && message !== '' && sendingserver !== '') {
     console.log(item)
     toast.success('message sent successfully')
   } else {
@@ -79,54 +60,29 @@ const send = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Quick Send</CardTitle>
+        <CardTitle tag='h4'>SMS Template</CardTitle>
       </CardHeader>
 
       <CardBody>
         <Form>
-          <Row className='mb-1'>
-            <Label sm='3' for='name'>
-              Sending Server
+        <Row className='mb-1'>
+            <Label sm='3'>
+              Name
             </Label>
             <Col sm='9'>
-              <Input type='text' name='sending-server' id='name' placeholder='Sending Server' value={sendingserver} onChange={(e) => SetSendingServer(e.target.value) } />
+              <Input type='text' name='text' id='text' placeholder='Name'/>
             </Col>
           </Row>
 
           <Row className='mb-1'>
-            <Label sm='3' for='Email'>
-              Sender ID
-            </Label>
-            <Col sm='9'>
-            <Input
-                  id="exampleSelect"
-                   name="select"
-                   type="select"
-                   onChange={handleChange}
-                   value={sender_id}  
-                >
-                   {
-           data.map((data, index) => ([
-                <option key={index} value={data.id}>
-                 {data.name}
-                </option>
-                 ])
-                 )
-              }
-              </Input>
-            </Col>
-          </Row>
-
-          <Row className='mb-1'>
-          <Label sm='3' >Contacts</Label>
+          <Label sm='3' >Available Tags</Label>
            <Col sm='9'>
             <Select
               onChange={handleChanged}
               isClearable={false}
               theme={selectThemeColors}
-              isMulti
               /* eslint-disable */
-              getOptionLabel={e => e.firstname + ' ' + e.lastname}
+              getOptionLabel={e => e.name}
               /* eslint-enable */
               getOptionValue={e => e.id}
               name='colors'
@@ -139,15 +95,6 @@ const send = () => {
 
           <Row className='mb-1'>
             <Label sm='3'>
-              Message Title
-            </Label>
-            <Col sm='9'>
-              <Input type='text' name='text' id='text' placeholder='New Message' value={title} onChange={(e) => setTitle(e.target.value) }/>
-            </Col>
-          </Row>
-
-          <Row className='mb-1'>
-            <Label sm='3'>
               Message
             </Label>
             <Col sm='9'>
@@ -157,7 +104,7 @@ const send = () => {
           <Row>
             <Col className='d-flex' md={{ size: 9, offset: 3 }}>
               <Button className='me-1' color='primary' onClick={send}>
-                Submit
+                Create
               </Button>
               <Button outline color='secondary' onClick={reset}>
                 Reset
@@ -169,4 +116,4 @@ const send = () => {
     </Card>
   )
 }
-export default Sms
+export default Smstemplate

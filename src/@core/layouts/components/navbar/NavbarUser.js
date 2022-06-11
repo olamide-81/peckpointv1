@@ -6,7 +6,7 @@ import NavbarSearch from './NavbarSearch'
 import NotificationDropdown from './NotificationDropdown'
 import { useState } from 'react'
 import axios from 'axios'
-import { toast } from 'react-toastify'
+//import { toast } from 'react-toastify'
 
 
 // ** Third Party Components
@@ -14,6 +14,7 @@ import { Sun, Moon } from 'react-feather'
 
 // ** Reactstrap Imports
 import { Button, NavItem, NavLink, Modal, ModalHeader, ModalBody, ModalFooter, Label, Input} from 'reactstrap'
+import { toast } from 'react-toastify'
 
 const NavbarUser = props => {
   // ** Props
@@ -22,6 +23,9 @@ const NavbarUser = props => {
   const [amount, setAmount] = useState('')
   const [unit, SetUnit] = useState('')
   const [data, setData] = useState([])
+
+  const unit_id = unit
+  const type = "unit"
 
   const saved = JSON.parse(localStorage.getItem('user'))
   const token = saved.token
@@ -46,24 +50,9 @@ const NavbarUser = props => {
   }
 
   async function topup() {
-    const item = {amount}
-     const result = await fetch("https://api.peckpoint.com/api/v1/buy-units", {
-       method: 'POST',
-       body:JSON.stringify(item),
-       headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-       }
-    })
-    .then(res => res.json())
-      .then(data => {
-        toast.info(data.message)
-        if (data.success === true) {
-          refreshPage()
-          }
-      })
-    return result
-    
+    const item = {unit_id, amount, type}
+   console.log(item)
+   toast.success(`purchase of ${amount} recieved`)
   }
   const handleChange = (e) => {
     SetUnit(e.target.value)

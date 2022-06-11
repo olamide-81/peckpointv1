@@ -8,8 +8,6 @@ import { MoreVertical, Edit, FileText, Archive, Trash } from 'react-feather'
 // ** Reactstrap Imports
 import { Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 
-// ** Vars
-const states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary']
 
 const status = {
   1: { title: 'Current', color: 'light-primary' },
@@ -136,11 +134,6 @@ export const columns = [
     sortable: row => row.full_name,
     cell: row => (
       <div className='d-flex align-items-center'>
-        {row.avatar === '' ? (
-          <Avatar color={`light-${states[row.status]}`} content={row.full_name} initials />
-        ) : (
-          <Avatar img={require(`@src/assets/images/portrait/small/avatar-s-${row.avatar}`).default} />
-        )}
         <div className='user-info text-truncate ms-1'>
           <span className='d-block fw-bold text-truncate'>{row.full_name}</span>
           <small>{row.post}</small>
@@ -149,29 +142,10 @@ export const columns = [
     )
   },
   {
-    name: 'Email',
+    name: 'Message',
     sortable: true,
     minWidth: '250px',
     selector: row => row.email
-  },
-  {
-    name: 'Date',
-    sortable: true,
-    minWidth: '150px',
-    selector: row => row.start_date
-  },
-
-  {
-    name: 'Salary',
-    sortable: true,
-    minWidth: '150px',
-    selector: row => row.salary
-  },
-  {
-    name: 'Age',
-    sortable: true,
-    minWidth: '100px',
-    selector: row => row.age
   },
   {
     name: 'Status',

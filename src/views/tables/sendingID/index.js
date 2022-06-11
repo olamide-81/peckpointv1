@@ -56,23 +56,6 @@ async function deletesender (id) {
  return result
 }
 
-async function approvesender (id) {
-  setIsLoading(true)
-  const result = await fetch(`https://api.peckpoint.com/api/v1/approve-sender-ids/${id}`, {
-    method: 'patch',
-    headers: {
-     Authorization: `Bearer ${token}`,
-     'Content-Type': 'application/json'
-    }
- })
- .then(res => res.json())
-   .then(data => {
-     toast.info(data.message)
-     setIsLoading(false)
-   })
- return result
-}
-
   async function createsenderid() {
     const item = {name}
     setIsLoading(true)
@@ -127,9 +110,6 @@ async function approvesender (id) {
                 <CardText>
                 {data.name}
                 </CardText>
-                <Button color='primary' outline className='sender-id-btn' onClick={() => approvesender(data.id) } disabled={isLoading}>
-                  Approve
-                </Button>
                 <Button color='primary' outline onClick={() => deletesender(data.id) } disabled={isLoading}>
                   Delete
                 </Button>

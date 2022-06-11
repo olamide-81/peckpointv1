@@ -452,7 +452,7 @@ const Contact = () => {
                  ])
                  )
               }
-              </Input>
+              </Input>
  <br/>
  <FormGroup>
     <Label for="exampleSelectMulti">
