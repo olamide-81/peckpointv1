@@ -213,27 +213,19 @@ export const columns = [
   
   {
     name: 'Actions',
-    minWidth: '385px',
+    minWidth: '250px',
     allowOverflow: true,
     cell: (row) => {
       return (
         <div className='d-flex'>
-          <div className='w-100 dropdown-item' onClick={() => {
-                
+          <div className='w-100 dropdown-item' onClick={e => {
+                e.preventDefault() 
                 updateData({ id: row.id, name: row.name, description: row.description})
               }}>
                 <FileText size={15} />
                 <span className='align-middle ms-50'>Update</span>
               </div>
               <div className='w-100 dropdown-item' onClick={() => {
-                
-            AddData(row.id)
-              }}>
-                <Archive size={15} />
-                <span className='align-middle ms-50'>Add Contact</span>
-              </div>
-              <div className='w-100 dropdown-item' onClick={() => {
-                
                 deleteGroup(row.id)
                 }}>
                 <Trash size={15} />
