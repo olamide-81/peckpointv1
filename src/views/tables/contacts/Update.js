@@ -16,14 +16,14 @@ import '@styles/react/libs/flatpickr/flatpickr.scss'
 
 const UpdateModal = ({ open, handleModall, data }) => {
   // ** State
-  // console.log(handleModall)
+  console.log(data)
   
-  const [firstname, setfirstName] = useState('')
-  const [lastname, setlastName] = useState('')
-  const [phone_number, setphoneNumber] = useState('')
-  const [dob, setdob] = useState('')
+  const [firstname, setfirstName] = useState(data.firstname)
+  const [lastname, setlastName] = useState(data.lastname)
+  const [phone_number, setphoneNumber] = useState(data.phone_number)
+  const [dob, setdob] = useState(data.dob)
   const [address, setaddress] = useState('')
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState(data.email)
 const [cgender, setGender] = useState({
     male : (data.gender === 'male'),
     female: (data.gender === 'female')

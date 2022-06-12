@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment, useState, forwardRef } from 'react'
+import { Fragment, useEffect, useState, forwardRef } from 'react'
 
 // ** Table Data & Columns
 // import { dmodal, openUodal, openAmodal, Admodal } from './data'
@@ -164,29 +164,21 @@ const Contact = () => {
   const handleUmodal = () => setUmodal(!umodal)
   const handleAdmodal = () => setAdmodal(!admodal)
 
-  let dmodal = { id: '', name: '', description: '' }
+  const [dmodal, setDmodal] = useState({ id: '', name: '', description: '' })
 
 
   const updateData = (data) => {
-    dmodal = data
+    setDmodal(data)
     handleUmodal()
   }
 
-  let Admodal = { id: '', name: '', description: '' }
+  const [Admodal, setAdjmodal] = useState({ id: '', name: '', description: '' })
 
 
   const AddData = (data) => {
-    Admodal = data
+    setAdjmodal(data)
     handleAdmodal()
   }
-
-  // useEffect(() => {
-  //   setUmodal(openUodal)
-  // }, [openUodal])
-
-  // useEffect(() => {
-  //   setAdmodal(openAmodal)
-  // }, [openAmodal])
 
  const columns = [
     {
@@ -195,11 +187,6 @@ const Contact = () => {
       sortable: row => row.name,
       cell: row => (
         <div className='d-flex align-items-center'>
-          {/* {row.avatar === undefined ? (
-          <Avatar color={`light-${states[0]}`} content={row.fullname} initials />
-        ) : (
-          <Avatar img={require(`@src/assets/images/portrait/small/avatar-s-${row.avatar}`).default} />
-        )} */}
           <div className='user-info text-truncate ms-1'>
             <span className='d-block fw-bold text-truncate'>{row.name}</span>
 

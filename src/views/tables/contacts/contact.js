@@ -96,10 +96,10 @@ const Contact = () => {
   }
 
 
-  let dmodal = { id: '', firstname: '', lastname: '', gender: '', dob: '', phone_number: '', email: '', address: '' }
+  const [dmodal, setDmodal] = useState({ id: '', firstname: '', lastname: '', gender: '', dob: '', phone_number: '', email: '', address: '' })
 
   const updateData = (data) => {
-    dmodal = data
+    setDmodal(data)
     setUmodal(true)
   }
 
