@@ -65,15 +65,15 @@ const CardImages = () => {
 
         const date = new Date(), mdate = new Date(Date.parse(v.dob))
 
-        const currDate = Math.floor(Date.parse(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`) / 1000) // today's date
+        const currDate = Math.floor(Date.parse(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate() - date.getDay()}`) / 1000) // today's date
 
-        const UDate = Math.floor(Date.parse(`${mdate.getFullYear()}-${mdate.getMonth() + 1}-${mdate.getDate()}`) / 1000) // user date
+        const UDate = Math.floor(Date.parse(`${mdate.getFullYear()}-${mdate.getMonth() + 1}-${mdate.getDate() }`) / 1000) // user date
 
-        if (UDate >= currDate && UDate < currDate + 86400) {
+        if ((date.getMonth() === mdate.getMonth()) && (mdate.getDate() === date.getDate())) {
           today[i] = data[i]
         }
 
-        if ((UDate <= currDate - (604800 - (86400 * mdate.getDay()))) && mdate.getMonth() === date.getMonth())  {
+        if ((UDate >= currDate) && (UDate <= (currDate + 604800)))  {
           thisWeek[i] = data[i]
         }
 
@@ -112,7 +112,7 @@ const CardImages = () => {
                 })
 
                   if (cards.length) {
-                 cards.forEach((v, i) => {
+                    cards.forEach((v, i) => {
                          cards[i].style.display = 'block'
                        })
                       } else { 
@@ -133,7 +133,7 @@ const CardImages = () => {
               if (!e.length) {
                 tots++
               }
-
+             
             const arrr = ["today", "thisweek", "thismonth"]
             if (tots === 3 || (document.querySelector('.sortTab select').value === arrr[i] && !e.length)) {
                   return (
