@@ -16,7 +16,7 @@ const Confirm = ({ stepper}) => {
   const saved = JSON.parse(localStorage.getItem('user'))
   const useremail = saved.user.email
   const userphone = saved.user.phone
-  const name = saved.user.name
+
   const token = saved.token
   const [dataa, setData] = useState('')
   const [isChecked, setIsChecked] = useState(false)
@@ -50,18 +50,27 @@ const Confirm = ({ stepper}) => {
 
   console.warn(dataa)
   const plan_id = dataa.id
-  const plan_name = dataa.name
   const amount = dataa.cost
+  const type = "unit"
 
   async function checkout() {
-    const type = "subscription"
-    if (isChecked === true && address !== '') {
-      const item = {type, plan_id, amount}  
-      console.log(item)
-      toast.success(`Dear ${name} Your purchase of ${plan_name} was Succesfull`)
-    } else {
-      toast.info('Please fill in neccessary fields')
-    }
+    const item = {amount, plan_id, type}
+     const result = await fetch("https://api.peckpoint.com/api/v1/subscriptions", {
+       method: 'POST',
+       body:JSON.stringify(item),
+       headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+       }
+       
+    })
+    .then(res => res.json())
+      .then(data => {
+        toast.info(data.message)
+        window.location.replace(data.url)
+      })
+    return result
+    
   }
 
   return (

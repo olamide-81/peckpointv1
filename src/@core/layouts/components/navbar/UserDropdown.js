@@ -1,5 +1,5 @@
 // ** React Imports
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 // ** Custom Components
@@ -9,8 +9,8 @@ import Avatar from '@components/avatar'
 // import { isUserLoggedIn } from '@utils'
 
 // ** Store & Actions
-import { useDispatch } from 'react-redux'
-import { logout } from '@store/authentication'
+//import { useDispatch } from 'react-redux'
+//import { logout } from '@store/authentication'
 
 // ** Third Party Components
 import { User, Mail, CheckSquare, MessageSquare, Settings, CreditCard, HelpCircle, Power } from 'react-feather'
@@ -23,7 +23,7 @@ import defaultAvatar from '@src/assets/images/portrait/small/avatar-s-11.jpg'
 
 const UserDropdown = () => {
   // ** Store Vars
-  const dispatch = useDispatch()
+  //const dispatch = useDispatch()
 
   // ** State
   const [userData, setUserData] = useState(null)
@@ -34,6 +34,13 @@ const UserDropdown = () => {
       setUserData(JSON.parse(localStorage.getItem('user')))
     }
   }, [])
+
+  const history = useHistory()
+
+  const logout = () => {
+    history.push('/login')
+    localStorage.clear()
+  }
 
   //** Vars
   const userAvatar = (userData && userData.avatar) || defaultAvatar
@@ -62,7 +69,7 @@ const UserDropdown = () => {
           <HelpCircle size={14} className='me-75' />
           <span className='align-middle'>FAQ</span>
         </DropdownItem>
-        <DropdownItem tag={Link} to='/login' onClick={() => dispatch(logout())}>
+        <DropdownItem tag={Link} to='/login' onClick={logout}>
           <Power size={14} className='me-75' />
           <span className='align-middle'>Logout</span>
         </DropdownItem>

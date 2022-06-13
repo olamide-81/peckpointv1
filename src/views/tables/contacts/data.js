@@ -189,11 +189,7 @@ export const columns = [
     cell: row => (
       <div>
       <div className='d-flex align-items-center'>
-        {/* {row.avatar === undefined ? (
-          <Avatar color={`light-${states[0]}`} content={row.fullname} initials />
-        ) : (
-          <Avatar img={require(`@src/assets/images/portrait/small/avatar-s-${row.avatar}`).default} />
-        )} */}
+
         <div className='user-info text-truncate ms-1'>
           <span className='d-block fw-bold text-truncate'>{row.firstname} {row.lastname}</span>
      
@@ -239,18 +235,6 @@ export const columns = [
     selector: row => row.dob
   },
 
-  // {
-  //   name: 'Status',
-  //   minWidth: '150px',
-  //   sortable: row => row.status.title,
-  //   cell: row => {
-  //     return (
-  //       <Badge color={status[row.status].color} pill>
-  //         {status[row.status].title}
-  //       </Badge>
-  //     )
-  //   }
-  // },
   {
     name: 'Actions',
     allowOverflow: true,
