@@ -3,6 +3,7 @@ import IntlDropdown from './IntlDropdown'
 import CartDropdown from './CartDropdown'
 import UserDropdown from './UserDropdown'
 import NavbarSearch from './NavbarSearch'
+//import { useHistory } from 'react-router-dom'
 import NotificationDropdown from './NotificationDropdown'
 import { useState } from 'react'
 import axios from 'axios'
@@ -27,6 +28,8 @@ const NavbarUser = props => {
   const unit_id = unit
   const type = "unit"
 
+  //const history = useHistory()
+
   const saved = JSON.parse(localStorage.getItem('user'))
   const token = saved.token
   //const [isLoading, setIsLoading] = useState(false)
@@ -50,9 +53,23 @@ const NavbarUser = props => {
   }
 
   async function topup() {
-    const item = {unit_id, amount, type}
-   console.log(item)
-   toast.success(`purchase of ${amount} recieved`)
+    const item = {amount, unit_id, type}
+     const result = await fetch("https://api.peckpoint.com/api/v1/buy-units", {
+       method: 'POST',
+       body:JSON.stringify(item),
+       headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+       }
+       
+    })
+    .then(res => res.json())
+      .then(data => {
+        toast.info(data.message)
+        window.location.replace(data.url)
+      })
+    return result
+    
   }
   const handleChange = (e) => {
     SetUnit(e.target.value)

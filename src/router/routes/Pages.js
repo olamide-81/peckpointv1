@@ -2,14 +2,7 @@ import { lazy } from 'react'
 import { Redirect } from 'react-router-dom'
 
 const PagesRoutes = [
-  {
-    path: '/admin/login',
-    component: lazy(() => import('../../views/pages/authentication/LoginBasic')),
-    layout: 'BlankLayout',
-    meta: {
-      authRoute: true
-    }
-  },
+
   {
     path: '/pages/login-basic',
     component: lazy(() => import('../../views/pages/authentication/LoginBasic')),
