@@ -82,9 +82,15 @@ const Router = () => {
        */
 
       return <Redirect to='/login' />
+      
     } else if (route.meta && route.meta.authRoute && localStorage.getItem('user')) {
       // ** If route has meta and authRole and user is Logged in then redirect user to home page (DefaultRoute)
-      return <Redirect to='/dashboard' />
+      const {role} = localStorage.get('user')
+      if (role.slug === 'user') {
+          return <Redirect to='/dashboard' />
+      } else {
+          return <Redirect to='/admin/dashboard' />
+      }
     } else {
       // ** If none of the above render component
       return <route.component {...props} />
