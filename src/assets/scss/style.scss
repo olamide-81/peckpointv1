@@ -13,6 +13,33 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 	margin: 10px;
 }
 
+.directory-card {
+	display: flex;
+	justify-content: space-between;
+	height: 60px;
+	flex-direction: row;
+}
+
+.directory-img {
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+	padding: 2px;
+	margin: 10px;
+}
+
+.directory-name {
+	padding: 2px;
+	margin: 10px;
+	margin-right: 20px;
+	justify-content: center;
+}
+
+.directory-btn {
+	margin: 40px;
+	width: 140px;
+}
+
 .price-img {
 	height: 80px;
 	width: 80px;

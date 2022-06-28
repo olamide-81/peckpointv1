@@ -95,7 +95,6 @@ const Contact = () => {
       })
   }
 
-
   const [dmodal, setDmodal] = useState({ id: '', firstname: '', lastname: '', gender: '', dob: '', phone_number: '', email: '', address: '' })
 
   const updateData = (data) => {
@@ -323,9 +322,9 @@ const Contact = () => {
                   <FileText size={15} />
                   <span className='align-middle ms-50'>CSV</span>
                 </DropdownItem>
-                <DropdownItem className='w-100'>
+                <DropdownItem className='w-100'  tag={Link} to='/directory'>
                   <Grid size={15} />
-                  <span className='align-middle ms-50'>Excel</span>
+                  <span className='align-middle ms-50'>Directory</span>
                 </DropdownItem>
                 <DropdownItem className='w-100'>
                   <File size={15} />

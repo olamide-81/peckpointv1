@@ -112,6 +112,26 @@ const ClientDashboardRoutes = [
     component: lazy(() => import('../../views/pages/misc/Maintenance'))
   },
   {
+    path: '/mms',
+    className: 'chat-application',
+    component: lazy(() => import('../../views/pages/misc/ComingSoon'))
+  },
+  {
+    path: '/voice',
+    className: 'chat-application',
+    component: lazy(() => import('../../views/pages/misc/ComingSoon'))
+  },
+  {
+    path: '/whatsapp',
+    className: 'chat-application',
+    component: lazy(() => import('../../views/pages/misc/ComingSoon'))
+  },
+  {
+    path: '/directory',
+    className: 'chat-application',
+    component: lazy(() => import('../../views/tables/Directory/index'))
+  },
+  {
     path: '/mms-quick-send',
     className: 'chat-application',
     component: lazy(() => import('../../views/pages/misc/Maintenance'))

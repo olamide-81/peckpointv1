@@ -69,7 +69,7 @@ const ComingSoon = () => {
       </a>
       <div className='misc-inner p-2 p-sm-3'>
         <div className='w-100 text-center'>
-          <h2 className='mb-1'>We are launching soon 🚀</h2>
+          <h2 className='mb-1'>This feature is launching soon 🚀</h2>
           <p className='mb-3'>We're creating something awesome. Please subscribe to get notified when it's ready!</p>
           <Form
             tag={Row}

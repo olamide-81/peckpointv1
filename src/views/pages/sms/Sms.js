@@ -13,15 +13,15 @@ const token = saved.token
 
 const Sms = () => {
 
-  const [data, addData] = useState([])
+  //const [data, addData] = useState([])
   const [dataa, setDataa] = useState([])
-  const [sender_id, setSenderID] = useState('')
+  //const [sender_id, setSenderID] = useState('')
   const [contact, getContact] = useState()
   const [message, setMessage] = useState('')
   const [title, setTitle] = useState('')
   const [sendingserver, SetSendingServer] = useState('')
 
-  useEffect(async() => {
+ { /* useEffect(async() => {
     const resultsender = await fetch("https://api.peckpoint.com/api/v1/sender-ids", {
         headers: {
          Authorization: `Bearer ${token}`
@@ -32,7 +32,7 @@ const Sms = () => {
      addData(resultsender.data)
      }
 
-  }, [])
+  }, [])*/ }
 
   useEffect(async() => {
     const resultsender = await fetch("https://api.peckpoint.com/api/v1/contacts", {
@@ -47,9 +47,10 @@ const Sms = () => {
 
   }, [])
 
-  const handleChange = (e) => {
+{ /*  const handleChange = (e) => {
     setSenderID(e.target.value)
   }
+  */ }
     // handle selection
     const handleChanged = (e) => {
       getContact(Array.isArray(e) ? e.map(x => x.id) : [])
@@ -90,30 +91,6 @@ const send = () => {
             </Label>
             <Col sm='9'>
               <Input type='text' name='sending-server' id='name' placeholder='Sending Server' value={sendingserver} onChange={(e) => SetSendingServer(e.target.value) } />
-            </Col>
-          </Row>
-
-          <Row className='mb-1'>
-            <Label sm='3' for='Email'>
-              Sender ID
-            </Label>
-            <Col sm='9'>
-            <Input
-                  id="exampleSelect"
-                   name="select"
-                   type="select"
-                   onChange={handleChange}
-                   value={sender_id}  
-                >
-                   {
-           data.map((data, index) => ([
-                <option key={index} value={data.id}>
-                 {data.name}
-                </option>
-                 ])
-                 )
-              }
-              </Input>
             </Col>
           </Row>
 
