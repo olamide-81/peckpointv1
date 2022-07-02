@@ -72,7 +72,7 @@ const Router = () => {
 
     if (
       (localStorage.getItem('user') === null && route.meta === undefined) ||
-      (localStorage.getItem('user') === null && route.meta && !route.meta.authRoute && !route.meta.publicRoute)
+      (localStorage.getItem('user') === null && route.meta && !route.meta.authRoute)
     ) {
       /**
        ** If user is not Logged in & route meta is undefined
@@ -85,7 +85,9 @@ const Router = () => {
       
     } else if (route.meta && route.meta.authRoute && localStorage.getItem('user')) {
       // ** If route has meta and authRole and user is Logged in then redirect user to home page (DefaultRoute)
-      const {role} = localStorage.get('user')
+      const { user } = JSON.parse(localStorage.getItem('user'))
+      const { role } = user
+
       if (role.slug === 'user') {
           return <Redirect to='/dashboard' />
       } else {

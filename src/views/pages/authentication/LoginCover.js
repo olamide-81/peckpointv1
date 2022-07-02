@@ -38,7 +38,7 @@ const LoginCover = () => {
       setIsLoading(false)
     }
 
-    if (isSuccess || user) {
+    if (isSuccess && user) {
       history.push(DefaultRoute)
       setIsLoading(false)
     }
