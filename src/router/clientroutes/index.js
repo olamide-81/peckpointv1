@@ -7,12 +7,15 @@ const TemplateTitle = '%s - PECKPOINT'
 
 
 // ** Default Route
+let DefaultRoute = '/dashboard'
+
+if (localStorage.getItem('user') !== null) {
 const { user } = JSON.parse(localStorage.getItem('user'))
 const { role } = user
-let DefaultRoute = '/dashboard'
 
 if (role.slug === 'admin') {
     DefaultRoute = '/admin/dashboard'
+}
 }
 
 // ** Merge Routes
