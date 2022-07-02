@@ -3,12 +3,12 @@ import { lazy } from 'react'
 const ClientDashboardRoutes = [
   // Dashboards
   {
-    path: '/dashboard',
-    component: lazy(() => import('../../views/dashboard/client'))
-  },
-  {
     path: '/admin/dashboard',
     component: lazy(() => import('../../views/dashboard/analytics'))
+  },
+  {
+    path: '/dashboard',
+    component: lazy(() => import('../../views/dashboard/client'))
   },
   {
     path: '/contacts',

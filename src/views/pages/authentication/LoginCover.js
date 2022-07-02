@@ -9,7 +9,6 @@ import { toast } from 'react-toastify'
 import { reset, login } from '../../../redux/authentication'
 import '@styles/react/pages/page-authentication.scss'
 import Spinner from '../../../@core/components/spinner/Fallback-spinner'
-import { DefaultRoute } from '../../../router/clientroutes'
 // ** Context
 import { AbilityContext } from '@src/utility/context/Can'
 
@@ -39,7 +38,18 @@ const LoginCover = () => {
     }
 
     if (isSuccess && user) {
-      history.push(DefaultRoute)
+      let go = '/dashboard'
+
+      if (localStorage.getItem('user')) {
+        const { user } = JSON.parse(localStorage.getItem('user'))
+        const { role } = user
+
+        if (role.slug === "admin") {
+         go = '/admin/dashboard'
+        }
+      }
+
+      history.push(go)
       setIsLoading(false)
     }
 
