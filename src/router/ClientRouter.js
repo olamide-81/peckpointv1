@@ -18,28 +18,36 @@ import { DefaultRoute, Routes } from './clientroutes'
 
 // ** Layouts
 import BlankLayout from '@layouts/BlankLayout'
-import VerticalLayout from '@src/layouts/ClientLayout'
+import VerticalLayoutClient from '@src/layouts/ClientLayout'
 import HorizontalLayout from '@src/layouts/HorizontalLayout'
+import VerticalLayoutAdmin from '@src/layouts/VerticalLayout' 
 
 const Router = () => {
   // ** Hooks
   const { layout, setLayout, setLastLayout } = useLayout()
   const { transition, setTransition } = useRouterTransition()
-
+  const { user } = JSON.parse(localStorage.getItem('user'))
+  const { role } = user
   // ** ACL Ability Context
   //const ability = useContext(AbilityContext)
 
   // ** Default Layout
+  console.log(localStorage.getItem('user'))
   const DefaultLayout = layout === 'horizontal' ? 'HorizontalLayout' : 'VerticalLayout'
 
+  console.log(layout)
+
   // ** All of the available layouts
-  const Layouts = { BlankLayout, VerticalLayout, HorizontalLayout }
+  const Layouts = { BlankLayout, VerticalLayoutClient, HorizontalLayout, VerticalLayoutAdmin}
 
   // ** Current Active Item
   const currentActiveItem = null
 
   // ** Return Filtered Array of Routes & Paths
   const LayoutRoutesAndPaths = layout => {
+
+    console.log(layout)
+
     const LayoutRoutes = []
     const LayoutPaths = []
 
@@ -85,8 +93,7 @@ const Router = () => {
       
     } else if (route.meta && route.meta.authRoute && localStorage.getItem('user')) {
       // ** If route has meta and authRole and user is Logged in then redirect user to home page (DefaultRoute)
-      const { user } = JSON.parse(localStorage.getItem('user'))
-      const { role } = user
+
       
       if (role.slug === "user") {
           return <Redirect to='/dashboard' />

@@ -5,10 +5,10 @@ import Layout from '@layouts/VerticalLayout'
 // ** Menu Items Array
 import navigation from '@src/navigation/vertical'
 
-const VerticalLayout = props => (
+const VerticalLayoutAdmin = props => (
     <Layout menuData={navigation} {...props}>
       {props.children}
     </Layout>
   )
 
-export default VerticalLayout
+export default VerticalLayoutAdmin
