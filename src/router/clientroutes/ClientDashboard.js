@@ -68,7 +68,7 @@ const ClientDashboardRoutes = [
     layout: 'VerticalLayoutClient'
   },
   {
-    path: '/pages/birthday-template',
+    path: '/pages/birthday-templates',
     className: 'chat-application',
     component: lazy(() => import('../../views/tables/birthdaytable')),
     layout: 'VerticalLayoutClient'
@@ -76,7 +76,8 @@ const ClientDashboardRoutes = [
   {
     path: '/pages/birthday',
     component: lazy(() => import('../../views/ui-elements/cards/basic/CardImages')),
-    className: 'chat-application'
+    className: 'chat-application',
+    layout: 'VerticalLayoutClient'
   },
   {
     path: '/senderid',

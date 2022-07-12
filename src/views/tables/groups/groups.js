@@ -1,5 +1,7 @@
 // ** React Imports
 import { Fragment, useEffect, useState, forwardRef } from 'react'
+import Select from 'react-select'
+import { selectThemeColors } from '@utils'
 
 // ** Table Data & Columns
 // import { dmodal, openUodal, openAmodal, Admodal } from './data'
@@ -56,10 +58,17 @@ const BootstrapCheckbox = forwardRef((props, ref) => (
 
 const Contact = () => {
   // ** States
+  const [contact, getContact] = useState()
+     // handle selection
+     const handleChange = (e) => {
+      getContact(Array.isArray(e) ? e.map(x => x.id) : [])
+    }
   const [data, addData] = useState([])
   const [group_id, setGroupname] = useState('')
-  const [contact_id, setContacts] = useState('')
-  const [contactfetch, setContactfetch] = useState([])
+  //const [contact_id, setContacts] = useState('')
+  const [dataa, setDataa] = useState([])
+
+ 
   //const [response, setResponse] = useState({})
   // const [mdata, addMdata] = useState({}) 
 
@@ -89,16 +98,18 @@ const Contact = () => {
      }).then(res => res.json())
 
     if (resultsender.success) {
-     setContactfetch(resultsender.data)
+     setDataa(resultsender.data)
      }
 
   }, [])
+
+  const colorOptions = dataa
 
   function refreshPage() {
     window.location.reload(true)
   }
 
-  console.warn(contactfetch)
+  //console.warn(contactfetch)
 
   const groupsfetch = () => {
     axios.get('https://api.peckpoint.com/api/v1/groups', {
@@ -113,6 +124,7 @@ const Contact = () => {
 
  groupsfetch()
 
+ const contact_id = contact
  
   async function addtogroup() {
         const item = {group_id, contact_id}
@@ -372,9 +384,6 @@ const Contact = () => {
     setGroupname(e.target.value)
   }
 
-  const handleChange = (e) => {
-    setContacts(e.target.value)
-  }
 
   return (
     <Fragment>
@@ -442,27 +451,25 @@ const Contact = () => {
               </Input>
  <br/>
  <FormGroup>
-    <Label for="exampleSelectMulti">
-      Select Multiple
-    </Label>
-    <Input
-      id="exampleSelectMulti"
-      multiple
-      name="selectMulti"
-      type="select"
-      onChange={handleChange}
-      value={contact_id}  
-    >
-       {
-             contactfetch.map((data, index) => ([
-                <option key={index} value={data.id}>
-                 {data.firstname}   {data.lastname}
-                </option>
-                 ])
-                 )
-              }
-    </Input>
-  </FormGroup>
+ <Label sm='3' >Contacts</Label>
+           <Col sm='9'>
+            <Select
+              onChange={handleChange}
+              isClearable={false}
+              theme={selectThemeColors}
+              isMulti
+              /* eslint-disable */
+              getOptionLabel={e => e.firstname + ' ' + e.lastname}
+              /* eslint-enable */
+              getOptionValue={e => e.id}
+              name='colors'
+              options={colorOptions}
+              className='react-select'
+              classNamePrefix='select'
+            />
+          </Col>
+ </FormGroup>
+
             </div>
           </ModalBody>
           <ModalFooter>

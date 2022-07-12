@@ -128,11 +128,13 @@ const PagesRoutes = [
   },
   {
     path: '/pages/profile',
-    component: lazy(() => import('../../views/pages/profile'))
+    component: lazy(() => import('../../views/pages/profile')),
+    layout: 'VerticalLayoutClient'
   },
   {
     path: '/pages/faq',
-    component: lazy(() => import('../../views/pages/faq'))
+    component: lazy(() => import('../../views/pages/faq')),
+    layout: 'VerticalLayoutClient'
   },
   {
     path: '/pages/knowledge-base',
@@ -156,7 +158,8 @@ const PagesRoutes = [
   },
   {
     path: '/pages/account-settings',
-    component: lazy(() => import('../../views/pages/account-settings'))
+    component: lazy(() => import('../../views/pages/account-settings')),
+    layout: 'VerticalLayoutClient'
   },
   {
     path: '/pages/license',

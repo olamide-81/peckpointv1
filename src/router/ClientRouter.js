@@ -26,8 +26,11 @@ const Router = () => {
   // ** Hooks
   const { layout, setLayout, setLastLayout } = useLayout()
   const { transition, setTransition } = useRouterTransition()
-  const { user } = JSON.parse(localStorage.getItem('user'))
-  const { role } = user
+  const { user } = JSON.parse(localStorage.getItem('user')) || {}
+  console.log(user) // 👉️ undefined
+
+  const { role } = user || {}
+  console.log(role) // 👉️ undefined
   // ** ACL Ability Context
   //const ability = useContext(AbilityContext)
 
@@ -80,6 +83,7 @@ const Router = () => {
 
     if (
       (localStorage.getItem('user') === null && route.meta === undefined) ||
+      (user === null) ||
       (localStorage.getItem('user') === null && route.meta && !route.meta.authRoute)
     ) {
       /**

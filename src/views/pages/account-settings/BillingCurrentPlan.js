@@ -106,43 +106,29 @@ const BillingCurrentPlan = () => {
           <Row>
             <Col md='6'>
               <div className='mb-2 pb-50'>
-                <h5>
-                  Your Current Plan is {user.user.is_subscribed}
-                </h5>
-                <span>A simple start for everyone</span>
+                {(user.user.plan === null) ?  <h5>
+                 You are not Subscribed to any plan
+                </h5> : <h5>
+                  Your Current Plan is {user.user.plan}
+                </h5> }
               </div>
               <div className='mb-2 pb-50'>
-                <h5>Active until Dec 09, 2021</h5>
-                <span>We will send you a notification upon Subscription expiration</span>
+              {(user.user.plan === null) ?  <h5>
+                
+                </h5> : <h5>Active until Dec 09, 2021</h5> }
               </div>
               <div className='mb-2 mb-md-1'>
-                <h5>
-                  $199 Per Month{' '}
-                  <Badge color='light-primary' className='ms-50'>
-                    Popular
-                  </Badge>
-                </h5>
-                <span>Standard plan for small to medium businesses</span>
-              </div>
-            </Col>
-            <Col md='6'>
-              <Alert color='warning'>
-                <h4 className='alert-heading'>We need your attention!</h4>
-                <div className='alert-body'>your plan requires update</div>
-              </Alert>
-              <div className='plan-statistics pt-1'>
-                <div className='d-flex justify-content-between'>
-                  <h5 className='fw-bolder'>Days</h5>
-                  <h5 className='fw-bolder'>4 of 30 Days</h5>
-                </div>
-                <Progress className='mb-50' value={75} />
-                <p className='mt-50'>4 days remaining until your plan requires update</p>
+              {(user.user.plan === null) ?  <h5>
+                </h5> : <h5>
+                  $199 Per Month
+                </h5>}
               </div>
             </Col>
             <Col xs={12}>
-              <Button color='primary' className='me-1 mt-1' onClick={() => setShow(true)}>
-                Upgrade Plan
-              </Button>
+            {(user.user.plan === null) ?    <Button color='primary' className='me-1 mt-1'>
+                Buy Plan
+              </Button> : <h5>
+                </h5>}
               <Button outline color='danger' className='mt-1' onClick={handleConfirmCancel}>
                 Cancel Subscription
               </Button>

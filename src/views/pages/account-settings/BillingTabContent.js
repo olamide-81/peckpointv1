@@ -10,7 +10,6 @@ const BillingTabContent = () => {
   return (
     <Fragment>
       <BillingCurrentPlan />
-      <BillingHistory />
     </Fragment>
   )
 }
