@@ -1,13 +1,13 @@
 // ** React Imports
 import { useState } from 'react'
 import { toast } from 'react-toastify'
-import Spinner from '../../../@core/components/spinner/Fallback-spinner'
+import Spinner from '../../@core/components/spinner/Fallback-spinner'
 
 // ** Third Party Components
 import Flatpickr from 'react-flatpickr'
 import { User, Briefcase, Mail, Calendar, DollarSign, X, Phone } from 'react-feather'
 
-import ShareLink from '../../extensions/copy-to-clipboard'
+import ShareLink from './copy-to-clipboard'
 
 // ** Reactstrap Imports
 import { Modal, Input, Label, Button, ModalHeader, ModalBody, InputGroup, InputGroupText } from 'reactstrap'

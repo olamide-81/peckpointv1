@@ -2,7 +2,7 @@
 import { Fragment, useState, forwardRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-import ShareLink from '../../extensions/copy-to-clipboard'
+import ShareLink from './copy-to-clipboard'
 
 //import { delayLog } from './delayLog'
 // ** Add New Modal Component

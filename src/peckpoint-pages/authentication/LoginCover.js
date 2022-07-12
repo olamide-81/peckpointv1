@@ -6,9 +6,9 @@ import { Row, Col, CardTitle, CardText, Form, Label, Input, Button } from 'react
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-import { reset, login } from '../../../redux/authentication'
+import { reset, login } from '../../redux/authentication'
 import '@styles/react/pages/page-authentication.scss'
-import Spinner from '../../../@core/components/spinner/Fallback-spinner'
+import Spinner from '../../@core/components/spinner/Fallback-spinner'
 // ** Context
 import { AbilityContext } from '@src/utility/context/Can'
 

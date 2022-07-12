@@ -7,7 +7,7 @@ import LoadingSpinner from "../../ui-elements/cards/basic/Spinner"
 import Flatpickr from 'react-flatpickr'
 import { User, Briefcase, Mail, Calendar, DollarSign, X, Phone } from 'react-feather'
 
-import ShareLink from '../../extensions/copy-to-clipboard'
+import ShareLink from '../../../peckpoint-pages/contacts/copy-to-clipboard'
 
 // ** Reactstrap Imports
 import { Modal, Input, Label, Button, ModalHeader, ModalBody, InputGroup, InputGroupText } from 'reactstrap'

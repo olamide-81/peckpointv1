@@ -5,17 +5,17 @@ const PagesRoutes = [
 
   {
     path: '/pages/login-basic',
-    component: lazy(() => import('../../views/pages/authentication/LoginBasic')),
+    component: lazy(() => import('../../peckpoint-pages/authentication/LoginCover')),
     layout: 'BlankLayout'
   },
   {
     path: '/pages/login-cover',
-    component: lazy(() => import('../../views/pages/authentication/LoginCover')),
+    component: lazy(() => import('../../peckpoint-pages/authentication/LoginCover')),
     layout: 'BlankLayout'
   },
   {
     path: '/admin/register',
-    component: lazy(() => import('../../views/pages/authentication/Register')),
+    component: lazy(() => import('../../peckpoint-pages/authentication/RegisterCover')),
     layout: 'BlankLayout',
     meta: {
       authRoute: true
@@ -23,17 +23,17 @@ const PagesRoutes = [
   },
   {
     path: '/pages/register-basic',
-    component: lazy(() => import('../../views/pages/authentication/RegisterBasic')),
+    component: lazy(() => import('../../peckpoint-pages/authentication/RegisterCover')),
     layout: 'BlankLayout'
   },
   {
     path: '/pages/register-cover',
-    component: lazy(() => import('../../views/pages/authentication/RegisterCover')),
+    component: lazy(() => import('../../peckpoint-pages/authentication/RegisterCover')),
     layout: 'BlankLayout'
   },
   {
     path: '/forgot-password',
-    component: lazy(() => import('../../views/pages/authentication/ForgotPasswordCover')),
+    component: lazy(() => import('../../peckpoint-pages/authentication/RegisterCover')),
     layout: 'BlankLayout',
     meta: {
       authRoute: true
@@ -41,42 +41,42 @@ const PagesRoutes = [
   },
   {
     path: '/pages/forgot-password-basic',
-    component: lazy(() => import('../../views/pages/authentication/ForgotPasswordBasic')),
+    component: lazy(() => import('../../peckpoint-pages/authentication/RegisterCover')),
     layout: 'BlankLayout'
   },
   {
     path: '/pages/forgot-password-cover',
-    component: lazy(() => import('../../views/pages/authentication/ForgotPasswordCover.js')),
+    component: lazy(() => import('../../peckpoint-pages/authentication/RegisterCover')),
     layout: 'BlankLayout'
   },
   {
     path: '/pages/reset-password-basic',
-    component: lazy(() => import('../../views/pages/authentication/ResetPasswordBasic')),
+    component: lazy(() => import('../../peckpoint-pages/authentication/RegisterCover')),
     layout: 'BlankLayout'
   },
   {
     path: '/pages/reset-password-cover',
-    component: lazy(() => import('../../views/pages/authentication/ResetPasswordCover')),
+    component: lazy(() => import('../../peckpoint-pages/authentication/RegisterCover')),
     layout: 'BlankLayout'
   },
   {
     path: '/pages/verify-email-basic',
-    component: lazy(() => import('../../views/pages/authentication/VerifyEmailBasic')),
+    component: lazy(() => import('../../peckpoint-pages/authentication/RegisterCover')),
     layout: 'BlankLayout'
   },
   {
     path: '/pages/verify-email-cover',
-    component: lazy(() => import('../../views/pages/authentication/VerifyEmailCover')),
+    component: lazy(() => import('../../peckpoint-pages/authentication/RegisterCover')),
     layout: 'BlankLayout'
   },
   {
     path: '/pages/two-steps-basic',
-    component: lazy(() => import('../../views/pages/authentication/TwoStepsBasic')),
+    component: lazy(() => import('../../peckpoint-pages/authentication/RegisterCover')),
     layout: 'BlankLayout'
   },
   {
     path: '/pages/two-steps-cover',
-    component: lazy(() => import('../../views/pages/authentication/TwoStepsCover')),
+    component: lazy(() => import('../../peckpoint-pages/authentication/RegisterCover')),
     layout: 'BlankLayout'
   },
   {
@@ -109,7 +109,7 @@ const PagesRoutes = [
   },
   {
     path: '/pages/account-settings',
-    component: lazy(() => import('../../views/pages/account-settings'))
+    component: lazy(() => import('../../peckpoint-pages/account-settings'))
   },
   {
     path: '/pages/license',
@@ -156,7 +156,7 @@ const PagesRoutes = [
   },
   {
     path: '/pages/pricing',
-    component: lazy(() => import('../../views/pages/pricing'))
+    component: lazy(() => import('../../peckpoint-pages/pricing'))
   },
   {
     path: '/misc/coming-soon',

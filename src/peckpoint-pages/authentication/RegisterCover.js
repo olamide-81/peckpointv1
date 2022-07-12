@@ -3,8 +3,8 @@ import { Link, useHistory} from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-import { register, reset } from '../../../redux/authentication'
-import LoadingSpinner from "../../ui-elements/cards/basic/Spinner"
+import { register, reset } from '../../redux/authentication'
+import LoadingSpinner from "../../views/ui-elements/cards/basic/Spinner"
 
 // ** Custom Hooks
 import { useSkin } from '@hooks/useSkin'

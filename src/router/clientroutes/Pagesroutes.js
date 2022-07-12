@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 const PagesRoutes = [
   {
     path: '/login',
-    component: lazy(() => import('../../views/pages/authentication/LoginCover')),
+    component: lazy(() => import('../../peckpoint-pages/authentication/LoginCover')),
     layout: 'BlankLayout',
     meta: {
       authRoute: true
@@ -25,22 +25,22 @@ const PagesRoutes = [
   },
   {
     path: '/pages/birthday-templates',
-    component: lazy(() => import('../../views/tables/birthdaytable')),
+    component: lazy(() => import('../../peckpoint-pages/birthday/birthdaycardtemplates')),
     className: 'chat-application'
   },
   {
     path: '/pages/birthday',
-    component: lazy(() => import('../../views/ui-elements/cards/basic/CardImages')),
+    component: lazy(() => import('../../peckpoint-pages/birthday/Birthday')),
     className: 'chat-application'
   },
   {
     path: '/pages/login-cover',
-    component: lazy(() => import('../../views/pages/authentication/LoginCover')),
+    component: lazy(() => import('../../peckpoint-pages/authentication/LoginCover')),
     layout: 'BlankLayout'
   },
   {
     path: '/register-cover',
-    component: lazy(() => import('../../views/pages/authentication/Register')),
+    component: lazy(() => import('../../peckpoint-pages/authentication/RegisterCover')),
     layout: 'BlankLayout',
     meta: {
       authRoute: true
@@ -53,7 +53,7 @@ const PagesRoutes = [
   },
   {
     path: '/register',
-    component: lazy(() => import('../../views/pages/authentication/RegisterCover')),
+    component: lazy(() => import('../../peckpoint-pages/authentication/RegisterCover')),
     layout: 'BlankLayout',
     meta: {
       authRoute: true
@@ -61,7 +61,7 @@ const PagesRoutes = [
   },
   {
     path: '/forgot-password',
-    component: lazy(() => import('../../views/pages/authentication/ForgotPasswordCover')),
+    component: lazy(() => import('../../peckpoint-pages/authentication/ForgotPasswordCover.js')),
     layout: 'BlankLayout',
     meta: {
       authRoute: true
@@ -74,20 +74,12 @@ const PagesRoutes = [
   },
   {
     path: '/pages/forgot-password-cover',
-    component: lazy(() => import('../../views/pages/authentication/ForgotPasswordCover.js')),
+    component: lazy(() => import('../../peckpoint-pages/authentication/ForgotPasswordCover')),
     layout: 'BlankLayout'
   },
   {
     path: '/contact-boarding',
     component: lazy(() => import('../../views/forms/ShareContactList')),
-    layout: 'BlankLayout',
-    meta: {
-      authRoute: true
-    }
-  },
-  {
-    path: '/signin',
-    component: lazy(() => import('../../views/pages/authentication/VerifyEmailBasic')),
     layout: 'BlankLayout',
     meta: {
       authRoute: true
@@ -105,7 +97,7 @@ const PagesRoutes = [
   },
   {
     path: '/pages/verify-email-basic',
-    component: lazy(() => import('../../views/pages/authentication/VerifyEmailBasic')),
+    component: lazy(() => import('../../peckpoint-pages/authentication/VerifyEmailBasic')),
     layout: 'BlankLayout'
   },
   {
@@ -158,7 +150,7 @@ const PagesRoutes = [
   },
   {
     path: '/pages/account-settings',
-    component: lazy(() => import('../../views/pages/account-settings')),
+    component: lazy(() => import('../../peckpoint-pages/account-settings')),
     layout: 'VerticalLayoutClient'
   },
   {
@@ -206,7 +198,7 @@ const PagesRoutes = [
   },
   {
     path: '/pages/pricing',
-    component: lazy(() => import('../../views/pages/pricing'))
+    component: lazy(() => import('../../peckpoint-pages/pricing'))
   },
   {
     path: '/misc/coming-soon',

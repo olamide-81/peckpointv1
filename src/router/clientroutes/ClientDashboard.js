@@ -4,18 +4,18 @@ const ClientDashboardRoutes = [
   // Dashboards
   {
     path: '/admin/dashboard',
-    component: lazy(() => import('../../views/dashboard/analytics')),
+    component: lazy(() => import('../../peckpoint-pages/dashboard/admin')),
     layout: 'VerticalLayoutAdmin'
   },
   {
     path: '/dashboard',
-    component: lazy(() => import('../../views/dashboard/client')),
+    component: lazy(() => import('../../peckpoint-pages/dashboard/client')),
     layout: 'VerticalLayoutClient'
   },
   {
     path: '/contacts',
     className: 'chat-application',
-    component: lazy(() => import('../../views/tables/contacts')),
+    component: lazy(() => import('../../peckpoint-pages/contacts/')),
     layout: 'VerticalLayoutClient'
   },
   {
@@ -39,7 +39,7 @@ const ClientDashboardRoutes = [
   {
     path: '/groups',
     className: 'chat-application',
-    component: lazy(() => import('../../views/tables/groups')),
+    component: lazy(() => import('../../peckpoint-pages/groups')),
     layout: 'VerticalLayoutClient'
   },
   {
@@ -70,19 +70,31 @@ const ClientDashboardRoutes = [
   {
     path: '/pages/birthday-templates',
     className: 'chat-application',
-    component: lazy(() => import('../../views/tables/birthdaytable')),
+    component: lazy(() => import('../../peckpoint-pages/birthday/birthdaycardtemplates')),
     layout: 'VerticalLayoutClient'
   },
   {
     path: '/pages/birthday',
-    component: lazy(() => import('../../views/ui-elements/cards/basic/CardImages')),
+    component: lazy(() => import('../../peckpoint-pages/birthday/Birthday')),
     className: 'chat-application',
     layout: 'VerticalLayoutClient'
   },
   {
+    path: '/templatetwo',
+    component: lazy(() => import('../../peckpoint-pages/birthday/Birthdaytwo')),
+    className: 'chat-application',
+    layout: 'VerticalLayoutClient'
+  },
+  {
+    path: '/admin/plans',
+    component: lazy(() => import('../../peckpoint-pages/pricing/Create')),
+    className: 'chat-application',
+    layout: 'VerticalLayoutAdmin'
+  },
+  {
     path: '/senderid',
     className: 'chat-application',
-    component: lazy(() => import('../../views/tables/sendingID/index')),
+    component: lazy(() => import('../../peckpoint-pages/sendingID')),
     layout: 'VerticalLayoutClient'
   },
   {
@@ -118,19 +130,19 @@ const ClientDashboardRoutes = [
   {
     path: '/sms-campaign-builder',
     className: 'chat-application',
-    component: lazy(() => import('../../views/pages/sms/Campaignbuilder')),
+    component: lazy(() => import('../../peckpoint-pages/sms/Campaignbuilder')),
     layout: 'VerticalLayoutClient'
   },
   {
     path: '/sms-quick-send',
     className: 'chat-application',
-    component: lazy(() => import('../../views/pages/sms/Sms')),
+    component: lazy(() => import('../../peckpoint-pages/sms/Sms')),
     layout: 'VerticalLayoutClient'
   },
   {
     path: '/sms-send-using-file',
     className: 'chat-application',
-    component: lazy(() => import('../../views/pages/sms/Sendusingfile')),
+    component: lazy(() => import('../../peckpoint-pages/sms/Sendusingfile')),
     layout: 'VerticalLayoutClient'
   },
   {

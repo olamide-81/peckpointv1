@@ -5,7 +5,7 @@ import { Fragment, useState, useEffect } from 'react'
 import { Card, Input, Modal, Button, CardBody, CardText, CardTitle, ModalBody, ModalHeader } from 'reactstrap'
 
 // ** Custom Component
-import PricingCard from '@src/views/pages/pricing/PricingCards'
+import PricingCard from '@src/peckpoint-pages/pricing/PricingCards.js'
 
 // ** Third Party Components
 import axios from 'axios'

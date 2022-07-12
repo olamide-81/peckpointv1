@@ -33,7 +33,7 @@ const AppRoutes = [
     path: '/all-settings',
     exact: true,
     className: 'email-application',
-    component: lazy(() => import('../../views/pages/account-settings'))
+    component: lazy(() => import('../../peckpoint-pages/account-settings'))
 },
 {
   path: '/admin/blacklist',

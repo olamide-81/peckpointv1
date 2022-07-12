@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 // ** Third Party Components
 import Flatpickr from 'react-flatpickr'
 import { User, Briefcase, Mail, Calendar, DollarSign, X, Phone } from 'react-feather'
-import LoadingSpinner from "../../ui-elements/cards/basic/Spinner"
+import LoadingSpinner from "../../views/ui-elements/cards/basic/Spinner"
 
 // ** Reactstrap Imports
 import { Modal, Input, Label, Button, ModalHeader, ModalBody, InputGroup, InputGroupText } from 'reactstrap'

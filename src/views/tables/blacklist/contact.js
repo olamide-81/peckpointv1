@@ -3,7 +3,7 @@ import { Fragment, useState, forwardRef } from 'react'
 import { Link } from 'react-router-dom'
 
 
-import ShareLink from '../../extensions/copy-to-clipboard'
+import ShareLink from '../../../peckpoint-pages/contacts/copy-to-clipboard'
 
 // ** Table Data & Columns
 import { columns } from './data'

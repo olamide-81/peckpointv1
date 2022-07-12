@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 
 // ** React Imports
 import { useEffect, useState } from 'react'
-import Spinner from '../../../@core/components/spinner/Fallback-spinner'
+import Spinner from '../../@core/components/spinner/Fallback-spinner'
 
 
 const CardTitles = () => {

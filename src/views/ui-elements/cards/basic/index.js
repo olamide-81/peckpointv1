@@ -3,7 +3,7 @@ import { Fragment } from 'react'
 
 // ** Demo Components
 import CardTitles from './CardTitles'
-import CardImages from './CardImages'
+import CardImages from '../../../../peckpoint-pages/birthday/Birthday'
 import CardLayout from './CardLayout'
 import CardNavigation from './CardNavigation'
 import CardHeaderFooter from './CardHeaderFooter'

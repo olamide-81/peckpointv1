@@ -16,8 +16,6 @@ import { Row, Col, Form, Card, Input, Label, Button, CardBody, CardTitle, CardHe
 
 // ** Demo Components
 import DeleteAccount from './DeleteAccount'
-import ShareLink from '../../extensions/copy-to-clipboard'
-import Birthday from '../../ui-elements/cards/advance/CardCongratulations'
 
 
 const AccountTabs = ({ data }) => {

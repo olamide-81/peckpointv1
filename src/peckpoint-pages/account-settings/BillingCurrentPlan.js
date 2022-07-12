@@ -19,7 +19,7 @@ import {
 } from 'reactstrap'
 
 // ** Demo Components
-import PricingCard from '@src/views/pages/pricing/PricingCards'
+import PricingCard from '@src/peckpoint-pages/pricing/PricingCards.js'
 
 // ** Third Party Components
 import axios from 'axios'

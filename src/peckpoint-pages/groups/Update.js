@@ -1,7 +1,7 @@
 // ** React Imports
 import { useState, useEffect } from 'react'
 // import { toast } from 'react-toastify'
-import LoadingSpinner from "../../ui-elements/cards/basic/Spinner"
+import LoadingSpinner from "../../views/ui-elements/cards/basic/Spinner"
 
 // ** Third Party Components
 import Flatpickr from 'react-flatpickr'
