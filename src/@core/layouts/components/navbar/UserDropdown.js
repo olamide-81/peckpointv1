@@ -46,6 +46,7 @@ const UserDropdown = () => {
   const userAvatar = (userData && userData.avatar) || defaultAvatar
 
   const user = JSON.parse(localStorage.getItem('user'))
+  const usera = user.user.role.slug
 
   return (
     <UncontrolledDropdown tag='li' className='dropdown-user nav-item'>
@@ -61,14 +62,14 @@ const UserDropdown = () => {
           <Settings size={14} className='me-75' />
           <span className='align-middle'>Settings</span>
         </DropdownItem>
-        <DropdownItem tag={Link} to='/pages/pricing'>
+        {(usera === "user") ?   <DropdownItem tag={Link} to='/pages/pricing'>
           <CreditCard size={14} className='me-75' />
           <span className='align-middle'>Pricing</span>
-        </DropdownItem>
-        <DropdownItem tag={Link} to='/pages/faq'>
+        </DropdownItem> : console.log('hello')}
+        {(usera === "user") ?    <DropdownItem tag={Link} to='/pages/faq'>
           <HelpCircle size={14} className='me-75' />
           <span className='align-middle'>FAQ</span>
-        </DropdownItem>
+        </DropdownItem> : console.log('hello')}
         <DropdownItem tag={Link} to='/login' onClick={logout}>
           <Power size={14} className='me-75' />
           <span className='align-middle'>Logout</span>

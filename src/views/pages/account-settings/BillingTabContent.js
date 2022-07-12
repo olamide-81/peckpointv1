@@ -1,6 +1,5 @@
 // ** React Imports
 import { Fragment } from 'react'
-
 // ** Demo Components
 import PaymentMethods from './PaymentMethods'
 import BillingAddress from './BillingAddress'
@@ -11,8 +10,6 @@ const BillingTabContent = () => {
   return (
     <Fragment>
       <BillingCurrentPlan />
-      <PaymentMethods />
-      <BillingAddress />
       <BillingHistory />
     </Fragment>
   )

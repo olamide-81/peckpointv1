@@ -175,9 +175,7 @@ const AccountTabs = ({ data }) => {
           </Form>
         </CardBody>
       </Card>
-      <ShareLink />
       <DeleteAccount />
-      <Birthday />
     </Fragment>
   )
 }

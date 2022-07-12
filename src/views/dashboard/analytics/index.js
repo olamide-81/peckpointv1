@@ -1,5 +1,5 @@
 // ** React Imports
-import { useContext } from 'react'
+//import { useContext } from 'react'
 
 // ** Icons Imports
 import { List } from 'react-feather'
@@ -38,7 +38,7 @@ import '@styles/react/libs/charts/apex-charts.scss'
 
 const AnalyticsDashboard = () => {
   // ** Context
-  const { colors } = useContext(ThemeColors)
+  //const { colors } = useContext(ThemeColors)
 
   // ** Vars 
   /*
@@ -136,23 +136,6 @@ const AnalyticsDashboard = () => {
         <Col lg='3' sm='6'>
           <SubscribersGained kFormatter={kFormatter} />
         </Col>
-        <Col lg='3' sm='6'>
-          <OrdersReceived kFormatter={kFormatter} warning={colors.warning.main} />
-        </Col>
-        <Col lg='3' sm='6'>
-          <SubscribersGained kFormatter={kFormatter} />
-        </Col>
-        <Col lg='3' sm='6'>
-          <SubscribersGained kFormatter={kFormatter} />
-        </Col>
-      </Row>
-      <Row className='match-height'>
-        <Col lg='6' xs='12'>
-          <AvgSessions primary={colors.primary.main} />
-        </Col>
-        <Col lg='6' xs='12'>
-          <SupportTracker primary={colors.primary.main} danger={colors.danger.main} />
-        </Col>
       </Row>
       {/*
       <Row className='match-height'>
@@ -177,11 +160,7 @@ const AnalyticsDashboard = () => {
         </Col>
       </Row> 
       */}
-      <Row className='match-height'>
-        <Col xs='12'>
-          <InvoiceList />
-        </Col>
-      </Row>
+   
     </div>
   )
 }

@@ -21,8 +21,8 @@ const SubscribersGained = ({}) => {
     <StatsWithAreaChart
       icon={<Users size={21} />}
       color='primary'
-      stats='0'
-      statTitle='Contacts'
+      stats='40'
+      statTitle='Users'
       series={data.series}
       type='area'
     />

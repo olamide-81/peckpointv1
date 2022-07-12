@@ -32,6 +32,9 @@ const NavbarUser = props => {
 
   const saved = JSON.parse(localStorage.getItem('user'))
   const token = saved.token
+  const user = saved.user.role.slug
+
+  console.log(user)
   //const [isLoading, setIsLoading] = useState(false)
 
   axios.get("https://api.peckpoint.com/api/v1/units", {
@@ -83,9 +86,9 @@ const NavbarUser = props => {
         </NavLink>
       </NavItem>
       <CartDropdown/>
-      <Button outline onClick={() => setFormModal(!formModal)}>
+     {(user === "user") ?  <Button outline onClick={() => setFormModal(!formModal)}>
                   Top Up
-                </Button>
+                </Button> : console.log('bad')}
                 <Modal isOpen={formModal} toggle={() => setFormModal(!formModal)} className='modal-dialog-centered'>
           <ModalHeader toggle={() => setFormModal(!formModal)}>Top Up</ModalHeader>
           <ModalBody>

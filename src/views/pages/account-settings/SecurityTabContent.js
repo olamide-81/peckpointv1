@@ -94,10 +94,6 @@ const SecurityTabContent = () => {
           </Form>
         </CardBody>
       </Card>
-      <TwoFactorAuth />
-      <CreateApiKey />
-      <ApiKeysList />
-      <RecentDevices />
     </Fragment>
   )
 }

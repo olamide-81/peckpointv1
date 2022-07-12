@@ -75,7 +75,6 @@ const DeleteAccount = () => {
       </CardHeader>
       <CardBody className='py-2 my-25'>
         <Alert color='warning'>
-          <h4 className='alert-heading'>Are you sure you want to delete your account?</h4>
           <div className='alert-body fw-normal'>
             Once you delete your account, there is no going back. Please be certain.
           </div>
