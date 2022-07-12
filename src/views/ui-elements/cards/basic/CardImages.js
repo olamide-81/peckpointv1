@@ -21,6 +21,7 @@ const CardImages = () => {
    empty = require(`@src/assets/images/pages/${illustration}`).default
   const user = JSON.parse(localStorage.getItem('user'))
   const token = user.token
+  const plan = user.user.plan
   
 
   const printRef = useRef([])
@@ -181,7 +182,9 @@ const CardImages = () => {
                           <div>
                             <img src={img4} className='profile-picture' />
                             <h2>{(`${ee.firstname} ${ee.lastname}`).toUpperCase()}</h2>
-                              <p>{ee.dob} - With Love from {user.user.name}</p>
+                              <p>{ee.dob} - With Love from {user.user.name} <br/>
+                              {(plan === null) ? "Powered by Peckpoint" : ""}
+                              </p>
                           </div>
                         </div>
                         <img src={img3} className='gift' />
