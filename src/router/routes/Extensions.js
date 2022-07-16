@@ -23,7 +23,7 @@ const ExtensionsRoutes = [
   },
   {
     path: '/extensions/clipboard',
-    component: lazy(() => import('../../views/extensions/copy-to-clipboard'))
+    component: lazy(() => import('../../peckpoint-pages/contacts/copy-to-clipboard'))
   },
   {
     path: '/extensions/react-player',

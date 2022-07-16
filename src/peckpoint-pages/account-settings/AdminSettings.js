@@ -11,7 +11,7 @@ import { toast } from 'react-toastify'
 const saved = JSON.parse(localStorage.getItem('user'))
 const token = saved.token
 
-const Create = () => {
+const Admin = () => {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [duration, setDuration] = useState()
@@ -40,7 +40,7 @@ const send = () => {
       <div>
            <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Create New Plan</CardTitle>
+        <CardTitle tag='h4'>Admin Settings</CardTitle>
       </CardHeader>
 
       <CardBody>
@@ -95,4 +95,4 @@ const send = () => {
       </div>
   )
 }
-export default Create
+export default Admin
