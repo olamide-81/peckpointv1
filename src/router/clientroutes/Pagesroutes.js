@@ -197,10 +197,6 @@ const PagesRoutes = [
     component: () => <Redirect to='/pages/blog/edit/1' />
   },
   {
-    path: '/pages/pricing',
-    component: lazy(() => import('../../peckpoint-pages/pricing'))
-  },
-  {
     path: '/misc/coming-soon',
     component: lazy(() => import('../../views/pages/misc/ComingSoon')),
     layout: 'BlankLayout',

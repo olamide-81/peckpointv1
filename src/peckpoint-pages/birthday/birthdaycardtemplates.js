@@ -26,7 +26,7 @@ const CardTitles = () => {
       <Col lg='4' md='6'>
         <Card>
           <CardBody>
-            <CardTitle tag='h4'>New Template</CardTitle>
+            <CardTitle tag='h4'>Galaxy Template</CardTitle>
             <CardSubtitle className='text-muted'>Coming soon!</CardSubtitle>
           </CardBody>
           <img className='img-fluid' src={img2} alt='Card cap' />

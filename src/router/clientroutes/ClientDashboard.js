@@ -68,6 +68,11 @@ const ClientDashboardRoutes = [
     layout: 'VerticalLayoutClient'
   },
   {
+    path: '/pages/pricing',
+    component: lazy(() => import('../../peckpoint-pages/pricing')),
+    layout: 'VerticalLayoutClient'
+  },
+  {
     path: '/pages/birthday-templates',
     className: 'chat-application',
     component: lazy(() => import('../../peckpoint-pages/birthday/birthdaycardtemplates')),
