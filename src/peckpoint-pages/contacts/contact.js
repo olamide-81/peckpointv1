@@ -52,7 +52,8 @@ const Contact = () => {
   const token = saved.token
 
   useEffect(async () => {
-    const resultsender = await fetch("https://api.peckpoint.com/api/v1/contacts", {
+    try {
+      const resultsender = await fetch("https://api.peckpoint.com/api/v1/contacts", {
         headers: {
          Authorization: `Bearer ${token}`
         }
@@ -61,7 +62,9 @@ const Contact = () => {
     if (resultsender.success) {
      addData(resultsender.data)
      }
-
+    } catch (error) {
+      console.log(error)
+    }
   }, [])
 
   const [modal, setModal] = useState(false)
@@ -314,10 +317,7 @@ const Contact = () => {
                 <span className='align-middle ms-50'>Export</span>
               </DropdownToggle>
               <DropdownMenu>
-                <DropdownItem className='w-100'>
-                  <Printer size={15} />
-                  <span className='align-middle ms-50'>Print</span>
-                </DropdownItem>
+               
                 <DropdownItem className='w-100' onClick={() => downloadCSV(data)}>
                   <FileText size={15} />
                   <span className='align-middle ms-50'>CSV</span>
@@ -326,14 +326,7 @@ const Contact = () => {
                   <Grid size={15} />
                   <span className='align-middle ms-50'>Directory</span>
                 </DropdownItem>
-                <DropdownItem className='w-100'>
-                  <File size={15} />
-                  <span className='align-middle ms-50'>PDF</span>
-                </DropdownItem>
-                <DropdownItem className='w-100'>
-                  <Copy size={15} />
-                  <span className='align-middle ms-50'>Copy</span>
-                </DropdownItem>
+              
               </DropdownMenu>
             </UncontrolledButtonDropdown>
             <ShareLink/>

@@ -77,8 +77,9 @@ const Contact = () => {
 
   //Handle Selection
 
-  useEffect(async() => {
-    const resultsender = await fetch("https://api.peckpoint.com/api/v1/groups", {
+  useEffect(async () => {
+    try {
+      const resultsender = await fetch("https://api.peckpoint.com/api/v1/groups", {
         headers: {
          Authorization: `Bearer ${token}`
         }
@@ -88,10 +89,15 @@ const Contact = () => {
      addData(resultsender.data)
      }
 
+    } catch (error) {
+      console.log(error)
+    }
   }, [])
 
-  useEffect(async() => {
-    const resultsender = await fetch("https://api.peckpoint.com/api/v1/contacts", {
+
+  useEffect(async () => {
+    try {
+      const resultsender = await fetch("https://api.peckpoint.com/api/v1/contacts", {
         headers: {
          Authorization: `Bearer ${token}`
         }
@@ -100,7 +106,9 @@ const Contact = () => {
     if (resultsender.success) {
      setDataa(resultsender.data)
      }
-
+    } catch (error) {
+      console.log(error)
+    }
   }, [])
 
   const colorOptions = dataa
@@ -229,7 +237,7 @@ const Contact = () => {
 
     {
       name: 'Actions',
-      minWidth: '385px',
+      minWidth: '280px',
       allowOverflow: true,
       cell: (row) => {
         return (
@@ -242,14 +250,6 @@ const Contact = () => {
               <span className='align-middle ms-50'>Update</span>
             </div>
             <div className='w-100 dropdown-item' onClick={() => {
-
-              AddData(row.id)
-            }}>
-              <Archive size={15} />
-              <span className='align-middle ms-50'>Add Contact</span>
-            </div>
-            <div className='w-100 dropdown-item' onClick={() => {
-
               deleteGroup(row.id)
             }}>
               <Trash size={15} />
@@ -397,25 +397,9 @@ const Contact = () => {
                 <span className='align-middle ms-50'>Export</span>
               </DropdownToggle>
               <DropdownMenu>
-                <DropdownItem className='w-100'>
-                  <Printer size={15} />
-                  <span className='align-middle ms-50'>Print</span>
-                </DropdownItem>
                 <DropdownItem className='w-100' onClick={() => downloadCSV(data)}>
                   <FileText size={15} />
                   <span className='align-middle ms-50'>CSV</span>
-                </DropdownItem>
-                <DropdownItem className='w-100'>
-                  <Grid size={15} />
-                  <span className='align-middle ms-50'>Excel</span>
-                </DropdownItem>
-                <DropdownItem className='w-100'>
-                  <File size={15} />
-                  <span className='align-middle ms-50'>PDF</span>
-                </DropdownItem>
-                <DropdownItem className='w-100'>
-                  <Copy size={15} />
-                  <span className='align-middle ms-50'>Copy</span>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledButtonDropdown>

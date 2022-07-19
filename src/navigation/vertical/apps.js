@@ -82,7 +82,7 @@ export default [
         id: 'blacklist',
         title: 'Blacklist',
         icon: <UserX size={12} />,
-        navLink: '/admin/blacklist'
+        navLink: '/blacklist'
       },
       {
         id: 'spam-words',

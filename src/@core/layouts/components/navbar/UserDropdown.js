@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 
 // ** Custom Components
 import Avatar from '@components/avatar'
+import userimg from '../../../../assets/images/logo/logo.png'
 
 // // ** Utils
 // import { isUserLoggedIn } from '@utils'
@@ -19,7 +20,7 @@ import { User, Mail, CheckSquare, MessageSquare, Settings, CreditCard, HelpCircl
 import { UncontrolledDropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap'
 
 // ** Default Avatar Image
-import defaultAvatar from '@src/assets/images/portrait/small/avatar-s-11.jpg'
+//import defaultAvatar from '@src/assets/images/portrait/small/avatar-s-11.jpg'
 
 const UserDropdown = () => {
   // ** Store Vars
@@ -43,7 +44,7 @@ const UserDropdown = () => {
   }
 
   //** Vars
-  const userAvatar = (userData && userData.avatar) || defaultAvatar
+  const userAvatar = (userData && userData.avatar) || userimg
 
   const user = JSON.parse(localStorage.getItem('user'))
   const usera = user.user.role.slug
@@ -58,10 +59,10 @@ const UserDropdown = () => {
         <Avatar img={userAvatar} imgHeight='40' imgWidth='40' status='online' />
       </DropdownToggle>
       <DropdownMenu end>
-        <DropdownItem tag={Link} to='/pages/account-settings'>
+      {(usera === "user") ? <DropdownItem tag={Link} to='/pages/account-settings'>
           <Settings size={14} className='me-75' />
           <span className='align-middle'>Settings</span>
-        </DropdownItem>
+        </DropdownItem> : console.log('hello')}
         {(usera === "user") ?   <DropdownItem tag={Link} to='/pages/pricing'>
           <CreditCard size={14} className='me-75' />
           <span className='align-middle'>Pricing</span>

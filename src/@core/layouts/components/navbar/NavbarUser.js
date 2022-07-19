@@ -5,7 +5,7 @@ import UserDropdown from './UserDropdown'
 import NavbarSearch from './NavbarSearch'
 //import { useHistory } from 'react-router-dom'
 import NotificationDropdown from './NotificationDropdown'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 //import { toast } from 'react-toastify'
 
@@ -37,14 +37,20 @@ const NavbarUser = props => {
   console.log(user)
   //const [isLoading, setIsLoading] = useState(false)
 
-  axios.get("https://api.peckpoint.com/api/v1/units", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
+  useEffect(async () => {
+    try {
+      axios.get("https://api.peckpoint.com/api/v1/units", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      }).then(dataa => {
+               setData(dataa.data.data)
+      })
+    } catch (error) {
+      console.log(error)
     }
-  }).then(dataa => {
-           setData(dataa.data.data)
-  })
+  }, [])
 
   // ** Function to toggle Theme (Light/Dark)
   const ThemeToggler = () => {

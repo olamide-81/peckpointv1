@@ -11,7 +11,7 @@ const AppRoutes = [
     component: lazy(() => import('../../views/apps/email'))
   },
   {
-    path: '/admin/plans',
+    path: '/admin/plan',
     exact: true,
     className: 'email-application',
     component: lazy(() => import('../../views/tables/reactstrap'))
@@ -39,7 +39,7 @@ const AppRoutes = [
   path: '/admin/blacklist',
   exact: true,
   className: 'email-application',
-  component: lazy(() => import('../../views/tables/reactstrap'))
+  component: lazy(() => import('../../views/pages/misc/Maintenance'))
 },
 {
   path: '/admin/spam-words',

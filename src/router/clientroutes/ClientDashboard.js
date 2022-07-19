@@ -28,13 +28,13 @@ const ClientDashboardRoutes = [
     path: '/blacklist',
     className: 'chat-application',
     component: lazy(() => import('../../views/tables/blacklist')),
-    layout: 'VerticalLayoutClient'
+    layout: 'VerticalLayoutAdmin'
   },
   {
     path: '/all-contacts-blacklist',
     className: 'chat-application',
     component: lazy(() => import('../../views/tables/allcontactsblacklist')),
-    layout: 'VerticalLayoutClient'
+    layout: 'VerticalLayoutAdmin'
   },
   {
     path: '/groups',
@@ -124,12 +124,6 @@ const ClientDashboardRoutes = [
     path: '/sms-templates-new',
     className: 'chat-application',
     component: lazy(() => import('../../views/pages/sms-template/Smstemplate')),
-    layout: 'VerticalLayoutClient'
-  },
-  {
-    path: '/blacklist',
-    className: 'chat-application',
-    component: lazy(() => import('../../views/pages/misc/Maintenance')),
     layout: 'VerticalLayoutClient'
   },
   {
