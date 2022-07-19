@@ -119,18 +119,25 @@ const Contact = () => {
 
   //console.warn(contactfetch)
 
-  const groupsfetch = () => {
-    axios.get('https://api.peckpoint.com/api/v1/groups', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    }).then(res => {
-       addData(res.data.data)
-    })
-  }
 
- groupsfetch()
+  useEffect(async () => {
+    try {
+      const groupsfetch = () => {
+        axios.get('https://api.peckpoint.com/api/v1/groups', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }).then(res => {
+           addData(res.data.data)
+        })
+      }
+    
+     groupsfetch()
+    } catch (error) {
+      console.log(error)
+    }
+  }, [])
 
  const contact_id = contact
  
@@ -391,7 +398,9 @@ const Contact = () => {
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
           <CardTitle tag='h4'>Groups</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-            <UncontrolledButtonDropdown>
+            <div className='group-top-btn'>
+              <div className='group-break'>
+              <UncontrolledButtonDropdown>
               <DropdownToggle color='secondary' caret outline>
                 <Share size={15} />
                 <span className='align-middle ms-50'>Export</span>
@@ -409,7 +418,9 @@ const Contact = () => {
             </Button>
             <Button color='primary' className='importbtn' onClick={() => setFormModal(!formModal)}>
                   Add to group
-                </Button>
+            </Button>
+              </div>
+            </div>
                 <Modal isOpen={formModal} toggle={() => setFormModal(!formModal)} className='modal-dialog-centered'>
           <ModalHeader toggle={() => setFormModal(!formModal)}>Add contact to group</ModalHeader>
           <ModalBody>

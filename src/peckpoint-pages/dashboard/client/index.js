@@ -49,6 +49,7 @@ const AnalyticsDashboard = () => {
   const token = user.token
 
   useEffect(() => {
+    try {
       const contactnofetch = async () => {
         try {
           const response = await axios.get('https://api.peckpoint.com/api/v1/contacts', {
@@ -68,9 +69,13 @@ const AnalyticsDashboard = () => {
         }
       }
       contactnofetch()
+    } catch (error) {
+      console.log(error)
+    }
   })
 
   useEffect(() => {
+  try {
     const groupnofetch = async () => {
       try {
         const response = await axios.get('https://api.peckpoint.com/api/v1/groups', {
@@ -89,6 +94,9 @@ const AnalyticsDashboard = () => {
       }
     }
     groupnofetch()
+  } catch (error) {
+    console.log(error)
+  }
 })
   // ** Vars 
   /*

@@ -24,7 +24,9 @@ const CardTitles = () => {
   }
 
   useEffect(async() => {
-    const resultsender = await fetch("https://api.peckpoint.com/api/v1/sender-ids", {
+  
+    try {
+      const resultsender = await fetch("https://api.peckpoint.com/api/v1/sender-ids", {
         headers: {
          Authorization: `Bearer ${token}`
         }
@@ -33,6 +35,9 @@ const CardTitles = () => {
     if (resultsender.success) {
      setData(resultsender.data)
      }
+    } catch (error) {
+      console.log(error)
+    }
 
   }, [])
 

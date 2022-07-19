@@ -27,17 +27,22 @@ const Pricing = () => {
     const token = saved.token
 
     useEffect(async() => {
+     try {
       const resultsender = await fetch("https://api.peckpoint.com/api/v1/plans", {
-          headers: {
-           Authorization: `Bearer ${token}`
-          }
-       }).then(res => res.json())
-  
-      if (resultsender.success) {
-       setData(resultsender.data)
-       }
-  
+        headers: {
+         Authorization: `Bearer ${token}`
+        }
+     }).then(res => res.json())
+
+    if (resultsender.success) {
+     setData(resultsender.data)
+     }
+
+     } catch (error) {
+       console.log(error)
+     }
     }, [])
+
 
     async function purchase() {
       

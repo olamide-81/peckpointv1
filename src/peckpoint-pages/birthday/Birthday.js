@@ -49,44 +49,49 @@ const CardImages = () => {
   const [conts, setConts] = useState([])
   const today = [], thisWeek = [], thisMonth = [], sorts = ['Today', 'This Week', 'This Month']
 
-  axios.get('https://api.peckpoint.com/api/v1/contacts', {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
+  useEffect(async () => {
+    try {
+      axios.get('https://api.peckpoint.com/api/v1/contacts', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      }).then(res => {
+        if (res.data.data !== undefined) {
+        const data = res.data.data
+        
+        data.forEach((v, i) => {
+          // console.log(Date.parse(v.dob))
+    
+          if (!isNaN(Date.parse(v.dob))) {
+    
+            const date = new Date(), mdate = new Date(Date.parse(v.dob))
+    
+            const currDate = Math.floor(Date.parse(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate() - date.getDay()}`) / 1000) // today's date
+    
+            const UDate = Math.floor(Date.parse(`${mdate.getFullYear()}-${mdate.getMonth() + 1}-${mdate.getDate() }`) / 1000) // user date
+    
+            if ((date.getMonth() === mdate.getMonth()) && (mdate.getDate() === date.getDate())) {
+              today[i] = data[i]
+            }
+    
+            if ((UDate >= currDate) && (UDate <= (currDate + 604800)))  {
+              thisWeek[i] = data[i]
+            }
+    
+            if (mdate.getMonth() === date.getMonth()) {
+              thisMonth[i] = data[i]
+            }
+                
+            }
+        }) 
+      }
+        setConts([today, thisWeek, thisMonth])
+      })
+    } catch (error) {
+      console.log(error)
     }
-  }).then(res => {
-    
-    if (res.data.data !== undefined) {
-    const data = res.data.data
-    
-    data.forEach((v, i) => {
-      // console.log(Date.parse(v.dob))
-
-      if (!isNaN(Date.parse(v.dob))) {
-
-        const date = new Date(), mdate = new Date(Date.parse(v.dob))
-
-        const currDate = Math.floor(Date.parse(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate() - date.getDay()}`) / 1000) // today's date
-
-        const UDate = Math.floor(Date.parse(`${mdate.getFullYear()}-${mdate.getMonth() + 1}-${mdate.getDate() }`) / 1000) // user date
-
-        if ((date.getMonth() === mdate.getMonth()) && (mdate.getDate() === date.getDate())) {
-          today[i] = data[i]
-        }
-
-        if ((UDate >= currDate) && (UDate <= (currDate + 604800)))  {
-          thisWeek[i] = data[i]
-        }
-
-        if (mdate.getMonth() === date.getMonth()) {
-          thisMonth[i] = data[i]
-        }
-            
-        }
-    }) 
-  }
-    setConts([today, thisWeek, thisMonth])
-  })
+  }, [])
   let tots = 0
   return (
     <Fragment>

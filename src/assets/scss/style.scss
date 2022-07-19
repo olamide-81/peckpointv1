@@ -228,6 +228,19 @@ div[data-column-id="7"] div[role=columnheader], .groups div[data-column-id="3"] 
 		max-height: 300px;
 	}
 
+	.importbtn {
+		margin-top: 15px;
+	 }
+
+	 .group-top-btn {
+         display: flex;
+		 flex-direction: row;
+		 justify-content: space-between;
+	 }
+
+	 .group-break {
+
+	 }
 	.birthdaycard {
 		background-color: #f9f5f6;
 		margin: 0px;
