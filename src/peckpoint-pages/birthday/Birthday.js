@@ -2,6 +2,7 @@
 import { Fragment, React, useRef, useState, useEffect } from 'react'
 //import html2canvas from 'html2canvas'
 import html2canvas from 'html2canvas'
+import Idle from '../IdleTimerContainer'
 
 import axios from 'axios'
 import { useSkin } from '@hooks/useSkin'
@@ -212,6 +213,7 @@ const CardImages = () => {
       })
         }
   </div>
+  <Idle></Idle>
        {/* <Col xl='6' md='6'>
           <Card className='birthdaycardf' responsive="true">
             <div className='birthdaycardf' key={printRef.current.length} ref={e => {

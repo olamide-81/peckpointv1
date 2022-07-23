@@ -9,6 +9,7 @@ import { Row, Col } from 'reactstrap'
 
 // ** Demo Components
 import TableWithButtons from './groups'
+import Idle from '../IdleTimerContainer'
 
 
 // ** Styles
@@ -17,6 +18,7 @@ import '@styles/react/libs/tables/react-dataTable-component.scss'
 const Tables = () => {
   return (
     <Fragment>
+       <Idle></Idle>
       <Breadcrumbs breadCrumbTitle='Group' breadCrumbActive='Group List' />
       <Row>
         <Col sm='12'>

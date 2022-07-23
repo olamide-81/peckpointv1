@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 // ** React Imports
 import { useEffect, useState } from 'react'
 import Spinner from '../../@core/components/spinner/Fallback-spinner'
+import Idle from '../IdleTimerContainer'
 
 
 const CardTitles = () => {
@@ -86,6 +87,7 @@ async function deletesender (id) {
 
   return (
     <Row className='match-height'>
+       <Idle></Idle>
       <Col lg='4' md='6'>
       <Button color='primary' className='button' onClick={() => setFormModal(!formModal)}>
                   Create Sender ID

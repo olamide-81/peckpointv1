@@ -15,6 +15,8 @@ import AccountTabContent from './AccountTabContent'
 import SecurityTabContent from './SecurityTabContent'
 import ConnectionsTabContent from './ConnectionsTabContent'
 import NotificationsTabContent from './NotificationsTabContent'
+import Idle from '../IdleTimerContainer'
+
 
 // ** Styles
 import '@styles/react/libs/flatpickr/flatpickr.scss'
@@ -35,6 +37,7 @@ const AccountSettings = () => {
 
   return (
     <Fragment>
+       <Idle></Idle>
       <Breadcrumbs breadCrumbTitle='Account Settings' breadCrumbParent='Pages' breadCrumbActive='Account Settings' />
       {data !== null ? (
         <Row>

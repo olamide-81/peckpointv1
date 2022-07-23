@@ -7,6 +7,7 @@ import { selectThemeColors } from '@utils'
 import { toast } from 'react-toastify'
 // ** Third Party Imports
 import { useDropzone } from 'react-dropzone'
+import Idle from '../IdleTimerContainer'
 import { FileText, X, DownloadCloud } from 'react-feather'
 //import makeAnimated from 'react-select/animated'
 
@@ -132,6 +133,7 @@ const Sendusingfile = () => {
 }
   return (
     <Card>
+       <Idle></Idle>
       <CardHeader>
         <CardTitle tag='h4'>Send Using File</CardTitle>
       </CardHeader>

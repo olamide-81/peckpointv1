@@ -5,6 +5,7 @@ import Select from 'react-select'
 // ** Utils
 import { selectThemeColors } from '@utils'
 import { toast } from 'react-toastify'
+import Idle from '../IdleTimerContainer'
 //import makeAnimated from 'react-select/animated'
 
 
@@ -77,6 +78,7 @@ const send = () => {
 
   return (
     <Card>
+       <Idle></Idle>
       <CardHeader>
         <CardTitle tag='h4'>Campaign Builder</CardTitle>
       </CardHeader>

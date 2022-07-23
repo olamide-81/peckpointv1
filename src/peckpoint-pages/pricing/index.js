@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom'
 import PricingCards from './PricingCards'
 import PricingTrial from './PricingTrial'
 import PricingHeader from './PricingHeader'
+import Idle from '../IdleTimerContainer'
 
 // ** Styles
 import '@styles/base/pages/page-pricing.scss'
@@ -63,6 +64,7 @@ const Pricing = () => {
 
   return (
     <div id='pricing-table'>
+     <Idle></Idle>
       <PricingHeader duration={duration} setDuration={setDuration} />
         <Fragment>
        <Row>

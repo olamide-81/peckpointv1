@@ -39,6 +39,8 @@ import '@styles/react/libs/charts/apex-charts.scss'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
+import Idle from '../../IdleTimerContainer'
+
 const AnalyticsDashboard = () => { 
   // ** Context
   const { colors } = useContext(ThemeColors)
@@ -188,6 +190,7 @@ const AnalyticsDashboard = () => {
    
   return (
     <div id='dashboard-analytics'>
+      <Idle></Idle>
       <Row className='match-height'>
        {/* <Col lg='6' sm='12'>
           <CardCongratulations />
