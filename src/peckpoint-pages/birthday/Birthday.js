@@ -48,8 +48,8 @@ const CardImages = () => {
     }
   }
   const [conts, setConts] = useState([])
-  const today = [], thisWeek = [], thisMonth = [], sorts = ['Today', 'This Week', 'This Month']
-
+  const [cdata, setCdata] = useState([])
+  
   useEffect(async () => {
     try {
       axios.get('https://api.peckpoint.com/api/v1/contacts', {
@@ -60,40 +60,28 @@ const CardImages = () => {
       }).then(res => {
         if (res.data.data !== undefined) {
         const data = res.data.data
-        
-        data.forEach((v, i) => {
-          // console.log(Date.parse(v.dob))
-    
+        const cummulate = []
+          data.forEach((v, i) => {
+
           if (!isNaN(Date.parse(v.dob))) {
-    
+
             const date = new Date(), mdate = new Date(Date.parse(v.dob))
-    
-            const currDate = Math.floor(Date.parse(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate() - date.getDay()}`) / 1000) // today's date
-    
-            const UDate = Math.floor(Date.parse(`${mdate.getFullYear()}-${mdate.getMonth() + 1}-${mdate.getDate() }`) / 1000) // user date
-    
-            if ((date.getMonth() === mdate.getMonth()) && (mdate.getDate() === date.getDate())) {
-              today[i] = data[i]
-            }
-    
-            if ((UDate >= currDate) && (UDate <= (currDate + 604800)))  {
-              thisWeek[i] = data[i]
-            }
-    
-            if (mdate.getMonth() === date.getMonth()) {
-              thisMonth[i] = data[i]
-            }
-                
-            }
-        }) 
+
+              if ((date.getMonth() === mdate.getMonth()) && (mdate.getDate() === date.getDate())) {
+                cummulate.push(cdata[i])
+              }
+          }
+        })
+          setConts(cummulate)
+          setCdata(data)
       }
-        setConts([today, thisWeek, thisMonth])
+        // setConts([today, thisWeek, thisMonth])
       })
     } catch (error) {
       console.log(error)
     }
   }, [])
-  let tots = 0
+
   return (
     <Fragment>
       <Row>
@@ -101,32 +89,38 @@ const CardImages = () => {
             <span>Show Card for - </span>
             <select onChange={(e) => {
               const arr = ["today", "thisweek", "thismonth"]
+              const cummulate = []
+                  cdata.forEach((v, i) => {
 
-               const cards = document.querySelectorAll(`[main="${e.target.value}"]`)
-            
-              
-                arr.forEach((v) => {
-                  if (v !== e.target.value) {
+                    if (!isNaN(Date.parse(v.dob))) {
 
-                    if (document.querySelectorAll(`[main="${v}"]`).length) {
-                      
-                     const e = document.querySelectorAll(`[main="${v}"]`)
-                       e.forEach((v, i) => {
-                         e[i].style.display = 'none'
-                       })
-                    }
-                  }
-                })
+                        const date = new Date(), mdate = new Date(Date.parse(v.dob))
 
-                  if (cards.length) {
-                    cards.forEach((v, i) => {
-                         cards[i].style.display = 'block'
-                       })
-                      } else { 
-                    //     if (e.target.value !== 'today') {
-                    // document.querySelector('.cardss').innerHTML = `<div class="empty" style="display: flex; width: 100%; height: fit-content; justify-content: center; flex-direction: column; align-items: center;"><img src="${empty}" alt="no birthdays" style="width: 300px;"><h2 class="mt-2">No Birthdays around the selected time</h2></div>`
-                    // }
-                }
+                        const currDate = Math.floor(Date.parse(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate() - date.getDay()}`) / 1000) // today's date
+
+                        const UDate = Math.floor(Date.parse(`${mdate.getFullYear()}-${mdate.getMonth() + 1}-${mdate.getDate()}`) / 1000) // user date
+
+                      if (arr[0] === e.target.value) {
+                        if ((date.getMonth() === mdate.getMonth()) && (mdate.getDate() === date.getDate())) {
+                          cummulate.push(cdata[i])
+                        }
+                      }
+                      if (arr[1] === e.target.value) {
+                        if ((UDate >= currDate) && (UDate <= (currDate + 604800))) {
+                          cummulate.push(cdata[i])
+                        }
+                      }
+
+                      if (arr[2] === e.target.value) {
+                        if (mdate.getMonth() === date.getMonth()) {
+                          cummulate.push(cdata[i])
+                        }
+                      }
+                      }
+                }) 
+
+                setConts(cummulate)
+
             }}>
               <option value="today">Today</option>
               <option value="thisweek">This Week</option>
@@ -135,46 +129,25 @@ const CardImages = () => {
         </div>
 
             <div className="cardss">
-        {
-           conts.map((e, i) => { 
-              if (!e.length) {
-                tots++
-              }
-             
-            const arrr = ["today", "thisweek", "thismonth"]
-            if (tots === 3 || (document.querySelector('.sortTab select').value === arrr[i] && !e.length)) {
-                  return (
-                    <div key={i} className="empty" style={{
-                      display:'flex',
-                      width: '100%',
-                      height: 'fit-content',
-                      justifyContent : 'center',
-                      flexDirection : 'column',
-                      alignItems: 'center'
-                    }}>
-                        <img src={empty} className="mb-3" style={{
-                            width: '300px'
-                        }} alt="no birthdays around this month"/>
+          {!Boolean(conts.length) && (
+            <div className="empty" style={{
+              display: 'flex',
+              width: '100%',
+              height: 'fit-content',
+              justifyContent: 'center',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }}>
+              <img src={empty} className="mb-3" style={{
+                width: '300px'
+              }} alt="no birthdays around this month" />
 
-                        <h2 className="mt-2">No Birthdays are close by at the moment</h2>
-                    </div>
-                  )
+              <h2 className="mt-2">No Birthdays are close by at the moment</h2>
+            </div>
+          )}
 
-              }
-                // console.log(e.length)
-
-            if (e.length) {
-           return (e.map((ee, ii) => {
-              if (ee !== undefined) {
-                let e = 'none'
-                if (((sorts[i]).replace(' ', '')).toLowerCase() === document.querySelector('.sortTab select').value) {
-                  e = 'unset' 
-                
-                }
-              return (
-                <Col xl='6' style={{
-                  display: e
-                }} main={((sorts[i]).replace(' ', '')).toLowerCase()} key={ii} md='6'>
+        {Boolean(conts.length) && (conts.map((ee, ii) => (
+                <Col xl='6' key={ii} md='6'>
                 <Card className='birthdaycardf' responsive="true">
                   <div className='birthdaycardf' ref={e => {
                     const ez = printRef.current[ii] = e
@@ -203,15 +176,7 @@ const CardImages = () => {
                 </Button>
               </Col>
             )
-          }
-        }
-      
-            ))
-          }
-          // ]
-            
-      })
-        }
+          ))}
   </div>
   <Idle></Idle>
        {/* <Col xl='6' md='6'>

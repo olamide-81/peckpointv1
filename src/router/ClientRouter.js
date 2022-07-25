@@ -35,10 +35,9 @@ const Router = () => {
   //const ability = useContext(AbilityContext)
 
   // ** Default Layout
-  console.log(localStorage.getItem('user'))
+  
   const DefaultLayout = layout === 'horizontal' ? 'HorizontalLayout' : 'VerticalLayout'
 
-  console.log(layout)
 
   // ** All of the available layouts
   const Layouts = { BlankLayout, VerticalLayoutClient, HorizontalLayout, VerticalLayoutAdmin}
