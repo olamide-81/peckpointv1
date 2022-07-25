@@ -68,7 +68,7 @@ const CardImages = () => {
             const date = new Date(), mdate = new Date(Date.parse(v.dob))
 
               if ((date.getMonth() === mdate.getMonth()) && (mdate.getDate() === date.getDate())) {
-                cummulate.push(cdata[i])
+                cummulate.push(data[i])
               }
           }
         })
@@ -120,6 +120,7 @@ const CardImages = () => {
                 }) 
 
                 setConts(cummulate)
+                console.log(cummulate)
 
             }}>
               <option value="today">Today</option>
