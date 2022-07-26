@@ -98,14 +98,14 @@ const CardImages = () => {
 
                         const currDate = Math.floor(Date.parse(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate() - date.getDay()}`) / 1000) // today's date
 
-                        const UDate = Math.floor(Date.parse(`${mdate.getFullYear()}-${mdate.getMonth() + 1}-${mdate.getDate()}`) / 1000) // user date
-
+                        const UDate = Math.floor(Date.parse(`${date.getFullYear()}-${mdate.getMonth() + 1}-${mdate.getDate()}`) / 1000) // user date
                       if (arr[0] === e.target.value) {
                         if ((date.getMonth() === mdate.getMonth()) && (mdate.getDate() === date.getDate())) {
                           cummulate.push(cdata[i])
                         }
                       }
                       if (arr[1] === e.target.value) {
+                        console.log(UDate, currDate, (UDate >= currDate))
                         if ((UDate >= currDate) && (UDate <= (currDate + 604800))) {
                           cummulate.push(cdata[i])
                         }
