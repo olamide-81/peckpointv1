@@ -210,7 +210,7 @@ const Contact = () => {
   const columns = [
     {
       name: 'Name',
-      minWidth: '250px',
+      minWidth: '120px',
       sortable: row => row.fullname,
       cell: row => (
         <div>
@@ -225,8 +225,33 @@ const Contact = () => {
         </div>
       )
     },
-
     {
+      name: 'Actions',
+      allowOverflow: true,
+      minWidth: '250px',
+      cell: (row) => {
+        return (
+          <div className='d-flex'>
+            <div className='w-100 dropdown-item' onClick={e => {
+              e.preventDefault()
+              updateData({ id: row.id, firstname: row.firstname, lastname: row.lastname, gender: row.gender, dob: row.dob, phone_number: row.phone_number, email: row.email })
+            }}>
+              <FileText size={15} />
+              <span className='align-middle ms-50'>Update</span>
+            </div>
+            <div className='w-100 dropdown-item' onClick={e => {
+              e.preventDefault()
+              deleteContact(row.id)
+            }} >
+              <Trash size={15} />
+              <span className='align-middle ms-50'>Delete</span>
+            </div>
+          </div>
+        )
+      }
+    },
+
+{/*     {
       name: 'Phone Number',
       sortable: true,
       minWidth: '250px',
@@ -259,33 +284,7 @@ const Contact = () => {
       sortable: true,
       minWidth: '100px',
       selector: row => row.dob
-    },
-
-    {
-      name: 'Actions',
-      allowOverflow: true,
-      minWidth: '250px',
-      cell: (row) => {
-        return (
-          <div className='d-flex'>
-            <div className='w-100 dropdown-item' onClick={e => {
-              e.preventDefault()
-              updateData({ id: row.id, firstname: row.firstname, lastname: row.lastname, gender: row.gender, dob: row.dob, phone_number: row.phone_number, email: row.email })
-            }}>
-              <FileText size={15} />
-              <span className='align-middle ms-50'>Update</span>
-            </div>
-            <div className='w-100 dropdown-item' onClick={e => {
-              e.preventDefault()
-              deleteContact(row.id)
-            }} >
-              <Trash size={15} />
-              <span className='align-middle ms-50'>Delete</span>
-            </div>
-          </div>
-        )
-      }
-    }
+    },*/}
   ]
 
   // ** Downloads CSV

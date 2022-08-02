@@ -200,7 +200,7 @@ export const columns = [
     )
   },
 
-  {
+ {/*  {
     name: 'Phone Number',
     sortable: true,
     minWidth: '250px',
@@ -233,7 +233,7 @@ export const columns = [
     sortable: true,
     minWidth: '100px',
     selector: row => row.dob
-  },
+  },*/},
 
   {
     name: 'Actions',
