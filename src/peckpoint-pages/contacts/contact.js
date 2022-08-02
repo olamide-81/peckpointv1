@@ -210,7 +210,7 @@ const Contact = () => {
   const columns = [
     {
       name: 'Name',
-      minWidth: '120px',
+      minWidth: '250px',
       sortable: row => row.fullname,
       cell: row => (
         <div>
@@ -228,7 +228,7 @@ const Contact = () => {
     {
       name: 'Actions',
       allowOverflow: true,
-      minWidth: '250px',
+      minWidth: '200px',
       cell: (row) => {
         return (
           <div className='d-flex'>
