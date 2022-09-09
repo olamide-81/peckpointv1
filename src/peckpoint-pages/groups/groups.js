@@ -11,9 +11,10 @@ import { selectThemeColors } from '@utils'
 import AddNewModal from './AddNewModal'
 
 import UpdateModal from './Update'
-import AddContact from './addContact'
+import AddGroup from './addGroup'
 
 import DataTable from 'react-data-table-component'
+import APIURL from '../../APIURL'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
@@ -79,7 +80,7 @@ const Contact = () => {
 
   useEffect(async () => {
     try {
-      const resultsender = await fetch("https://api.peckpoint.com/api/v1/groups", {
+      const resultsender = await fetch(APIURL.API_GROUPS, {
         headers: {
          Authorization: `Bearer ${token}`
         }
@@ -97,7 +98,7 @@ const Contact = () => {
 
   useEffect(async () => {
     try {
-      const resultsender = await fetch("https://api.peckpoint.com/api/v1/contacts", {
+      const resultsender = await fetch(APIURL.APICONTACTS, {
         headers: {
          Authorization: `Bearer ${token}`
         }
@@ -123,7 +124,7 @@ const Contact = () => {
   useEffect(async () => {
     try {
       const groupsfetch = () => {
-        axios.get('https://api.peckpoint.com/api/v1/groups', {
+        axios.get(APIURL.API_GROUPS, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -508,7 +509,7 @@ const Contact = () => {
       <AddNewModal open={modal} handleModal={handleModal} />
       
       <UpdateModal open={umodal} data={dmodal} handleModal={handleUmodal} />
-      <AddContact open={admodal} data={Admodal} handleModal={handleAdmodal} />
+      <AddGroup open={admodal} data={Admodal} handleModal={handleAdmodal} />
     </Fragment>
   )
 }

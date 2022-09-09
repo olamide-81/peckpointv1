@@ -187,6 +187,12 @@ const ClientDashboardRoutes = [
     layout: 'VerticalLayoutClient'
   },
   {
+    path: '/success',
+    className: 'chat-application',
+    component: lazy(() => import('../../peckpoint-pages/Successpayment')),
+    layout: 'VerticalLayoutClient'
+  },
+  {
     path: '/voice-campaign-builder',
     className: 'chat-application',
     component: lazy(() => import('../../views/pages/misc/Maintenance')),

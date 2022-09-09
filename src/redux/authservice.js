@@ -1,17 +1,17 @@
 import axios from 'axios'
+import APIURL from '../../src/APIURL'
 
-const API_URL = 'https://api.peckpoint.com/api/v1/create-account'
 
 // Register user
 const register = async (userdata) => {
-  const response = await axios.post(API_URL, userdata)
+  const response = await axios.post(APIURL.API_URLREG, userdata)
   if (response.data) {
   }
 }
 
 // Login user
 const login = async (userData) => {
-  const response = await axios.post("https://api.peckpoint.com/api/v1/login", userData)
+  const response = await axios.post(APIURL.API_URLLOG, userData)
 
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data))

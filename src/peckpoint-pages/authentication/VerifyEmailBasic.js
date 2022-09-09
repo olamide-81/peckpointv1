@@ -6,6 +6,7 @@ import { Card, CardBody, CardTitle, CardText, Button } from 'reactstrap'
 
 // ** Styles
 import '@styles/react/pages/page-authentication.scss'
+import { useEffect } from 'react'
 
 //import { toast } from 'react-toastify'
 
@@ -28,9 +29,12 @@ const getGet = (val) => {
     status : false,
     message : 'Loading...'
   }
+ { /*
+    
   if (tok === null) {
       window.location = '/login'
 }
+  */ } 
 axios.post('https://api.peckpoint.com/api/v2/verify-account', {
   data: {
     token : tok
@@ -40,6 +44,8 @@ axios.post('https://api.peckpoint.com/api/v2/verify-account', {
 })
 
 const VerifyEmailBasic = () => {
+ useEffect(() => {
+     
 
   const getGet = (val) => {
     const str = (window.location.search).substring(1)
@@ -54,16 +60,19 @@ const VerifyEmailBasic = () => {
     }
   }
   const token = getGet('token')
+  console.log(token)
+
+  console.log(getGet)
 
 
   axios.post("https://api.peckpoint.com/api/v1/verify-account", {
-    token: {token},
     headers: {
       'Content-Type': 'application/json'
     }
   })
-    //toast.info(err.messsage)
-    //console.log(data.message)
+    toast.info(err.messsage)
+    console.log(data.message)
+ }, [])
  
   return (
     <div className='auth-wrapper auth-basic px-2'>

@@ -69,8 +69,8 @@ const PagesRoutes = [
   },
   {
     path: '/pages/forgot-password-basic',
-    component: lazy(() => import('../../views/pages/authentication/ForgotPasswordBasic')),
-    layout: 'BlankLayout'
+    component: lazy(() => import('../../views/pages/authentication/ForgotPasswordBasic')), 
+    layout: 'BlankLayout' 
   },
   {
     path: '/pages/forgot-password-cover',
@@ -96,8 +96,8 @@ const PagesRoutes = [
     layout: 'BlankLayout'
   },
   {
-    path: '/pages/verify-email-basic',
-    component: lazy(() => import('../../peckpoint-pages/authentication/VerifyEmailBasic')),
+    path: '/pages/verify-email-basic/:dataname',
+    component: lazy(() => import('../../peckpoint-pages/authentication/Verify')),
     layout: 'BlankLayout'
   },
   {

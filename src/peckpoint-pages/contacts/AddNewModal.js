@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import Spinner from '../../@core/components/spinner/Fallback-spinner'
+import APIURL from '../../APIURL'
 
 // ** Third Party Components
 import Flatpickr from 'react-flatpickr'
@@ -35,7 +36,7 @@ const AddNewModal = ({ open, handleModal }) => {
   async function createcontact() {
     const item = {firstname, lastname, phone_number}
     setIsLoading(true)
-     const result = await fetch("https://api.peckpoint.com/api/v1/contacts", {
+     const result = await fetch(APIURL.APICONTACTS, {
        method: 'POST',
        body:JSON.stringify(item),
        headers: {
