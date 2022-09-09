@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom'
 // ** Reactstrap Imports
 import { Card, CardBody, CardTitle, CardText, Button } from 'reactstrap'
 
+import axios from 'axios'
 // ** Styles
 import '@styles/react/pages/page-authentication.scss'
-import { useEffect } from 'react'
+
 
 //import { toast } from 'react-toastify'
 
@@ -24,55 +25,32 @@ const getGet = (val) => {
   }
   return null
 }
+
   const tok = getGet('token')
+
   let status = {
     status : false,
     message : 'Loading...'
   }
- { /*
-    
+
   if (tok === null) {
-      window.location = '/login'
-}
-  */ } 
-axios.post('https://api.peckpoint.com/api/v2/verify-account', {
-  data: {
-    token : tok
+
+     window.location = '/login'
+
   }
-}).then(res => {
-  status = res.data
-})
+
+const token = getGet('token')
+
 
 const VerifyEmailBasic = () => {
- useEffect(() => {
-     
 
-  const getGet = (val) => {
-    const str = (window.location.search).substring(1)
-  
-    const ee = str.split('&')
-  
-    for (const e in ee) {
-      const c = ee[e].split('=')
-      if (c[0] === val) {
-        return c[1]
-      }
+  axios.post('https://api.peckpoint.com/api/v2/verify-account', {
+    data: {
+      token
     }
-  }
-  const token = getGet('token')
-  console.log(token)
-
-  console.log(getGet)
-
-
-  axios.post("https://api.peckpoint.com/api/v1/verify-account", {
-    headers: {
-      'Content-Type': 'application/json'
-    }
+  }).then(res => {
+    status = res.data
   })
-    toast.info(err.messsage)
-    console.log(data.message)
- }, [])
  
   return (
     <div className='auth-wrapper auth-basic px-2'>

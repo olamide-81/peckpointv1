@@ -30,7 +30,7 @@ const Router = () => {
   console.log(user) // 👉️ undefined
 
   const { role } = user || {}
-  console.log(role) // 👉️ undefined
+
   // ** ACL Ability Context
   //const ability = useContext(AbilityContext)
 
@@ -47,8 +47,6 @@ const Router = () => {
 
   // ** Return Filtered Array of Routes & Paths
   const LayoutRoutesAndPaths = layout => {
-
-    console.log(layout)
 
     const LayoutRoutes = []
     const LayoutPaths = []
@@ -91,8 +89,18 @@ const Router = () => {
        ** If user is not Logged in & route.meta.authRoute, !route.meta.publicRoute are undefined
        ** Then redirect user to login
        */
+      const { pathname } = window.location
 
-      return <Redirect to='/login' />
+
+      // return <Redirect to='/login' />
+
+        if (pathname.substring(1) !== 'verifyemail') {
+
+          window.location.href = '/login'
+
+      } else {
+          return <route.component {...props} />
+      }
       
     } else if (route.meta && route.meta.authRoute && localStorage.getItem('user')) {
       // ** If route has meta and authRole and user is Logged in then redirect user to home page (DefaultRoute)
@@ -106,8 +114,6 @@ const Router = () => {
     } else {
       // ** If none of the above render component
        return <route.component {...props} />
-
-
     }
   }
 
