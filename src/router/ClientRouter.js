@@ -95,7 +95,7 @@ const Router = () => {
       // return <Redirect to='/login' />
 
         if (pathname.substring(1) !== 'verifyemail') {
-          
+
           window.location.href = '/login'
 
       } else {
