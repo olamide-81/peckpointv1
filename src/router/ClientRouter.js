@@ -69,6 +69,9 @@ const Router = () => {
   // ** Init Error Component
   const Error = lazy(() => import('@src/views/pages/misc/Error'))
 
+    // ** Verification Route
+  const Verification = lazy(() => import('../../src/peckpoint-pages/authentication/VerifyEmailBasic'))
+
   /**
    ** Final Route Component Checks for Login & User Role and then redirects to the route
    */
@@ -225,10 +228,10 @@ const Router = () => {
         {/* Not Auth Route */}
         <Route
           exact
-          path='/misc/not-authorized'
+          path='/verification/:dataname'
           render={() => (
             <Layouts.BlankLayout>
-              <NotAuthorized />
+              <Verification/>
             </Layouts.BlankLayout>
           )}
         />

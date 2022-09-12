@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { register, reset } from '../../redux/authentication'
-import LoadingSpinner from "../../views/ui-elements/cards/basic/Spinner"
+import LoadingSpinner from "../../@core/components/spinner/Fallback-spinner"
 
 // ** Custom Hooks
 import { useSkin } from '@hooks/useSkin'
@@ -91,8 +91,9 @@ const RegisterCover = () => {
     }
 
   return (
+    <div>
+       {isLoading ? <LoadingSpinner /> : register}
     <div className='auth-wrapper auth-cover'>
-      {isLoading ? <LoadingSpinner /> : register}
       <Row className='auth-inner m-0'>
         <Link className='brand-logo' to='/' onClick={e => e.preventDefault()}>
           <h2 className='brand-text text-primary ms-1'>PeckPoint</h2>
@@ -213,6 +214,7 @@ const RegisterCover = () => {
           </Col>
         </Col>
       </Row>
+    </div>
     </div>
   )
 }

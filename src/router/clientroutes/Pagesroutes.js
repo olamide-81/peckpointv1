@@ -96,7 +96,7 @@ const PagesRoutes = [
     layout: 'BlankLayout'
   },
   {
-    path: '/verification',
+    path: '/verification/:dataname',
     component: lazy(() => import('../../peckpoint-pages/authentication/VerifyEmailBasic')),
     layout: 'BlankLayout'
   },

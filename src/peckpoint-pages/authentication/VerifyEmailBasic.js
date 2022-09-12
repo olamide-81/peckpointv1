@@ -1,56 +1,50 @@
 // ** React Imports
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 // ** Reactstrap Imports
 import { Card, CardBody, CardTitle, CardText, Button } from 'reactstrap'
-
 import axios from 'axios'
+
 // ** Styles
 import '@styles/react/pages/page-authentication.scss'
+import { useState} from 'react'
 
 
 //import { toast } from 'react-toastify'
 
-
-const getGet = (val) => {
-  const str = (window.location.search).substring(1)
-
-  const ee = str.split('&')
-
-  for (const e in ee) {
-    const c = ee[e].split('=')
-    if (c[0] === val) {
-      return c[1]
-    }
-  }
-  return null
-}
-
-  const tok = getGet('token')
-
-  let status = {
-    status : false,
-    message : 'Loading...'
-  }
-
-  if (tok === null) {
-
-     window.location = '/login'
-
-  }
-
-const token = getGet('token')
-
-
 const VerifyEmailBasic = () => {
 
-  axios.post('https://api.peckpoint.com/api/v2/verify-account', {
+  const { dataname } = useParams()
+  const token = dataname
+
+  console.log(token)
+
+  const [data, addData] = useState('')
+
+  axios.post('https://api.peckpoint.com/api/v1/verify-account', {
     data: {
-      token
+      token : `${token}`
     }
   }).then(res => {
-    status = res.data
+    addData(res.data)
   })
+
+{ /*  useEffect(async () => {
+   const item = {
+      token: `${token}`
+    },
+    try {
+      const resultsender = await fetch('https://api.peckpoint.com/api/v1/verify-account', {
+        method: 'POST',
+        body:JSON.stringify(item),
+     }).then(res => res.json())
+       addData(resultsender)
+    } catch (error) {
+      console.log(error)
+    }
+  }, [])*/ }
+
+  console.log(data.message)
  
   return (
     <div className='auth-wrapper auth-basic px-2'>
@@ -61,10 +55,10 @@ const VerifyEmailBasic = () => {
               <h2 className='brand-text text-primary ms-1'>PeckPoint</h2>
             </Link>
             <CardTitle tag='h2' className='fw-bolder mb-1'>
-              {status.status ? 'Success ✉️' : (status.message === 'Loading...' ? 'Waiting' : 'Failed')}
+              {data.success === true ? 'Success ✉️' : data.message}
             </CardTitle>
             <CardText className='mb-2'>
-             { status.status ? 'Email was verified successfully !' : status.message}
+             { data.success === true ? 'Email was verified successfully !' : 'Email not Verified'}
             </CardText>
             <Button block tag={Link} to='/' color='primary'>
               Go back to Login
