@@ -56,7 +56,7 @@ const RegisterCover = () => {
       }
   
       if (isSuccess) {
-        history.push('/verifyemail')
+        history.push('/login')
         toast.success('Account created successfully please verify your email before logging in ')
         setIsLoading(false)
       }
