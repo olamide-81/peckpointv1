@@ -15,26 +15,33 @@ import { useState, useEffect } from 'react'
 const VerifyEmailBasic = () => {
 
   const { dataname } = useParams()
-  const token = dataname
 
-  console.log(token)
+  const token = dataname
 
   const [data, addData] = useState('')
 
+  useEffect(() => {
 
-  useEffect(async () => {
-    const tokeen = {
-      token : `${token}`
+    const init = async () => {
+      try {
+        const resultsender = await fetch('https://api.peckpoint.com/api/v1/verify-account', {
+          method: 'POST',
+          headers: {
+            'Content-Type': "application/json"
+          },
+          body: JSON.stringify({ token })
+        })
+
+        const dx = await resultsender.json()
+
+        addData(dx)
+      } catch (error) {
+        console.log(error)
+      }
     }
-    try {
-      const resultsender = await fetch('https://api.peckpoint.com/api/v1/verify-account', {
-        method: 'POST',
-        body: {tokeen}
-     })
-     addData(resultsender)
-    } catch (error) {
-      console.log(error)
-    }
+
+    init()
+
   }, [])
 
   console.log(data.message)
