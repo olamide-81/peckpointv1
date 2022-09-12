@@ -3,11 +3,11 @@ import { Link, useParams } from 'react-router-dom'
 
 // ** Reactstrap Imports
 import { Card, CardBody, CardTitle, CardText, Button } from 'reactstrap'
-import axios from 'axios'
+//import axios from 'axios'
 
 // ** Styles
 import '@styles/react/pages/page-authentication.scss'
-import { useState} from 'react'
+import { useState, useEffect } from 'react'
 
 
 //import { toast } from 'react-toastify'
@@ -21,28 +21,21 @@ const VerifyEmailBasic = () => {
 
   const [data, addData] = useState('')
 
-  axios.post('https://api.peckpoint.com/api/v1/verify-account', {
-    data: {
+
+  useEffect(async () => {
+    const tokeen = {
       token : `${token}`
     }
-  }).then(res => {
-    addData(res.data)
-  })
-
-{ /*  useEffect(async () => {
-   const item = {
-      token: `${token}`
-    },
     try {
       const resultsender = await fetch('https://api.peckpoint.com/api/v1/verify-account', {
         method: 'POST',
-        body:JSON.stringify(item),
-     }).then(res => res.json())
-       addData(resultsender)
+        body: {tokeen}
+     })
+     addData(resultsender)
     } catch (error) {
       console.log(error)
     }
-  }, [])*/ }
+  }, [])
 
   console.log(data.message)
  
