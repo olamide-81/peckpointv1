@@ -1,7 +1,7 @@
-const APICONTACTS = 'https://api.peckpoint.com/api/v1/contact'
+const APICONTACTS = 'https://api.peckpoint.com/api/v1/contacts'
 const API_URLREG = 'https://api.peckpoint.com/api/v1/create-account'
 const API_URLLOG = 'https://api.peckpoint.com/api/v1/login'
-const API_GROUPS = '"https://api.peckpoint.com/api/v1/groups"'
+const API_GROUPS = 'https://api.peckpoint.com/api/v1/groups'
 
 const APIURL = {
     APICONTACTS,

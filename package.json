@@ -1,5 +1,5 @@
 {
-  "name": "vuexy-react-admin-dashboard",
+  "name": "peckpoint",
   "version": "8.0.0",
   "private": true,
   "dependencies": {
@@ -122,6 +122,5 @@
   },
   "resolutions": {
     "react-error-overlay": "6.0.9"
-  },
-  "homepage": ""
+  }
 }

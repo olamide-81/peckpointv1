@@ -88,6 +88,7 @@ const Contact = () => {
 
     if (resultsender.success) {
      addData(resultsender.data)
+     console.log(data)
      }
 
     } catch (error) {
@@ -437,7 +438,7 @@ const Contact = () => {
                    value={group_id}  
                 >
                    {
-           data.map((data, index) => ([
+                data?.map((data, index) => ([
                 <option key={index} value={data.id}>
                  {data.name}
                 </option>

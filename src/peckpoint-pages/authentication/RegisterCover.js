@@ -95,11 +95,11 @@ const RegisterCover = () => {
        {isLoading ? <LoadingSpinner /> : register}
     <div className='auth-wrapper auth-cover'>
       <Row className='auth-inner m-0'>
-        <Link className='brand-logo' to='/' onClick={e => e.preventDefault()}>
+        <Link className='brand-logo' to='/'>
           <h2 className='brand-text text-primary ms-1'>PeckPoint</h2>
         </Link>
         <Col className='d-none d-lg-flex align-items-center p-5' lg='8' sm='12'>
-          <div className='w-100 d-lg-flex align-items-center justify-content-center px-5'>
+          <div className='w-100 d-lg-flex align-items-center justify-content-center px-20'>
             <img className='img-fluid' src={source} alt='Login Cover' />
           </div>
         </Col>
@@ -108,7 +108,7 @@ const RegisterCover = () => {
             <CardTitle tag='h2' className='fw-bold mb-1'>
               Adventure starts here 🚀
             </CardTitle>
-            <CardText className='mb-2'>Make your sms management easy and fun!</CardText>
+            <CardText className='mb-2'>Spice up your Contact Management!</CardText>
             <Form className='auth-register-form mt-2' onSubmit={onSubmit}>
               <div className='mb-1'>
                 <Label 
